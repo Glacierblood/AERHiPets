@@ -1,0 +1,42 @@
+﻿@model AERHiPets.Models.GestionAnimal.Raza
+
+@{
+    ViewBag.Title = "Informacion";
+}
+
+<h2>Informacion</h2>
+
+<div>
+    <h4>Raza</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.especie.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.especie.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Ir a la lista", "Index")
+</p>

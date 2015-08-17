@@ -1,0 +1,68 @@
+﻿@model IEnumerable<AERHiPets.Models.GestionAnimal.Animal>
+
+@{
+    ViewBag.Title = "Animales";
+}
+
+<h2>Lista Animales</h2>
+
+<p>
+
+    @Html.ActionLink("Ingresar Nuevo Animal", "Create")
+</p>
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.raza.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tamanio.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.edad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.caracteristicas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.enAdopcion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.raza.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tamanio.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.edad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.caracteristicas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.enAdopcion)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
