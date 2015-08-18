@@ -22,5 +22,8 @@ namespace AERHiPets.DAL.GestionAnimalesDAL
          public DbSet<Raza> Razas { get; set; }
          public DbSet<Animal> Animales { get; set; }
          public DbSet<Tamanio> Tamanios { get; set; }
+         public DbSet<Veterinaria> Veterinarias { get; set; }
+         public DbSet<ProductoVeterinaria> ProductosVeterinarias { get; set; }
+         public DbSet<AtencionMedica> AtencionesMedicas { get; set; }
     }
 }

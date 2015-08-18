@@ -1,0 +1,147 @@
+﻿@model AERHiPets.Models.GestionAnimal.GestionAnimalModelos.AtencionMedicaModelo
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    
+    <div class="form-horizontal">
+        <h4>AtencionMedica</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <script src="~/scripts/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                $("input[name=selectedAnimalId").change(function () {
+                    //cada vez que el estado de un radio button cambia, asignamos a nuestro campo hiden el valor del readio seleccionado, que en este caso es el id del animal seleccionado
+                    $("#atencionMedica_animalId").val($('input[name=selectedAnimalId]:checked').val());
+
+                })
+                $("#testButton").on("click", function () {
+                    alert($("#animalId").val());
+                })
+
+            })
+
+        </script>
+        <table class="table" id="myTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.animal.nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.animal.raza.nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.animal.tamanio.nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.animal.edad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.animal.caracteristicas)
+                    </th>
+                    <th>
+                        Seleccionar
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.animales)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.raza.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tamanio.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.edad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.caracteristicas)
+                        </td>
+                        <td>
+                            @Html.RadioButton("selectedAnimalId", item.Id)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>     
+             
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.atencionMedica.animalId, "animalId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.atencionMedica.animalId, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.atencionMedica.animalId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.atencionMedica.veterinariaId, "veterinariaId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("veterinariaId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.atencionMedica.veterinariaId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+               
+        <div class="form-group">
+            @Html.LabelFor(model => model.atencionMedica.productoVeterinariaId, "productoVeterinariaId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("productoVeterinariaId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.atencionMedica.productoVeterinariaId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.atencionMedica.tratamiento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.atencionMedica.tratamiento, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.atencionMedica.tratamiento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.atencionMedica.nombreVeterinario, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.atencionMedica.nombreVeterinario, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.atencionMedica.nombreVeterinario, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

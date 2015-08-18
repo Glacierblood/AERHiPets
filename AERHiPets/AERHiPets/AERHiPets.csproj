@@ -160,20 +160,36 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GestionAnimal\AnimalsController.cs" />
+    <Compile Include="Controllers\GestionAnimal\AtencionMedicasController.cs" />
     <Compile Include="Controllers\GestionAnimal\EspeciesController.cs" />
+    <Compile Include="Controllers\GestionAnimal\ProductoVeterinariasController.cs" />
     <Compile Include="Controllers\GestionAnimal\RazasController.cs" />
     <Compile Include="Controllers\GestionAnimal\TamaniosController.cs" />
+    <Compile Include="Controllers\GestionAnimal\VeterinariasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\GestionAnimalesDAL\GestionAnimalDb.cs" />
+    <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508172126069_InitialCreate.cs" />
+    <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508172126069_InitialCreate.Designer.cs">
+      <DependentUpon>201508172126069_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508180339025_GA1.cs" />
+    <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508180339025_GA1.Designer.cs">
+      <DependentUpon>201508180339025_GA1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GestionAnimalesDAL\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\GestionAnimal\Animal.cs" />
+    <Compile Include="Models\GestionAnimal\AtencionMedica.cs" />
     <Compile Include="Models\GestionAnimal\Especie.cs" />
+    <Compile Include="Models\GestionAnimal\GestionAnimalModelos\AtencionMedicaModelo.cs" />
+    <Compile Include="Models\GestionAnimal\ProductoVeterinaria.cs" />
     <Compile Include="Models\GestionAnimal\Raza.cs" />
     <Compile Include="Models\GestionAnimal\Tamanio.cs" />
+    <Compile Include="Models\GestionAnimal\Veterinaria.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -345,6 +361,21 @@
     <Content Include="Views\Tamanios\Edit.cshtml" />
     <Content Include="Views\Tamanios\Index.cshtml" />
     <Content Include="Views\Shared\Partial\_DDLOpciones.cshtml" />
+    <Content Include="Views\Veterinarias\Create.cshtml" />
+    <Content Include="Views\Veterinarias\Delete.cshtml" />
+    <Content Include="Views\Veterinarias\Details.cshtml" />
+    <Content Include="Views\Veterinarias\Edit.cshtml" />
+    <Content Include="Views\Veterinarias\Index.cshtml" />
+    <Content Include="Views\ProductoVeterinarias\Create.cshtml" />
+    <Content Include="Views\ProductoVeterinarias\Delete.cshtml" />
+    <Content Include="Views\ProductoVeterinarias\Details.cshtml" />
+    <Content Include="Views\ProductoVeterinarias\Edit.cshtml" />
+    <Content Include="Views\ProductoVeterinarias\Index.cshtml" />
+    <Content Include="Views\AtencionMedicas\Create.cshtml" />
+    <Content Include="Views\AtencionMedicas\Delete.cshtml" />
+    <Content Include="Views\AtencionMedicas\Details.cshtml" />
+    <Content Include="Views\AtencionMedicas\Edit.cshtml" />
+    <Content Include="Views\AtencionMedicas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -355,6 +386,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DAL\GestionAnimalesDAL\Migrations\201508172126069_InitialCreate.resx">
+      <DependentUpon>201508172126069_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionAnimalesDAL\Migrations\201508180339025_GA1.resx">
+      <DependentUpon>201508180339025_GA1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

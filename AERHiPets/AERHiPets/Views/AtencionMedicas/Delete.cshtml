@@ -1,0 +1,64 @@
+﻿@model AERHiPets.Models.GestionAnimal.AtencionMedica
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>AtencionMedica</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.animal.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.animal.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.productoVeterinaria.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productoVeterinaria.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.veterinaria.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.veterinaria.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tratamiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tratamiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombreVeterinario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombreVeterinario)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

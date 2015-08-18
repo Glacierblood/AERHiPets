@@ -1,0 +1,58 @@
+﻿@model AERHiPets.Models.GestionAnimal.AtencionMedica
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AtencionMedica</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.animal.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.animal.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.productoVeterinaria.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productoVeterinaria.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.veterinaria.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.veterinaria.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tratamiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tratamiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombreVeterinario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombreVeterinario)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
