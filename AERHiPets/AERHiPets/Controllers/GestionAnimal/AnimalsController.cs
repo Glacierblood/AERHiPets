@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using AERHiPets.DAL.GestionAnimalesDAL;
 using AERHiPets.Models.GestionAnimal;
+using AERHiPets.Models.GestionAnimal.GestionAnimalImagenes;
 
 namespace AERHiPets.Controllers.GestionAnimal
 {
@@ -29,7 +30,7 @@ namespace AERHiPets.Controllers.GestionAnimal
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Animal animal = db.Animales.Find(id);
+            Animal animal = db.Animales.Include(i => i.filePaths).SingleOrDefault(i => i.Id == id);            
             if (animal == null)
             {
                 return HttpNotFound();
@@ -50,16 +51,22 @@ namespace AERHiPets.Controllers.GestionAnimal
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,nombre,fechaNac,caracteristicas,tamanioId,razaId,enAdopcion")] Animal animal)
+        public ActionResult Create([Bind(Include = "Id,nombre,fechaNac,caracteristicas,tamanioId,razaId,enAdopcion")] Animal animal, HttpPostedFileBase upload)
         {
             animal.fechaAlta = DateTime.Now;
             animal.edad = DateTime.Now.Year - animal.fechaNac.Year;
-
-
-
-
             if (ModelState.IsValid)
             {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var photo = new FilePath
+                    {
+                        FileName = System.IO.Path.GetFileName(upload.FileName),
+                        FileType = FileType.Photo
+                    };
+                    animal.filePaths = new List<FilePath>();
+                    animal.filePaths.Add(photo);
+                }
                 db.Animales.Add(animal);
                 db.SaveChanges();
                 return RedirectToAction("Index");

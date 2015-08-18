@@ -1,4 +1,5 @@
 ﻿using AERHiPets.Models.GestionAnimal;
+using AERHiPets.Models.GestionAnimal.GestionAnimalImagenes;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -25,5 +26,6 @@ namespace AERHiPets.DAL.GestionAnimalesDAL
          public DbSet<Veterinaria> Veterinarias { get; set; }
          public DbSet<ProductoVeterinaria> ProductosVeterinarias { get; set; }
          public DbSet<AtencionMedica> AtencionesMedicas { get; set; }
+         public DbSet<FilePath> filePaths { get; set; }
     }
 }

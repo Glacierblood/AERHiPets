@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AERHiPets.Models.GestionAnimal.GestionAnimalImagenes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -45,5 +46,6 @@ namespace AERHiPets.Models.GestionAnimal
         [Display(Name = "Adopcion")]
         public Boolean enAdopcion { get; set; }
 
+        public virtual ICollection<FilePath> filePaths { get; set; }
     }
 }

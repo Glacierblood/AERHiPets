@@ -7,7 +7,7 @@
 <h2>Nueva Mascota</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Animal", null, FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
 
@@ -78,6 +78,13 @@
                     @Html.EditorFor(model => model.enAdopcion)
                     @Html.ValidationMessageFor(model => model.enAdopcion, "", new { @class = "text-danger" })
                 </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Photo", new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                <input type="file" id="Photo" name="upload" />
             </div>
         </div>
         

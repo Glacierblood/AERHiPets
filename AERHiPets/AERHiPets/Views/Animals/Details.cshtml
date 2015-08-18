@@ -61,37 +61,22 @@
         <dd>
             @Html.DisplayFor(model => model.enAdopcion)
         </dd>
+        @if (Model.filePaths.Any(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Photo))
+        {
+            <dt>
+                Photo
+            </dt>
+            <dd>
+                <img src="~/images/@Model.filePaths.First(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Photo)).FileName" alt="" />
+            </dd>
+        }
 
     </dl>
+    
 </div>
 <p>
     @Html.ActionLink("Modificar Mascota", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Ir a la lista", "Index")
 </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaBaja)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.caracteristicas)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.caracteristicas)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.enAdopcion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.enAdopcion)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        
