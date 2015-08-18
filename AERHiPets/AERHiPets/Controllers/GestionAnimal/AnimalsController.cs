@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using AERHiPets.DAL.GestionAnimalesDAL;
 using AERHiPets.Models.GestionAnimal;
 using AERHiPets.Models.GestionAnimal.GestionAnimalImagenes;
+using System.IO;
+using System.Data.Entity.Infrastructure;
 
 namespace AERHiPets.Controllers.GestionAnimal
 {
@@ -30,7 +32,7 @@ namespace AERHiPets.Controllers.GestionAnimal
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Animal animal = db.Animales.Include(i => i.filePaths).SingleOrDefault(i => i.Id == id);            
+            Animal animal = db.Animales.Include(i => i.Files).SingleOrDefault(i => i.Id == id);            
             if (animal == null)
             {
                 return HttpNotFound();
@@ -55,21 +57,34 @@ namespace AERHiPets.Controllers.GestionAnimal
         {
             animal.fechaAlta = DateTime.Now;
             animal.edad = DateTime.Now.Year - animal.fechaNac.Year;
+            try
+    {
+            
             if (ModelState.IsValid)
             {
                 if (upload != null && upload.ContentLength > 0)
                 {
-                    var photo = new FilePath
+                    var avatar = new AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.File
                     {
                         FileName = System.IO.Path.GetFileName(upload.FileName),
-                        FileType = FileType.Photo
+                        FileType = FileType.Avatar,
+                        ContentType = upload.ContentType
                     };
-                    animal.filePaths = new List<FilePath>();
-                    animal.filePaths.Add(photo);
+                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                    {
+                        avatar.Content = reader.ReadBytes(upload.ContentLength);
+                    }
+                    animal.Files = new List<AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.File> { avatar };
                 }
                 db.Animales.Add(animal);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+    }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
             ViewBag.razaId = new SelectList(db.Razas, "Id", "nombre", animal.razaId);
@@ -84,7 +99,7 @@ namespace AERHiPets.Controllers.GestionAnimal
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Animal animal = db.Animales.Find(id);
+            Animal animal = db.Animales.Include(i => i.Files).SingleOrDefault(i => i.Id == id);  
             if (animal == null)
             {
                 return HttpNotFound();
@@ -99,12 +114,33 @@ namespace AERHiPets.Controllers.GestionAnimal
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,nombre,fechaNac,caracteristicas,tamanioId,razaId,enAdopcion")] Animal animal)
+        public ActionResult Edit([Bind(Include = "Id,nombre,fechaNac,caracteristicas,tamanioId,razaId,enAdopcion")] Animal animal, HttpPostedFileBase upload)
         {
             animal.fechaAlta = DateTime.Now;
             animal.edad = DateTime.Now.Year - animal.fechaNac.Year;
+            
+            var animalToUpdate = db.Animales.Find(animal.Id);
+
             if (ModelState.IsValid)
             {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    if (animalToUpdate.Files.Any(f => f.FileType == FileType.Avatar))
+                    {
+                        db.Files.Remove(animalToUpdate.Files.First(f => f.FileType == FileType.Avatar));
+                    }
+                    var avatar = new AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.File
+                    {
+                        FileName = System.IO.Path.GetFileName(upload.FileName),
+                        FileType = FileType.Avatar,
+                        ContentType = upload.ContentType
+                    };
+                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                    {
+                        avatar.Content = reader.ReadBytes(upload.ContentLength);
+                    }
+                    animalToUpdate.Files = new List<AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.File> { avatar };
+                }
                 db.Entry(animal).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

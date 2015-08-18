@@ -162,6 +162,7 @@
     <Compile Include="Controllers\GestionAnimal\AnimalsController.cs" />
     <Compile Include="Controllers\GestionAnimal\AtencionMedicasController.cs" />
     <Compile Include="Controllers\GestionAnimal\EspeciesController.cs" />
+    <Compile Include="Controllers\GestionAnimal\FileController.cs" />
     <Compile Include="Controllers\GestionAnimal\ProductoVeterinariasController.cs" />
     <Compile Include="Controllers\GestionAnimal\RazasController.cs" />
     <Compile Include="Controllers\GestionAnimal\TamaniosController.cs" />
@@ -181,6 +182,10 @@
     <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508181441497_GA2.Designer.cs">
       <DependentUpon>201508181441497_GA2.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508181801587_GA3.cs" />
+    <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508181801587_GA3.Designer.cs">
+      <DependentUpon>201508181801587_GA3.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\GestionAnimalesDAL\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -189,6 +194,7 @@
     <Compile Include="Models\GestionAnimal\Animal.cs" />
     <Compile Include="Models\GestionAnimal\AtencionMedica.cs" />
     <Compile Include="Models\GestionAnimal\Especie.cs" />
+    <Compile Include="Models\GestionAnimal\GestionAnimalImagenes\File.cs" />
     <Compile Include="Models\GestionAnimal\GestionAnimalImagenes\FilePath.cs" />
     <Compile Include="Models\GestionAnimal\GestionAnimalImagenes\FileType.cs" />
     <Compile Include="Models\GestionAnimal\GestionAnimalModelos\AtencionMedicaModelo.cs" />
@@ -387,6 +393,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="DAL\GestionAnimalesDAL\AnimalImages\" />
     <Folder Include="images\" />
+    <Folder Include="Views\File\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -404,6 +411,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DAL\GestionAnimalesDAL\Migrations\201508181441497_GA2.resx">
       <DependentUpon>201508181441497_GA2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionAnimalesDAL\Migrations\201508181801587_GA3.resx">
+      <DependentUpon>201508181801587_GA3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

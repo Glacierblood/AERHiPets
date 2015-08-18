@@ -47,5 +47,6 @@ namespace AERHiPets.Models.GestionAnimal
         public Boolean enAdopcion { get; set; }
 
         public virtual ICollection<FilePath> filePaths { get; set; }
+        public virtual ICollection<File> Files { get; set; }
     }
 }

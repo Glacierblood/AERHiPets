@@ -27,5 +27,6 @@ namespace AERHiPets.DAL.GestionAnimalesDAL
          public DbSet<ProductoVeterinaria> ProductosVeterinarias { get; set; }
          public DbSet<AtencionMedica> AtencionesMedicas { get; set; }
          public DbSet<FilePath> filePaths { get; set; }
+         public DbSet<File> Files { get; set; }
     }
 }
