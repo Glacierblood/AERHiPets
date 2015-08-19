@@ -186,6 +186,10 @@
     <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508181801587_GA3.Designer.cs">
       <DependentUpon>201508181801587_GA3.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508182011288_GA4.cs" />
+    <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508182011288_GA4.Designer.cs">
+      <DependentUpon>201508182011288_GA4.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\GestionAnimalesDAL\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -197,6 +201,8 @@
     <Compile Include="Models\GestionAnimal\GestionAnimalImagenes\File.cs" />
     <Compile Include="Models\GestionAnimal\GestionAnimalImagenes\FilePath.cs" />
     <Compile Include="Models\GestionAnimal\GestionAnimalImagenes\FileType.cs" />
+    <Compile Include="Models\GestionAnimal\GestionAnimalModelos\AnimalModel.cs" />
+    <Compile Include="Models\GestionAnimal\GestionAnimalModelos\AnimalV.cs" />
     <Compile Include="Models\GestionAnimal\GestionAnimalModelos\AtencionMedicaModelo.cs" />
     <Compile Include="Models\GestionAnimal\ProductoVeterinaria.cs" />
     <Compile Include="Models\GestionAnimal\Raza.cs" />
@@ -414,6 +420,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DAL\GestionAnimalesDAL\Migrations\201508181801587_GA3.resx">
       <DependentUpon>201508181801587_GA3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionAnimalesDAL\Migrations\201508182011288_GA4.resx">
+      <DependentUpon>201508182011288_GA4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

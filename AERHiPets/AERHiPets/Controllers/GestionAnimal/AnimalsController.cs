@@ -11,6 +11,7 @@ using AERHiPets.Models.GestionAnimal;
 using AERHiPets.Models.GestionAnimal.GestionAnimalImagenes;
 using System.IO;
 using System.Data.Entity.Infrastructure;
+using AERHiPets.Models.GestionAnimal.GestionAnimalModelos;
 
 namespace AERHiPets.Controllers.GestionAnimal
 {
@@ -21,8 +22,14 @@ namespace AERHiPets.Controllers.GestionAnimal
         // GET: Animal
         public ActionResult Index()
         {
+            
             var animales = db.Animales.Include(a => a.raza).Include(a => a.tamanio);
-            return View(animales.ToList());
+            var especies = db.Especies;
+            AnimalModel modelo = new AnimalModel();
+            modelo.animales = animales.ToList();
+            modelo.especies = especies.ToList();
+          
+            return View(modelo);
         }
 
         // GET: Animal/Details/5

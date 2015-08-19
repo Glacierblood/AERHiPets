@@ -42,12 +42,15 @@ namespace AERHiPets.Controllers.GestionAnimal
         public ActionResult Create()
         {
             var animales = db.Animales.Include(a => a.raza).Include(a => a.tamanio);
+            var especies = db.Especies;
             var veterinarias = db.Veterinarias.ToList();
             var productos = db.ProductosVeterinarias.ToList();
             AtencionMedicaModelo atencionMedicaModelo = new AtencionMedicaModelo();
             atencionMedicaModelo.animales = animales.ToList();
             atencionMedicaModelo.veterinarias = veterinarias;
             atencionMedicaModelo.productosVeterinarias = productos;
+            atencionMedicaModelo.especies = especies.ToList();
+            
 
             ViewBag.animalId = new SelectList(db.Animales, "Id", "nombre");
             ViewBag.productoVeterinariaId = new SelectList(db.ProductosVeterinarias, "Id", "nombre");

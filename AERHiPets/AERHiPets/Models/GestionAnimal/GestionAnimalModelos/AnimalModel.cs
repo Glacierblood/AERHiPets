@@ -5,14 +5,11 @@ using System.Web;
 
 namespace AERHiPets.Models.GestionAnimal.GestionAnimalModelos
 {
-    public class AtencionMedicaModelo
+    public class AnimalModel
     {
         public List<Animal> animales { get; set; }
-        public AtencionMedica atencionMedica { get; set; }
-        public Animal animal { get; set; }
-        public List<Veterinaria> veterinarias { get; set; }
-        public List<ProductoVeterinaria> productosVeterinarias { get; set; }
-        public Especie especie { get; set; }
         public List<Especie> especies { get; set; }
+        public Animal animal { get; set; }
+        public Especie especie { get; set; }
     }
 }

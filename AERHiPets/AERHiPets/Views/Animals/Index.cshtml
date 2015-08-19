@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AERHiPets.Models.GestionAnimal.Animal>
+﻿@model AERHiPets.Models.GestionAnimal.GestionAnimalModelos.AnimalModel
 
 @{
     ViewBag.Title = "Animales";
@@ -14,28 +14,31 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.nombre)
+                @Html.DisplayNameFor(model => model.animal.nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.raza.nombre)
+                @Html.DisplayNameFor(model => model.animal.raza.nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.tamanio.nombre)
+                @Html.DisplayNameFor(model => model.animal.raza.especie.nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.edad)
+                @Html.DisplayNameFor(model => model.animal.tamanio.nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.caracteristicas)
+                @Html.DisplayNameFor(model => model.animal.edad)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.enAdopcion)
+                @Html.DisplayNameFor(model => model.animal.caracteristicas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal.enAdopcion)
             </th>
             <th></th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var item in Model)
+    <tbody>        
+        @foreach (var item in Model.animales)
         {
             <tr>
                 <td>
@@ -43,6 +46,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.raza.nombre)
+                </td>
+                <td>                    
+                    @Html.DisplayFor(modelItem => item.raza.especie.nombre)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.tamanio.nombre)
