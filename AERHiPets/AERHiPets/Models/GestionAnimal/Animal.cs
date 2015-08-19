@@ -14,16 +14,17 @@ namespace AERHiPets.Models.GestionAnimal
 
         [Required]
         [StringLength(50, ErrorMessage = "No se permiten mas de 50 caracteres.")]
-        [Display(Name = "Nombre")]
+        [Display(Name = "Nombre Mascota")]
         public String nombre { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Fecha de Nacimento")]
         public DateTime fechaNac { get; set; }
 
         [Display(Name = "Fecha de Alta")]
         public DateTime fechaAlta { get; set; }
+        [Display(Name = "Edad (Años)")]
         public int edad { get; set; }
 
         [Display(Name = "Fecha de Baja")]

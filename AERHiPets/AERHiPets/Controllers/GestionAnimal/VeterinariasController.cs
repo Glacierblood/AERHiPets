@@ -18,7 +18,7 @@ namespace AERHiPets.Controllers.GestionAnimal
         // GET: Veterinarias
         public ActionResult Index()
         {
-            return View(db.Veterinarias.ToList());
+            return View(db.Veterinarias.Where(a => a.fechaBaja == null).ToList());
         }
 
         // GET: Veterinarias/Details/5
@@ -111,7 +111,10 @@ namespace AERHiPets.Controllers.GestionAnimal
         public ActionResult DeleteConfirmed(int id)
         {
             Veterinaria veterinaria = db.Veterinarias.Find(id);
-            db.Veterinarias.Remove(veterinaria);
+            
+            veterinaria.fechaBaja = System.DateTime.Now;
+            db.Entry(veterinaria).State = EntityState.Modified;
+           // db.Veterinarias.Remove(veterinaria);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

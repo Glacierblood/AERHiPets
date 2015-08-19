@@ -19,7 +19,9 @@ namespace AERHiPets.Controllers.GestionAnimal
         // GET: AtencionMedicas
         public ActionResult Index()
         {
-            var atencionesMedicas = db.AtencionesMedicas.Include(a => a.animal).Include(a => a.productoVeterinaria).Include(a => a.veterinaria);
+            var atencionesMedicas = db.AtencionesMedicas.Include(a => a.animal).Include(a => a.productoVeterinaria).Include(a => a.veterinaria);//.Where(a => a.fechaBaja == null);
+            //atencionesMedicas.animal = db.Animales.Include(r => r.raza).SingleOrDefault(i => i.Id == atencionesMedicas.animalId);
+            
             return View(atencionesMedicas.ToList());
         }
 
@@ -31,6 +33,9 @@ namespace AERHiPets.Controllers.GestionAnimal
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             AtencionMedica atencionMedica = db.AtencionesMedicas.Find(id);
+            atencionMedica.animal = db.Animales.Include(r => r.raza).SingleOrDefault(i => i.Id == atencionMedica.animalId);
+            atencionMedica.veterinaria = db.Veterinarias.SingleOrDefault(i => i.Id == atencionMedica.veterinariaId);
+            atencionMedica.productoVeterinaria = db.ProductosVeterinarias.SingleOrDefault(i => i.Id == atencionMedica.productoVeterinariaId);
             if (atencionMedica == null)
             {
                 return HttpNotFound();
@@ -69,6 +74,7 @@ namespace AERHiPets.Controllers.GestionAnimal
             //AtencionMedicaModelo model = new AtencionMedicaModelo();
             //model.animales = animales.ToList();
             //model.atencionMedica = atencionMedica;
+           
 
             if (ModelState.IsValid)
             {
@@ -91,6 +97,9 @@ namespace AERHiPets.Controllers.GestionAnimal
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             AtencionMedica atencionMedica = db.AtencionesMedicas.Find(id);
+            atencionMedica.animal = db.Animales.Include(r => r.raza).SingleOrDefault(i => i.Id == atencionMedica.animalId);
+            atencionMedica.veterinaria = db.Veterinarias.SingleOrDefault(i => i.Id == atencionMedica.veterinariaId);
+            atencionMedica.productoVeterinaria = db.ProductosVeterinarias.SingleOrDefault(i => i.Id == atencionMedica.productoVeterinariaId);
             if (atencionMedica == null)
             {
                 return HttpNotFound();
@@ -128,6 +137,9 @@ namespace AERHiPets.Controllers.GestionAnimal
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             AtencionMedica atencionMedica = db.AtencionesMedicas.Find(id);
+            atencionMedica.animal = db.Animales.Include(r => r.raza).SingleOrDefault(i => i.Id == atencionMedica.animalId);
+            atencionMedica.veterinaria = db.Veterinarias.SingleOrDefault(i => i.Id == atencionMedica.veterinariaId);
+            atencionMedica.productoVeterinaria = db.ProductosVeterinarias.SingleOrDefault(i => i.Id == atencionMedica.productoVeterinariaId);
             if (atencionMedica == null)
             {
                 return HttpNotFound();
@@ -141,7 +153,10 @@ namespace AERHiPets.Controllers.GestionAnimal
         public ActionResult DeleteConfirmed(int id)
         {
             AtencionMedica atencionMedica = db.AtencionesMedicas.Find(id);
-            db.AtencionesMedicas.Remove(atencionMedica);
+            
+            atencionMedica.fechaBaja = System.DateTime.Now;
+            db.Entry(atencionMedica).State = EntityState.Modified;
+            //db.AtencionesMedicas.Remove(atencionMedica);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

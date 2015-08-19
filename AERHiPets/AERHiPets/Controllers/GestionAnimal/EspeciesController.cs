@@ -18,7 +18,7 @@ namespace AERHiPets.Controllers.GestionAnimal
         // GET: Especie
         public ActionResult Index()
         {
-            return View(db.Especies.ToList());
+            return View(db.Especies.Where(a => a.fechaBaja == null).ToList());
         }
 
         // GET: Especie/Details/5
@@ -111,7 +111,10 @@ namespace AERHiPets.Controllers.GestionAnimal
         public ActionResult DeleteConfirmed(int id)
         {
             Especie especie = db.Especies.Find(id);
-            db.Especies.Remove(especie);
+           
+            especie.fechaBaja = System.DateTime.Now;
+            db.Entry(especie).State = EntityState.Modified;
+           // db.Especies.Remove(especie);
             try
             {
                 db.SaveChanges();

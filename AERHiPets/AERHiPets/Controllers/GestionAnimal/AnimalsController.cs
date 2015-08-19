@@ -22,8 +22,8 @@ namespace AERHiPets.Controllers.GestionAnimal
         // GET: Animal
         public ActionResult Index()
         {
-            
-            var animales = db.Animales.Include(a => a.raza).Include(a => a.tamanio);
+
+            var animales = db.Animales.Include(a => a.raza).Include(a => a.tamanio);//.Where(a => a.fechaBaja == null);
             var especies = db.Especies;
             AnimalModel modelo = new AnimalModel();
             modelo.animales = animales.ToList();
@@ -39,7 +39,8 @@ namespace AERHiPets.Controllers.GestionAnimal
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Animal animal = db.Animales.Include(i => i.Files).SingleOrDefault(i => i.Id == id);            
+            Animal animal = db.Animales.Find(id);
+            animal.raza = db.Razas.Include(r => r.especie).SingleOrDefault(i => i.Id == animal.razaId);
             if (animal == null)
             {
                 return HttpNotFound();
@@ -106,7 +107,8 @@ namespace AERHiPets.Controllers.GestionAnimal
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Animal animal = db.Animales.Include(i => i.Files).SingleOrDefault(i => i.Id == id);  
+            Animal animal = db.Animales.Find(id);
+            animal.raza = db.Razas.Include(r => r.especie).SingleOrDefault(i => i.Id == animal.razaId);
             if (animal == null)
             {
                 return HttpNotFound();
@@ -127,6 +129,14 @@ namespace AERHiPets.Controllers.GestionAnimal
             animal.edad = DateTime.Now.Year - animal.fechaNac.Year;
             
             var animalToUpdate = db.Animales.Find(animal.Id);
+            animalToUpdate.nombre = animal.nombre;
+            animalToUpdate.fechaNac = animal.fechaNac;
+            animalToUpdate.caracteristicas = animal.caracteristicas;
+            animalToUpdate.tamanioId = animal.tamanioId;
+            animalToUpdate.razaId = animal.razaId;
+            animalToUpdate.enAdopcion = animal.enAdopcion;
+            animalToUpdate.edad = animal.edad;
+            animalToUpdate.fechaAlta = animal.fechaAlta;
 
             if (ModelState.IsValid)
             {
@@ -148,7 +158,7 @@ namespace AERHiPets.Controllers.GestionAnimal
                     }
                     animalToUpdate.Files = new List<AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.File> { avatar };
                 }
-                db.Entry(animal).State = EntityState.Modified;
+                db.Entry(animalToUpdate).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -165,6 +175,7 @@ namespace AERHiPets.Controllers.GestionAnimal
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Animal animal = db.Animales.Find(id);
+            animal.raza = db.Razas.Include(r => r.especie).SingleOrDefault(i => i.Id == animal.razaId);
             if (animal == null)
             {
                 return HttpNotFound();
@@ -178,7 +189,9 @@ namespace AERHiPets.Controllers.GestionAnimal
         public ActionResult DeleteConfirmed(int id)
         {
             Animal animal = db.Animales.Find(id);
-            db.Animales.Remove(animal);
+            animal.fechaBaja = System.DateTime.Now;
+            db.Entry(animal).State = EntityState.Modified;
+            //db.Animales.Remove(animal);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

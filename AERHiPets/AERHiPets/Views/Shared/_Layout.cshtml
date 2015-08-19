@@ -40,7 +40,27 @@
     <script src="~/scripts/datatables/jquery.datatables.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#myTable').DataTable();
+            $('#myTable').DataTable(
+                {
+                    "oLanguage": {
+                        "oAria": {
+                            "sSortDescending": " - click/return to sort descending",                     
+                            
+                        },
+                        'oPaginate': {
+                            'sFirst': 'Primero',
+                            'sPrevious': 'Anterior',
+                            'sNext': 'Siguiente',
+                            'sLast': 'Ultimo'
+                        },
+                        'sProcessing': 'Por favor espere..',
+                        'sLengthMenu': 'Items por Pagina _MENU_',
+                        'sZeroRecords': 'No data was found', 'sInfo': '_START_ to _END_ of _TOTAL_',
+                        'sInfoEmpty': '0 to 0 of 0', 'sInfoFiltered': '(filtered of _MAX_)', 'sInfoPostFix': '',
+                        'sSearch': 'Buscar',
+                        'sUrl': ''
+                        }
+                    });
         });
     </script>
     @RenderSection("scripts", required: false)

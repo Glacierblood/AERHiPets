@@ -19,5 +19,8 @@ namespace AERHiPets.Models.GestionAnimal
         [StringLength(150, ErrorMessage = "No se permiten mas de 150 caracteres.")]
         [Display(Name = "Caracteristicas")]
         public String descripcion { get; set; }
+
+        [Display(Name = "Fecha de Baja")]
+        public DateTime? fechaBaja { get; set; }
     }
 }

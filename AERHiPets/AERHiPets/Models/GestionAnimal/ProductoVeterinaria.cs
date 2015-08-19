@@ -12,7 +12,7 @@ namespace AERHiPets.Models.GestionAnimal
         
         [Required]
         [StringLength(50, ErrorMessage = "No se permiten mas de 50 caracteres.")]
-        [Display(Name = "Nombre")]
+        [Display(Name = "Producto")]
         public String nombre { get; set; }
 
         public int? cantidad { get; set; }
@@ -21,5 +21,8 @@ namespace AERHiPets.Models.GestionAnimal
         [StringLength(255, ErrorMessage = "No se permiten mas de 255 caracteres.")]
         [Display(Name = "Descripcion")]
         public String descripcion { get; set; }
+
+        [Display(Name = "Fecha de Baja")]
+        public DateTime? fechaBaja { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+  
     $('#razaId option').remove();
     $('#razaId').append('<option value=""></option');
     // Populate categories when the page is loaded.
@@ -13,9 +14,9 @@
         }
     }).fail(function (jqXHR, textStatus, errorThrown) {
         // Ajax fail callback function.
-        alert('Error getting categories!');
+        alert('Error cargando Especies!');
     });
-
+    
     // First dropdown selection change event handler
     $('#especieId').change(function () {
         var catid = $(this).find(":selected").val();
@@ -32,7 +33,7 @@
                 }
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 // Ajax fail callback function.
-                alert('Error getting products!');
+                alert('Error cargando Razas!');
             });
         }
         else {

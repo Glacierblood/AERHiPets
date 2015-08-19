@@ -22,5 +22,8 @@ namespace AERHiPets.Models.GestionAnimal
 
         public int? especieID { get; set; }
         public Especie especie { get; set; }
+
+        [Display(Name = "Fecha de Baja")]
+        public DateTime? fechaBaja { get; set; }
     }
 }

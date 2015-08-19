@@ -1,10 +1,10 @@
 ﻿@model AERHiPets.Models.GestionAnimal.Animal
 
 @{
-    ViewBag.Title = "Editar Mascota";
+    ViewBag.Title = "Modificar Mascota";
 }
 
-<h2>Editar Mascota</h2>
+<h2>Modificar Mascota</h2>
 
 
 @using (Html.BeginForm("Edit", "Animals", null, FormMethod.Post, new {enctype = "multipart/form-data"}))
@@ -44,7 +44,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.tamanioId, "tamanioId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.tamanioId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("tamanioId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.tamanioId, "", new { @class = "text-danger" })
@@ -81,12 +81,12 @@
             </div>
         </div>
 
-        @if (Model.Files.Any(f => f.FileType == FileType.Avatar))
+        @if (Model.Files.Any(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar))
         {
             <div class="form-group">
-                <span class="control-label col-md-2"><strong>Current Avatar</strong></span>
+                <span class="control-label col-md-2"><strong>Foto</strong></span>
                 <div class="col-md-10">
-                    <img src="~/File?id=@Model.Files.First(f => f.FileType == FileType.Avatar).FileId" alt="avatar" />
+                    <img src="~/File?id=@Model.Files.First(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar).FileId" alt="avatar"  />
                 </div>
             </div>
         }
@@ -94,7 +94,7 @@
         <div class="form-group">
             @Html.Label("Avatar", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" id="Avatar" name="upload" />
+                <input type="file" id="Avatar" name="upload"  />
             </div>
         </div>
 

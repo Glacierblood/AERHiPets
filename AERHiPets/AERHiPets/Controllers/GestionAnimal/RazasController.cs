@@ -18,7 +18,7 @@ namespace AERHiPets.Controllers.GestionAnimal
         // GET: Raza
         public ActionResult Index()
         {
-            var razas = db.Razas.Include(r => r.especie);
+            var razas = db.Razas.Include(r => r.especie).Where(a => a.fechaBaja == null);
             return View(razas.ToList());
         }
 
@@ -30,6 +30,7 @@ namespace AERHiPets.Controllers.GestionAnimal
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Raza raza = db.Razas.Find(id);
+            raza.especie = db.Especies.SingleOrDefault(i => i.Id == raza.especieID);
             if (raza == null)
             {
                 return HttpNotFound();
@@ -103,6 +104,7 @@ namespace AERHiPets.Controllers.GestionAnimal
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Raza raza = db.Razas.Find(id);
+            raza.especie = db.Especies.SingleOrDefault(i => i.Id == raza.especieID);
             if (raza == null)
             {
                 return HttpNotFound();
@@ -116,7 +118,10 @@ namespace AERHiPets.Controllers.GestionAnimal
         public ActionResult DeleteConfirmed(int id)
         {
             Raza raza = db.Razas.Find(id);
-            db.Razas.Remove(raza);
+            
+            raza.fechaBaja = System.DateTime.Now;
+            db.Entry(raza).State = EntityState.Modified;
+            //db.Razas.Remove(raza);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

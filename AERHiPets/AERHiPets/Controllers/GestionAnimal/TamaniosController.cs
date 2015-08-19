@@ -18,7 +18,7 @@ namespace AERHiPets.Controllers.GestionAnimal
         // GET: Tamanio
         public ActionResult Index()
         {
-            return View(db.Tamanios.ToList());
+            return View(db.Tamanios.Where(a => a.fechaBaja == null).ToList());
         }
 
         // GET: Tamanio/Details/5
@@ -111,7 +111,10 @@ namespace AERHiPets.Controllers.GestionAnimal
         public ActionResult DeleteConfirmed(int id)
         {
             Tamanio tamanio = db.Tamanios.Find(id);
-            db.Tamanios.Remove(tamanio);
+            
+            tamanio.fechaBaja = System.DateTime.Now;
+            db.Entry(tamanio).State = EntityState.Modified;
+            //db.Tamanios.Remove(tamanio);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -190,6 +190,14 @@
     <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508182011288_GA4.Designer.cs">
       <DependentUpon>201508182011288_GA4.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508191347035_GA5.cs" />
+    <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508191347035_GA5.Designer.cs">
+      <DependentUpon>201508191347035_GA5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508191844014_GA6.cs" />
+    <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508191844014_GA6.Designer.cs">
+      <DependentUpon>201508191844014_GA6.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\GestionAnimalesDAL\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -423,6 +431,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DAL\GestionAnimalesDAL\Migrations\201508182011288_GA4.resx">
       <DependentUpon>201508182011288_GA4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionAnimalesDAL\Migrations\201508191347035_GA5.resx">
+      <DependentUpon>201508191347035_GA5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionAnimalesDAL\Migrations\201508191844014_GA6.resx">
+      <DependentUpon>201508191844014_GA6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
