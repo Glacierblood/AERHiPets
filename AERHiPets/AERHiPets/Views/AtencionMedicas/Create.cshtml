@@ -19,6 +19,7 @@
         <script src="~/scripts/jquery-1.10.2.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
+                $.validator.setDefaults({ ignore: null });
                 $("input[name=selectedAnimalId").change(function () {
                     //cada vez que el estado de un radio button cambia, asignamos a nuestro campo hiden el valor del readio seleccionado, que en este caso es el id del animal seleccionado
                     $("#atencionMedica_animalId").val($('input[name=selectedAnimalId]:checked').val());
@@ -96,13 +97,13 @@
         <div class="form-group">
             @*@Html.LabelFor(model => model.atencionMedica.animalId, "animalId", htmlAttributes: new { @class = "control-label col-md-2"})*@
             <div class="col-md-10">
-                @Html.EditorFor(model => model.atencionMedica.animalId, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
+                @Html.EditorFor(model => model.atencionMedica.animalId, new { htmlAttributes = new { @class = "form-control", @type = "hidden"} })
                 @Html.ValidationMessageFor(model => model.atencionMedica.animalId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.atencionMedica.veterinariaId, "veterinariaId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.atencionMedica.veterinariaId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.atencionMedica.veterinariaId, ViewBag.veterinariaId as SelectList, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.atencionMedica.veterinariaId, "", new { @class = "text-danger" })
@@ -110,7 +111,7 @@
         </div>
                
         <div class="form-group">
-            @Html.LabelFor(model => model.atencionMedica.productoVeterinariaId, "productoVeterinariaId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.atencionMedica.productoVeterinariaId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.atencionMedica.productoVeterinariaId, ViewBag.productoVeterinariaId as SelectList, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.atencionMedica.productoVeterinariaId, "", new { @class = "text-danger" })
