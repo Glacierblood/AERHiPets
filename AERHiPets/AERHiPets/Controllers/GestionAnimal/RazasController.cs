@@ -41,7 +41,7 @@ namespace AERHiPets.Controllers.GestionAnimal
         // GET: Raza/Create
         public ActionResult Create()
         {
-            ViewBag.especieID = new SelectList(db.Especies, "Id", "nombre");
+            ViewBag.especieID = new SelectList(db.Especies.Where(a => a.fechaBaja == null), "Id", "nombre");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace AERHiPets.Controllers.GestionAnimal
                 return RedirectToAction("Index");
             }
 
-            ViewBag.especieID = new SelectList(db.Especies, "Id", "nombre", raza.especieID);
+            ViewBag.especieID = new SelectList(db.Especies.Where(a => a.fechaBaja == null), "Id", "nombre", raza.especieID);
             return View(raza);
         }
 
@@ -75,7 +75,7 @@ namespace AERHiPets.Controllers.GestionAnimal
             {
                 return HttpNotFound();
             }
-            ViewBag.especieID = new SelectList(db.Especies, "Id", "nombre", raza.especieID);
+            ViewBag.especieID = new SelectList(db.Especies.Where(a => a.fechaBaja == null), "Id", "nombre", raza.especieID);
             return View(raza);
         }
 
@@ -92,7 +92,7 @@ namespace AERHiPets.Controllers.GestionAnimal
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.especieID = new SelectList(db.Especies, "Id", "nombre", raza.especieID);
+            ViewBag.especieID = new SelectList(db.Especies.Where(a => a.fechaBaja == null), "Id", "nombre", raza.especieID);
             return View(raza);
         }
 

@@ -55,7 +55,7 @@ namespace AERHiPets.Controllers.GestionAnimal
         public ActionResult Create()
         {
             ViewBag.razaId = new SelectList(db.Razas, "Id", "nombre");
-            ViewBag.tamanioId = new SelectList(db.Tamanios, "Id", "nombre");
+            ViewBag.tamanioId = new SelectList(db.Tamanios.Where(a => a.fechaBaja == null), "Id", "nombre");
             return View();
         }
 
@@ -99,7 +99,7 @@ namespace AERHiPets.Controllers.GestionAnimal
             }
 
             ViewBag.razaId = new SelectList(db.Razas, "Id", "nombre", animal.razaId);
-            ViewBag.tamanioId = new SelectList(db.Tamanios, "Id", "nombre", animal.tamanioId);
+            ViewBag.tamanioId = new SelectList(db.Tamanios.Where(a => a.fechaBaja == null), "Id", "nombre", animal.tamanioId);
             return View(animal);
         }
 
@@ -117,7 +117,7 @@ namespace AERHiPets.Controllers.GestionAnimal
                 return HttpNotFound();
             }
             ViewBag.razaId = new SelectList(db.Razas, "Id", "nombre", animal.razaId);
-            ViewBag.tamanioId = new SelectList(db.Tamanios, "Id", "nombre", animal.tamanioId);
+            ViewBag.tamanioId = new SelectList(db.Tamanios.Where(a => a.fechaBaja == null), "Id", "nombre", animal.tamanioId);
             return View(animal);
         }
 
@@ -166,7 +166,7 @@ namespace AERHiPets.Controllers.GestionAnimal
                 return RedirectToAction("Index");
             }
             ViewBag.razaId = new SelectList(db.Razas, "Id", "nombre", animal.razaId);
-            ViewBag.tamanioId = new SelectList(db.Tamanios, "Id", "nombre", animal.tamanioId);
+            ViewBag.tamanioId = new SelectList(db.Tamanios.Where(a => a.fechaBaja == null), "Id", "nombre", animal.tamanioId);
             return View(animal);
         }
 
@@ -212,6 +212,7 @@ namespace AERHiPets.Controllers.GestionAnimal
         {
             //AerDb db = new AerDb();
             var especies = db.Especies
+                .Where(e => e.fechaBaja == null)
                 .Select(e => new { e.Id, e.nombre })
                 .OrderBy(e => e.nombre);
             return Json(especies, JsonRequestBehavior.AllowGet);
@@ -223,6 +224,7 @@ namespace AERHiPets.Controllers.GestionAnimal
             //AerDb db = new AerDb();
             var razas = db.Razas
                 .Where(p => p.especieID == intEspID)
+                .Where(p => p.fechaBaja == null)
                 .Select(p => new { p.Id, p.nombre })
                 .OrderBy(p => p.nombre);
             return Json(razas, JsonRequestBehavior.AllowGet);
