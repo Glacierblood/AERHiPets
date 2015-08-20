@@ -23,7 +23,7 @@ namespace AERHiPets.Controllers.GestionAnimal
         public ActionResult Index()
         {
 
-            var animales = db.Animales.Include(a => a.raza).Include(a => a.tamanio);//.Where(a => a.fechaBaja == null);
+            var animales = db.Animales.Include(a => a.raza).Include(a => a.tamanio).Where(a => a.fechaBaja == null);
             var especies = db.Especies;
             AnimalModel modelo = new AnimalModel();
             modelo.animales = animales.ToList();
@@ -33,6 +33,9 @@ namespace AERHiPets.Controllers.GestionAnimal
         }
 
         // GET: Animal/Details/5
+        /*Recibe como parametro el Id de un animal, comprueba que este no se encuentre nulo, de ser asi busca
+         * y trae el animal de la BD, le incorpora la referencia a la entidad animal a la que apunta la FK razaId
+         * Comprueba que el animal devuelto no sea null y devuelve a la vista para que se muestre*/
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -66,23 +69,23 @@ namespace AERHiPets.Controllers.GestionAnimal
             animal.fechaAlta = DateTime.Now;
             animal.edad = DateTime.Now.Year - animal.fechaNac.Year;
             try
-    {
-            
-            if (ModelState.IsValid)
-            {
-                if (upload != null && upload.ContentLength > 0)
                 {
-                    var avatar = new AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.File
+            
+            if (ModelState.IsValid)//Verifica que el formulario sea valido
+            {
+                if (upload != null && upload.ContentLength > 0)//verifica se cargo una foto para en animal
+                {
+                    var avatar = new AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.File//instancia la clase encargada de mapear la foto en la BD
                     {
                         FileName = System.IO.Path.GetFileName(upload.FileName),
                         FileType = FileType.Avatar,
                         ContentType = upload.ContentType
                     };
-                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                    using (var reader = new System.IO.BinaryReader(upload.InputStream))//transforma la foto en una cadena de bytes para guardar en la BD
                     {
                         avatar.Content = reader.ReadBytes(upload.ContentLength);
                     }
-                    animal.Files = new List<AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.File> { avatar };
+                    animal.Files = new List<AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.File> { avatar };//aniade la referencia de la foto guardada al atributo correspondiente en animal
                 }
                 db.Animales.Add(animal);
                 db.SaveChanges();
