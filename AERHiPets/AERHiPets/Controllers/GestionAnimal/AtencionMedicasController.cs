@@ -92,14 +92,32 @@ namespace AERHiPets.Controllers.GestionAnimal
         // GET: AtencionMedicas/Edit/5
         public ActionResult Edit(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //---------------------------------------------------
+
+            var animales = db.Animales.Include(a => a.raza).Include(a => a.tamanio).Where(a => a.fechaBaja == null);
+            var especies = db.Especies;
+            var veterinarias = db.Veterinarias.Where(a => a.fechaBaja == null).ToList();
+            var productos = db.ProductosVeterinarias.Where(a => a.fechaBaja == null).ToList();
+            AtencionMedicaModelo atencionMedicaModelo = new AtencionMedicaModelo();
+            atencionMedicaModelo.animales = animales.ToList();
+            atencionMedicaModelo.veterinarias = veterinarias;
+            atencionMedicaModelo.productosVeterinarias = productos;
+            atencionMedicaModelo.especies = especies.ToList();
+            
+
+            //---------------------------------------------------
             AtencionMedica atencionMedica = db.AtencionesMedicas.Find(id);
             atencionMedica.animal = db.Animales.Include(r => r.raza).SingleOrDefault(i => i.Id == atencionMedica.animalId);
             atencionMedica.veterinaria = db.Veterinarias.SingleOrDefault(i => i.Id == atencionMedica.veterinariaId);
             atencionMedica.productoVeterinaria = db.ProductosVeterinarias.SingleOrDefault(i => i.Id == atencionMedica.productoVeterinariaId);
+
+            atencionMedicaModelo.atencionMedica = atencionMedica;
+
             if (atencionMedica == null)
             {
                 return HttpNotFound();
@@ -107,7 +125,8 @@ namespace AERHiPets.Controllers.GestionAnimal
             ViewBag.animalId = new SelectList(db.Animales.Where(a => a.fechaBaja == null), "Id", "nombre", atencionMedica.animalId);
             ViewBag.productoVeterinariaId = new SelectList(db.ProductosVeterinarias.Where(a => a.fechaBaja == null), "Id", "nombre", atencionMedica.productoVeterinariaId);
             ViewBag.veterinariaId = new SelectList(db.Veterinarias.Where(a => a.fechaBaja == null), "Id", "nombre", atencionMedica.veterinariaId);
-            return View(atencionMedica);
+            //return View(atencionMedica);
+            return View(atencionMedicaModelo);
         }
 
         // POST: AtencionMedicas/Edit/5
