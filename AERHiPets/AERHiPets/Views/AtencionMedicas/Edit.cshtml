@@ -14,7 +14,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>AtencionMedica</h4>
+        <h4>Atencion Medica</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.atencionMedica.Id)
@@ -110,6 +110,7 @@
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.atencionMedica.veterinariaId, ViewBag.veterinariaId as SelectList, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.atencionMedica.veterinariaId, "", new { @class = "text-danger" })
+                <a href="~/Veterinarias/Create">Agregar Veterinaria</a>
             </div>
         </div>
 
@@ -118,6 +119,7 @@
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.atencionMedica.productoVeterinariaId, ViewBag.productoVeterinariaId as SelectList, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.atencionMedica.productoVeterinariaId, "", new { @class = "text-danger" })
+                <a href="~/ProductoVeterinarias/Create">Agregar Producto</a>
             </div>
         </div>
 
@@ -139,7 +141,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Guardar" class="btn btn-default" />
             </div>
         </div>
     </div>

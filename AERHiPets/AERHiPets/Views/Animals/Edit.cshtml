@@ -59,6 +59,7 @@
                 <select class="form-control" id="especieId" name="especieId">
                     <option value=""></option>
                 </select>
+                <a href="~/Especies/Create">Agregar Especie</a>
             </div>
 
         </div>
@@ -68,6 +69,7 @@
             <div class="col-md-10">
                 @Html.DropDownList("razaId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.razaId, "", new { @class = "text-danger" })
+                <a href="~/Razas/Create">Agregar Raza</a>
             </div>
         </div>
 
