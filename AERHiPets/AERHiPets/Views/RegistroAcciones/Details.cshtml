@@ -1,0 +1,58 @@
+﻿@model AERHiPets.Models.GestionUsuarios.RegistroAcciones
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RegistroAcciones</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.acciones.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.acciones.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.persona.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.persona.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaAlta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaAlta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechcaBaja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechcaBaja)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comentario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comentario)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

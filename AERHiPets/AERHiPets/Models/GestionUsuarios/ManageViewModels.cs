@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace AERHiPets.Models
+namespace AERHiPets.Models.GestionUsuarios
 {
     public class IndexViewModel
     {

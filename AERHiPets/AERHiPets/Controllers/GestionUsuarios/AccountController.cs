@@ -8,9 +8,12 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using AERHiPets.Models;
+using AERHiPets.Models.GestionUsuarios;
+using AERHiPets.DAL.GestionVoluntariosDAL;
+using AERHiPets.Models.GestionUsuarios.Modelos;
+using AERHiPets.Models.GestionDireccion;
 
-namespace AERHiPets.Controllers
+namespace AERHiPets.Controllers.GestionUsuarios
 {
     [Authorize]
     public class AccountController : Controller
@@ -139,7 +142,21 @@ namespace AERHiPets.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            GestionVoluntarioDb db = new GestionVoluntarioDb();
+            //------------------------------------------------------------
+            var listaacc = db.acciones.ToList();
+            PersonaModelo pm = new PersonaModelo();
+            pm.listaAcciones = listaacc;
+            ViewBag.direccionId = new SelectList(db.direcciones, "Id", "calle");
+            
+            ViewBag.localidadId = new SelectList(db.localidades, "Id", "nombre");
+            ViewBag.barrioId = new SelectList(db.barrios, "Id", "nombre");
+            ViewBag.provinciaId = new SelectList(db.provincias, "Id", "nombre");
+            pm.registerViewModel = new RegisterViewModel();
+           
+            //------------------------------------------------------------
+
+            return View(pm);
         }
 
         //
@@ -147,15 +164,49 @@ namespace AERHiPets.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register([Bind(Include = "Id,Nombre,Apellido,fechaNac,fechaAlta,fechaBaja,telefono,telefonoCel,puntaje,direccionId")] Persona persona, PersonaModelo pm)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                GestionVoluntarioDb db = new GestionVoluntarioDb();
+
+                var direccion = new Direccion();
+                direccion.barrioId = pm.persona.direccion.barrioId;
+                direccion.calle = pm.persona.direccion.calle;
+                direccion.piso = pm.persona.direccion.piso;
+                direccion.Torre = pm.persona.direccion.Torre;
+
+                db.direcciones.Add(direccion);
+                db.SaveChanges();
+                
+                persona.fechaAlta = DateTime.Now;
+                persona.fechaNac = DateTime.Now;
+                persona.direccionId = direccion.Id;
+                db.personas.Add(persona);
+                db.SaveChanges();
+
+                foreach (var item in pm.listaAcciones)
+                {
+                    if (item.isSelected)
+                    {
+                        RegistroAcciones RA = new RegistroAcciones();
+                        RA.accionesId = item.Id;
+                        RA.personaId = persona.Id;
+                        RA.fechaAlta = DateTime.Now;
+                        db.registroAcciones.Add(RA);
+                        db.SaveChanges();
+                    }
+                }
+                var user = new ApplicationUser { UserName = pm.registerViewModel.Email, Email = pm.registerViewModel.Email };
+
+                user.persona = persona;
+                user.personaId = persona.Id;
+                var result = await UserManager.CreateAsync(user, pm.registerViewModel.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    
+                    
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -167,9 +218,13 @@ namespace AERHiPets.Controllers
                 }
                 AddErrors(result);
             }
-
+            GestionVoluntarioDb dbs = new GestionVoluntarioDb();
+            ViewBag.direccionId = new SelectList(dbs.direcciones, "Id", "calle");
+            ViewBag.localidadId = new SelectList(dbs.localidades, "Id", "nombre");
+            ViewBag.barrioId = new SelectList(dbs.barrios, "Id", "nombre");
+            ViewBag.provinciaId = new SelectList(dbs.provincias, "Id", "nombre");
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View(pm);
         }
 
         //

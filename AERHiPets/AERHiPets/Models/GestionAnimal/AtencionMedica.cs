@@ -24,12 +24,12 @@ namespace AERHiPets.Models.GestionAnimal
         public ProductoVeterinaria productoVeterinaria { get; set; }
 
         [Required]
-        [StringLength(250, ErrorMessage = "No se permiten mas de 50 caracteres.")]
+        [StringLength(250, ErrorMessage = "No se permiten mas de 250 caracteres.")]
         [Display(Name = "Tratamiento")]
         public String  tratamiento { get; set; }
 
         [Required]
-        [StringLength(250, ErrorMessage = "No se permiten mas de 50 caracteres.")]
+        [StringLength(250, ErrorMessage = "No se permiten mas de 250 caracteres.")]
         [Display(Name = "Nombre del Veterinario")]
         public String nombreVeterinario { get; set; }
 

@@ -158,7 +158,12 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GestionDireccion\BarriosController.cs" />
+    <Compile Include="Controllers\GestionDireccion\DireccionsController.cs" />
+    <Compile Include="Controllers\GestionDireccion\LocalidadsController.cs" />
+    <Compile Include="Controllers\GestionDireccion\ProvinciasController.cs" />
+    <Compile Include="Controllers\GestionUsuarios\AccionesController.cs" />
+    <Compile Include="Controllers\GestionUsuarios\AccountController.cs" />
     <Compile Include="Controllers\GestionAnimal\AnimalsController.cs" />
     <Compile Include="Controllers\GestionAnimal\AtencionMedicasController.cs" />
     <Compile Include="Controllers\GestionAnimal\EspeciesController.cs" />
@@ -167,8 +172,10 @@
     <Compile Include="Controllers\GestionAnimal\RazasController.cs" />
     <Compile Include="Controllers\GestionAnimal\TamaniosController.cs" />
     <Compile Include="Controllers\GestionAnimal\VeterinariasController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\GestionUsuarios\HomeController.cs" />
+    <Compile Include="Controllers\GestionUsuarios\ManageController.cs" />
+    <Compile Include="Controllers\GestionUsuarios\PersonasController.cs" />
+    <Compile Include="Controllers\GestionUsuarios\RegistroAccionesController.cs" />
     <Compile Include="DAL\GestionAnimalesDAL\GestionAnimalDb.cs" />
     <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508172126069_InitialCreate.cs" />
     <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508172126069_InitialCreate.Designer.cs">
@@ -199,10 +206,27 @@
       <DependentUpon>201508191844014_GA6.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\GestionAnimalesDAL\Migrations\Configuration.cs" />
+    <Compile Include="DAL\GestionUsuariosDAL\GestionUsuarioDb.cs" />
+    <Compile Include="DAL\GestionUsuariosDAL\Migrations1\201508241526294_USR1.cs" />
+    <Compile Include="DAL\GestionUsuariosDAL\Migrations1\201508241526294_USR1.Designer.cs">
+      <DependentUpon>201508241526294_USR1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GestionUsuariosDAL\Migrations1\201508252331043_USR2.cs" />
+    <Compile Include="DAL\GestionUsuariosDAL\Migrations1\201508252331043_USR2.Designer.cs">
+      <DependentUpon>201508252331043_USR2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GestionUsuariosDAL\Migrations1\Configuration.cs" />
+    <Compile Include="DAL\GestionVoluntariosDAL\GestionVoluntarioDb.cs" />
+    <Compile Include="DAL\GestionVoluntariosDAL\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\GestionDireccion\Barrio.cs" />
+    <Compile Include="Models\GestionDireccion\Direccion.cs" />
+    <Compile Include="Models\GestionDireccion\Localidad.cs" />
+    <Compile Include="Models\GestionDireccion\Provincia.cs" />
+    <Compile Include="Models\GestionUsuarios\Acciones.cs" />
+    <Compile Include="Models\GestionUsuarios\AccountViewModels.cs" />
     <Compile Include="Models\GestionAnimal\Animal.cs" />
     <Compile Include="Models\GestionAnimal\AtencionMedica.cs" />
     <Compile Include="Models\GestionAnimal\Especie.cs" />
@@ -216,8 +240,11 @@
     <Compile Include="Models\GestionAnimal\Raza.cs" />
     <Compile Include="Models\GestionAnimal\Tamanio.cs" />
     <Compile Include="Models\GestionAnimal\Veterinaria.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\GestionUsuarios\IdentityModels.cs" />
+    <Compile Include="Models\GestionUsuarios\ManageViewModels.cs" />
+    <Compile Include="Models\GestionUsuarios\Modelos\PersonaModelo.cs" />
+    <Compile Include="Models\GestionUsuarios\Persona.cs" />
+    <Compile Include="Models\GestionUsuarios\RegistroAcciones.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -402,6 +429,41 @@
     <Content Include="Views\AtencionMedicas\Details.cshtml" />
     <Content Include="Views\AtencionMedicas\Edit.cshtml" />
     <Content Include="Views\AtencionMedicas\Index.cshtml" />
+    <Content Include="Views\Acciones\Create.cshtml" />
+    <Content Include="Views\Acciones\Delete.cshtml" />
+    <Content Include="Views\Acciones\Details.cshtml" />
+    <Content Include="Views\Acciones\Edit.cshtml" />
+    <Content Include="Views\Acciones\Index.cshtml" />
+    <Content Include="Views\RegistroAcciones\Create.cshtml" />
+    <Content Include="Views\RegistroAcciones\Delete.cshtml" />
+    <Content Include="Views\RegistroAcciones\Details.cshtml" />
+    <Content Include="Views\RegistroAcciones\Edit.cshtml" />
+    <Content Include="Views\RegistroAcciones\Index.cshtml" />
+    <Content Include="Views\Personas\Create.cshtml" />
+    <Content Include="Views\Personas\Delete.cshtml" />
+    <Content Include="Views\Personas\Details.cshtml" />
+    <Content Include="Views\Personas\Edit.cshtml" />
+    <Content Include="Views\Personas\Index.cshtml" />
+    <Content Include="Views\Provincias\Create.cshtml" />
+    <Content Include="Views\Provincias\Delete.cshtml" />
+    <Content Include="Views\Provincias\Details.cshtml" />
+    <Content Include="Views\Provincias\Edit.cshtml" />
+    <Content Include="Views\Provincias\Index.cshtml" />
+    <Content Include="Views\Barrios\Create.cshtml" />
+    <Content Include="Views\Barrios\Delete.cshtml" />
+    <Content Include="Views\Barrios\Details.cshtml" />
+    <Content Include="Views\Barrios\Edit.cshtml" />
+    <Content Include="Views\Barrios\Index.cshtml" />
+    <Content Include="Views\Direccions\Create.cshtml" />
+    <Content Include="Views\Direccions\Delete.cshtml" />
+    <Content Include="Views\Direccions\Details.cshtml" />
+    <Content Include="Views\Direccions\Edit.cshtml" />
+    <Content Include="Views\Direccions\Index.cshtml" />
+    <Content Include="Views\Localidads\Create.cshtml" />
+    <Content Include="Views\Localidads\Delete.cshtml" />
+    <Content Include="Views\Localidads\Details.cshtml" />
+    <Content Include="Views\Localidads\Edit.cshtml" />
+    <Content Include="Views\Localidads\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -437,6 +499,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DAL\GestionAnimalesDAL\Migrations\201508191844014_GA6.resx">
       <DependentUpon>201508191844014_GA6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionUsuariosDAL\Migrations1\201508241526294_USR1.resx">
+      <DependentUpon>201508241526294_USR1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionUsuariosDAL\Migrations1\201508252331043_USR2.resx">
+      <DependentUpon>201508252331043_USR2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

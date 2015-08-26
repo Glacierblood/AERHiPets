@@ -1,0 +1,50 @@
+﻿@model AERHiPets.Models.GestionDireccion.Direccion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Direccion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.barrio.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.barrio.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.calle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.calle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.piso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.piso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Torre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Torre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

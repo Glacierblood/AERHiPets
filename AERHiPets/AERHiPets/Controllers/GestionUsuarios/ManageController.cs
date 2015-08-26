@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using AERHiPets.Models;
+using AERHiPets.Models.GestionUsuarios;
 
-namespace AERHiPets.Controllers
+namespace AERHiPets.Controllers.GestionUsuarios
 {
     [Authorize]
     public class ManageController : Controller

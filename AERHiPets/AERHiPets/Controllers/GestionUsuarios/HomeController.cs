@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace AERHiPets.Controllers
+namespace AERHiPets.Controllers.GestionUsuarios
 {
     public class HomeController : Controller
     {
