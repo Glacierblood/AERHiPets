@@ -12,6 +12,8 @@ using AERHiPets.Models.GestionUsuarios;
 using AERHiPets.DAL.GestionVoluntariosDAL;
 using AERHiPets.Models.GestionUsuarios.Modelos;
 using AERHiPets.Models.GestionDireccion;
+using System.Transactions;
+
 
 namespace AERHiPets.Controllers.GestionUsuarios
 {
@@ -144,8 +146,8 @@ namespace AERHiPets.Controllers.GestionUsuarios
         {
             GestionVoluntarioDb db = new GestionVoluntarioDb();
             //------------------------------------------------------------
-            var listaacc = db.acciones.ToList();
             PersonaModelo pm = new PersonaModelo();
+            var listaacc = db.acciones.ToList();            
             pm.listaAcciones = listaacc;
             ViewBag.direccionId = new SelectList(db.direcciones, "Id", "calle");
             
@@ -168,57 +170,69 @@ namespace AERHiPets.Controllers.GestionUsuarios
         {
             if (ModelState.IsValid)
             {
+               // TransactionScope ts = new TransactionScope();
                 GestionVoluntarioDb db = new GestionVoluntarioDb();
+                var transaccion = db.Database.BeginTransaction();
 
-                var direccion = new Direccion();
-                direccion.barrioId = pm.persona.direccion.barrioId;
-                direccion.calle = pm.persona.direccion.calle;
-                direccion.piso = pm.persona.direccion.piso;
-                direccion.Torre = pm.persona.direccion.Torre;
+                        var direccion = new Direccion();
+                        direccion.barrioId = pm.persona.direccion.barrioId;
+                        direccion.calle = pm.persona.direccion.calle;
+                        direccion.piso = pm.persona.direccion.piso;
+                        direccion.Torre = pm.persona.direccion.Torre;
 
-                db.direcciones.Add(direccion);
-                db.SaveChanges();
-                
-                persona.fechaAlta = DateTime.Now;
-                persona.fechaNac = DateTime.Now;
-                persona.direccionId = direccion.Id;
-                db.personas.Add(persona);
-                db.SaveChanges();
-
-                foreach (var item in pm.listaAcciones)
-                {
-                    if (item.isSelected)
-                    {
-                        RegistroAcciones RA = new RegistroAcciones();
-                        RA.accionesId = item.Id;
-                        RA.personaId = persona.Id;
-                        RA.fechaAlta = DateTime.Now;
-                        db.registroAcciones.Add(RA);
+                        db.direcciones.Add(direccion);                        
                         db.SaveChanges();
-                    }
-                }
-                var user = new ApplicationUser { UserName = pm.registerViewModel.Email, Email = pm.registerViewModel.Email };
 
-                user.persona = persona;
-                user.personaId = persona.Id;
-                var result = await UserManager.CreateAsync(user, pm.registerViewModel.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    
-                    
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        persona.fechaAlta = DateTime.Now;
+                        persona.fechaNac = pm.persona.fechaNac;
+                        persona.direccionId = direccion.Id;
+                
+                        db.personas.Add(persona);
+                        db.SaveChanges();
 
-                    return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
+                       // var ultimoId = db.personas.Max(p => p.Id);
+                        //persona.Id = ultimoId+1;
+                        //resultado = await db.SaveChangesAsync();
+                        foreach (var item in pm.listaAcciones)
+                        {
+                            if (item.isSelected)
+                            {
+                                RegistroAcciones RA = new RegistroAcciones();
+                                RA.accionesId = item.Id;
+                                RA.personaId = persona.Id;
+                                RA.fechaAlta = DateTime.Now;
+                                db.registroAcciones.Add(RA);
+                                db.SaveChanges();
+                                //resultado = await db.SaveChangesAsync();
+
+                            }
+                        }
+                      
+                        var user = new ApplicationUser { UserName = pm.registerViewModel.Email, Email = pm.registerViewModel.Email, persona=persona, personaId=persona.Id };
+                       // user.personaId = persona.Id;
+                       // user.persona = persona;
+                        var result = await UserManager.CreateAsync(user, pm.registerViewModel.Password);
+                        if (result.Succeeded)
+                        {
+                            
+
+                            transaccion.Commit();
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                            
+
+                            // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                            // Send an email with this link
+                            // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                            // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                            // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                            return RedirectToAction("Index", "Home");
+                        }
+                        AddErrors(result);
             }
             GestionVoluntarioDb dbs = new GestionVoluntarioDb();
+            var listaacc = dbs.acciones.ToList();
+            pm.listaAcciones = listaacc;
             ViewBag.direccionId = new SelectList(dbs.direcciones, "Id", "calle");
             ViewBag.localidadId = new SelectList(dbs.localidades, "Id", "nombre");
             ViewBag.barrioId = new SelectList(dbs.barrios, "Id", "nombre");

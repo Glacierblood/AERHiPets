@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -215,7 +216,24 @@
     <Compile Include="DAL\GestionUsuariosDAL\Migrations1\201508252331043_USR2.Designer.cs">
       <DependentUpon>201508252331043_USR2.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\GestionUsuariosDAL\Migrations1\201508261538550_USR3.cs" />
+    <Compile Include="DAL\GestionUsuariosDAL\Migrations1\201508261538550_USR3.Designer.cs">
+      <DependentUpon>201508261538550_USR3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GestionUsuariosDAL\Migrations1\201508261558513_USR4.cs" />
+    <Compile Include="DAL\GestionUsuariosDAL\Migrations1\201508261558513_USR4.Designer.cs">
+      <DependentUpon>201508261558513_USR4.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\GestionUsuariosDAL\Migrations1\Configuration.cs" />
+    <Compile Include="DAL\GestionUsuariosDAL\Migrations\201508261700284_USR1.cs" />
+    <Compile Include="DAL\GestionUsuariosDAL\Migrations\201508261700284_USR1.Designer.cs">
+      <DependentUpon>201508261700284_USR1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GestionUsuariosDAL\Migrations\201508262148230_USR2.cs" />
+    <Compile Include="DAL\GestionUsuariosDAL\Migrations\201508262148230_USR2.Designer.cs">
+      <DependentUpon>201508262148230_USR2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GestionUsuariosDAL\Migrations\Configuration.cs" />
     <Compile Include="DAL\GestionVoluntariosDAL\GestionVoluntarioDb.cs" />
     <Compile Include="DAL\GestionVoluntariosDAL\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -505,6 +523,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DAL\GestionUsuariosDAL\Migrations1\201508252331043_USR2.resx">
       <DependentUpon>201508252331043_USR2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionUsuariosDAL\Migrations1\201508261538550_USR3.resx">
+      <DependentUpon>201508261538550_USR3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionUsuariosDAL\Migrations1\201508261558513_USR4.resx">
+      <DependentUpon>201508261558513_USR4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionUsuariosDAL\Migrations\201508261700284_USR1.resx">
+      <DependentUpon>201508261700284_USR1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionUsuariosDAL\Migrations\201508262148230_USR2.resx">
+      <DependentUpon>201508262148230_USR2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

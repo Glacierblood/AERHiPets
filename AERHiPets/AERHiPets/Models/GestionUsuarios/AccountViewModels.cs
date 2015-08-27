@@ -81,33 +81,7 @@ namespace AERHiPets.Models.GestionUsuarios
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
-        public string Nombre { get; set; }
-        
-        public string Apellido { get; set; }
-        
-        public DateTime fechaNac { get; set; }
-       
-        public int telefono { get; set; }
-        
-        public int telefonoCel { get; set; }
-
-        public virtual ICollection<RegistroAcciones> registrosAcciones { get; set; }
-
-        public String calle { get; set; }
-        public int piso { get; set; }
-        public int Torre { get; set; }
-        public Char depto { get; set; }
-
-        public int barrioId { get; set; }
-        public virtual Barrio barrio { get; set; }
-
-        public int localidadId { get; set; }
-        public Localidad localidad { get; set; }
-
-        public int provinviaId { get; set; }
-        public Provincia provincia { get; set; }
-
+               
     }
 
     public class RegisterViewModel1
