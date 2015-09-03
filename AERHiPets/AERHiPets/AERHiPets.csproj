@@ -159,6 +159,10 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\GestionAdopApa\GestionAdopcion\AdopcionsController.cs" />
+    <Compile Include="Controllers\GestionAdopApa\GestionAdopcion\EstadoAdopcionsController.cs" />
+    <Compile Include="Controllers\GestionAdopApa\GestionAdopcion\TipoAdopcionsController.cs" />
+    <Compile Include="Controllers\GestionAdopApa\GestionApadrinamiento\EstadoApadrinamientoesController.cs" />
     <Compile Include="Controllers\GestionDireccion\BarriosController.cs" />
     <Compile Include="Controllers\GestionDireccion\DireccionsController.cs" />
     <Compile Include="Controllers\GestionDireccion\LocalidadsController.cs" />
@@ -177,6 +181,12 @@
     <Compile Include="Controllers\GestionUsuarios\ManageController.cs" />
     <Compile Include="Controllers\GestionUsuarios\PersonasController.cs" />
     <Compile Include="Controllers\GestionUsuarios\RegistroAccionesController.cs" />
+    <Compile Include="DAL\GestionAdopcionApadrinamiento\GestionAdopApaDb.cs" />
+    <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\201509030030009_ADOP1.cs" />
+    <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\201509030030009_ADOP1.Designer.cs">
+      <DependentUpon>201509030030009_ADOP1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\Configuration.cs" />
     <Compile Include="DAL\GestionAnimalesDAL\GestionAnimalDb.cs" />
     <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508172126069_InitialCreate.cs" />
     <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508172126069_InitialCreate.Designer.cs">
@@ -225,6 +235,11 @@
       <DependentUpon>201508261558513_USR4.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\GestionUsuariosDAL\Migrations1\Configuration.cs" />
+    <Compile Include="DAL\GestionUsuariosDAL\Migrations2\201509022138297_USR1.cs" />
+    <Compile Include="DAL\GestionUsuariosDAL\Migrations2\201509022138297_USR1.Designer.cs">
+      <DependentUpon>201509022138297_USR1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GestionUsuariosDAL\Migrations2\Configuration.cs" />
     <Compile Include="DAL\GestionUsuariosDAL\Migrations\201508261700284_USR1.cs" />
     <Compile Include="DAL\GestionUsuariosDAL\Migrations\201508261700284_USR1.Designer.cs">
       <DependentUpon>201508261700284_USR1.cs</DependentUpon>
@@ -235,10 +250,20 @@
     </Compile>
     <Compile Include="DAL\GestionUsuariosDAL\Migrations\Configuration.cs" />
     <Compile Include="DAL\GestionVoluntariosDAL\GestionVoluntarioDb.cs" />
+    <Compile Include="DAL\GestionVoluntariosDAL\Migrations\201509022146066_VOL1.cs" />
+    <Compile Include="DAL\GestionVoluntariosDAL\Migrations\201509022146066_VOL1.Designer.cs">
+      <DependentUpon>201509022146066_VOL1.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\GestionVoluntariosDAL\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GestionAdopcionApadrinamiento\GestionAdopcion\Adopcion.cs" />
+    <Compile Include="Models\GestionAdopcionApadrinamiento\GestionAdopcion\EstadoAdopcion.cs" />
+    <Compile Include="Models\GestionAdopcionApadrinamiento\GestionAdopcion\TipoAdopcion.cs" />
+    <Compile Include="Models\GestionAdopcionApadrinamiento\GestionApadrinamiento\Apadrinamiento.cs" />
+    <Compile Include="Models\GestionAdopcionApadrinamiento\GestionApadrinamiento\EstadoApadrinamiento.cs" />
+    <Compile Include="Models\GestionAdopcionApadrinamiento\Models\Adoptar.cs" />
     <Compile Include="Models\GestionDireccion\Barrio.cs" />
     <Compile Include="Models\GestionDireccion\Direccion.cs" />
     <Compile Include="Models\GestionDireccion\Localidad.cs" />
@@ -482,6 +507,26 @@
     <Content Include="Views\Localidads\Details.cshtml" />
     <Content Include="Views\Localidads\Edit.cshtml" />
     <Content Include="Views\Localidads\Index.cshtml" />
+    <Content Include="Views\EstadoAdopcions\Create.cshtml" />
+    <Content Include="Views\EstadoAdopcions\Delete.cshtml" />
+    <Content Include="Views\EstadoAdopcions\Details.cshtml" />
+    <Content Include="Views\EstadoAdopcions\Edit.cshtml" />
+    <Content Include="Views\EstadoAdopcions\Index.cshtml" />
+    <Content Include="Views\TipoAdopcions\Create.cshtml" />
+    <Content Include="Views\TipoAdopcions\Delete.cshtml" />
+    <Content Include="Views\TipoAdopcions\Details.cshtml" />
+    <Content Include="Views\TipoAdopcions\Edit.cshtml" />
+    <Content Include="Views\TipoAdopcions\Index.cshtml" />
+    <Content Include="Views\EstadoApadrinamientoes\Create.cshtml" />
+    <Content Include="Views\EstadoApadrinamientoes\Delete.cshtml" />
+    <Content Include="Views\EstadoApadrinamientoes\Details.cshtml" />
+    <Content Include="Views\EstadoApadrinamientoes\Edit.cshtml" />
+    <Content Include="Views\EstadoApadrinamientoes\Index.cshtml" />
+    <Content Include="Views\Adopcions\Create.cshtml" />
+    <Content Include="Views\Adopcions\Delete.cshtml" />
+    <Content Include="Views\Adopcions\Details.cshtml" />
+    <Content Include="Views\Adopcions\Edit.cshtml" />
+    <Content Include="Views\Adopcions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -497,6 +542,9 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DAL\GestionAdopcionApadrinamiento\Migrations\201509030030009_ADOP1.resx">
+      <DependentUpon>201509030030009_ADOP1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DAL\GestionAnimalesDAL\Migrations\201508172126069_InitialCreate.resx">
       <DependentUpon>201508172126069_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
@@ -530,11 +578,17 @@
     <EmbeddedResource Include="DAL\GestionUsuariosDAL\Migrations1\201508261558513_USR4.resx">
       <DependentUpon>201508261558513_USR4.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionUsuariosDAL\Migrations2\201509022138297_USR1.resx">
+      <DependentUpon>201509022138297_USR1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DAL\GestionUsuariosDAL\Migrations\201508261700284_USR1.resx">
       <DependentUpon>201508261700284_USR1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DAL\GestionUsuariosDAL\Migrations\201508262148230_USR2.resx">
       <DependentUpon>201508262148230_USR2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionVoluntariosDAL\Migrations\201509022146066_VOL1.resx">
+      <DependentUpon>201509022146066_VOL1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

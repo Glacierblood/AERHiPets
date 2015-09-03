@@ -18,8 +18,6 @@ namespace AERHiPets.Models.GestionUsuarios
             return userIdentity;
         }
 
-        public int? personaId { get; set; }
-        public virtual Persona persona { get; set; }
     }
 /*
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

@@ -6,123 +6,112 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using AERHiPets.DAL.GestionAnimalesDAL;
-using AERHiPets.Models.GestionAnimal;
+using AERHiPets.DAL.GestionAdopcionApadrinamiento;
+using AERHiPets.Models.GestionAdopcionApadrinamiento.GestionApadrinamiento;
 
-namespace AERHiPets.Controllers.GestionAnimal
+namespace AERHiPets.Controllers.GestionAdopApa.GestionApadrinamiento
 {
-    [Authorize]
-    public class RazasController : Controller
+    public class EstadoApadrinamientoesController : Controller
     {
-        private GestionAnimalDb db = new GestionAnimalDb();
+        private GestionAdopApaDb db = new GestionAdopApaDb();
 
-        // GET: Raza
+        // GET: EstadoApadrinamientoes
         public ActionResult Index()
         {
-            var razas = db.Razas.Include(r => r.especie).Where(a => a.fechaBaja == null);
-            return View(razas.ToList());
+            return View(db.estadosApadrinamientos.ToList());
         }
 
-        // GET: Raza/Details/5
+        // GET: EstadoApadrinamientoes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Raza raza = db.Razas.Find(id);
-            raza.especie = db.Especies.SingleOrDefault(i => i.Id == raza.especieID);
-            if (raza == null)
+            EstadoApadrinamiento estadoApadrinamiento = db.estadosApadrinamientos.Find(id);
+            if (estadoApadrinamiento == null)
             {
                 return HttpNotFound();
             }
-            return View(raza);
+            return View(estadoApadrinamiento);
         }
 
-        // GET: Raza/Create
+        // GET: EstadoApadrinamientoes/Create
         public ActionResult Create()
         {
-            ViewBag.especieID = new SelectList(db.Especies.Where(a => a.fechaBaja == null), "Id", "nombre");
             return View();
         }
 
-        // POST: Raza/Create
+        // POST: EstadoApadrinamientoes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,nombre,descripcion,especieID")] Raza raza)
+        public ActionResult Create([Bind(Include = "Id,nombre")] EstadoApadrinamiento estadoApadrinamiento)
         {
             if (ModelState.IsValid)
             {
-                db.Razas.Add(raza);
+                db.estadosApadrinamientos.Add(estadoApadrinamiento);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.especieID = new SelectList(db.Especies.Where(a => a.fechaBaja == null), "Id", "nombre", raza.especieID);
-            return View(raza);
+            return View(estadoApadrinamiento);
         }
 
-        // GET: Raza/Edit/5
+        // GET: EstadoApadrinamientoes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Raza raza = db.Razas.Find(id);
-            if (raza == null)
+            EstadoApadrinamiento estadoApadrinamiento = db.estadosApadrinamientos.Find(id);
+            if (estadoApadrinamiento == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.especieID = new SelectList(db.Especies.Where(a => a.fechaBaja == null), "Id", "nombre", raza.especieID);
-            return View(raza);
+            return View(estadoApadrinamiento);
         }
 
-        // POST: Raza/Edit/5
+        // POST: EstadoApadrinamientoes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,nombre,descripcion,especieID")] Raza raza)
+        public ActionResult Edit([Bind(Include = "Id,nombre")] EstadoApadrinamiento estadoApadrinamiento)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(raza).State = EntityState.Modified;
+                db.Entry(estadoApadrinamiento).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.especieID = new SelectList(db.Especies.Where(a => a.fechaBaja == null), "Id", "nombre", raza.especieID);
-            return View(raza);
+            return View(estadoApadrinamiento);
         }
 
-        // GET: Raza/Delete/5
+        // GET: EstadoApadrinamientoes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Raza raza = db.Razas.Find(id);
-            raza.especie = db.Especies.SingleOrDefault(i => i.Id == raza.especieID);
-            if (raza == null)
+            EstadoApadrinamiento estadoApadrinamiento = db.estadosApadrinamientos.Find(id);
+            if (estadoApadrinamiento == null)
             {
                 return HttpNotFound();
             }
-            return View(raza);
+            return View(estadoApadrinamiento);
         }
 
-        // POST: Raza/Delete/5
+        // POST: EstadoApadrinamientoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Raza raza = db.Razas.Find(id);
-            
-            raza.fechaBaja = System.DateTime.Now;
-            db.Entry(raza).State = EntityState.Modified;
-            //db.Razas.Remove(raza);
+            EstadoApadrinamiento estadoApadrinamiento = db.estadosApadrinamientos.Find(id);
+            db.estadosApadrinamientos.Remove(estadoApadrinamiento);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

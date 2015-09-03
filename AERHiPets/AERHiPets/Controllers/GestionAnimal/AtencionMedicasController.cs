@@ -12,6 +12,7 @@ using AERHiPets.Models.GestionAnimal.GestionAnimalModelos;
 
 namespace AERHiPets.Controllers.GestionAnimal
 {
+    [Authorize]
     public class AtencionMedicasController : Controller
     {
         private GestionAnimalDb db = new GestionAnimalDb();
@@ -47,7 +48,7 @@ namespace AERHiPets.Controllers.GestionAnimal
         public ActionResult Create()
         {
             var animales = db.Animales.Include(a => a.raza).Include(a => a.tamanio).Where(a => a.fechaBaja == null);
-            var especies = db.Especies;
+            var especies = db.Especies.Where(a => a.fechaBaja == null);
             var veterinarias = db.Veterinarias.Where(a => a.fechaBaja == null).ToList();
             var productos = db.ProductosVeterinarias.Where(a => a.fechaBaja == null).ToList();
             AtencionMedicaModelo atencionMedicaModelo = new AtencionMedicaModelo();

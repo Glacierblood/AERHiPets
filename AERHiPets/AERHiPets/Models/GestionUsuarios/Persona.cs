@@ -55,5 +55,8 @@ namespace AERHiPets.Models.GestionUsuarios
 
         public virtual ICollection<RegistroAcciones> registrosAcciones { get; set; }
 
+        [StringLength(255)]
+        public String UsrId { get; set; }
+
     }
 }

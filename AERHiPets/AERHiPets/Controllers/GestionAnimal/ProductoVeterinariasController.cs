@@ -11,6 +11,7 @@ using AERHiPets.Models.GestionAnimal;
 
 namespace AERHiPets.Controllers.GestionAnimal
 {
+    [Authorize]
     public class ProductoVeterinariasController : Controller
     {
         private GestionAnimalDb db = new GestionAnimalDb();

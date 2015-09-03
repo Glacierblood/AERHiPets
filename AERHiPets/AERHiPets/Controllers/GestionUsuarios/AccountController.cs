@@ -169,51 +169,51 @@ namespace AERHiPets.Controllers.GestionUsuarios
         public async Task<ActionResult> Register([Bind(Include = "Id,Nombre,Apellido,fechaNac,fechaAlta,fechaBaja,telefono,telefonoCel,puntaje,direccionId")] Persona persona, PersonaModelo pm)
         {
             if (ModelState.IsValid)
-            {
-               // TransactionScope ts = new TransactionScope();
-                GestionVoluntarioDb db = new GestionVoluntarioDb();
-                var transaccion = db.Database.BeginTransaction();
-
-                        var direccion = new Direccion();
-                        direccion.barrioId = pm.persona.direccion.barrioId;
-                        direccion.calle = pm.persona.direccion.calle;
-                        direccion.piso = pm.persona.direccion.piso;
-                        direccion.Torre = pm.persona.direccion.Torre;
-
-                        db.direcciones.Add(direccion);                        
-                        db.SaveChanges();
-
-                        persona.fechaAlta = DateTime.Now;
-                        persona.fechaNac = pm.persona.fechaNac;
-                        persona.direccionId = direccion.Id;
-                
-                        db.personas.Add(persona);
-                        db.SaveChanges();
-
-                       // var ultimoId = db.personas.Max(p => p.Id);
-                        //persona.Id = ultimoId+1;
-                        //resultado = await db.SaveChangesAsync();
-                        foreach (var item in pm.listaAcciones)
-                        {
-                            if (item.isSelected)
-                            {
-                                RegistroAcciones RA = new RegistroAcciones();
-                                RA.accionesId = item.Id;
-                                RA.personaId = persona.Id;
-                                RA.fechaAlta = DateTime.Now;
-                                db.registroAcciones.Add(RA);
-                                db.SaveChanges();
-                                //resultado = await db.SaveChangesAsync();
-
-                            }
-                        }
-                      
-                        var user = new ApplicationUser { UserName = pm.registerViewModel.Email, Email = pm.registerViewModel.Email, persona=persona, personaId=persona.Id };
+            {             
+                        var user = new ApplicationUser { UserName = pm.registerViewModel.Email  , Email = pm.registerViewModel.Email };
                        // user.personaId = persona.Id;
                        // user.persona = persona;
                         var result = await UserManager.CreateAsync(user, pm.registerViewModel.Password);
                         if (result.Succeeded)
                         {
+                            // TransactionScope ts = new TransactionScope();
+                            GestionVoluntarioDb db = new GestionVoluntarioDb();
+                            var transaccion = db.Database.BeginTransaction();
+
+                            var direccion = new Direccion();
+                            direccion.barrioId = pm.persona.direccion.barrioId;
+                            direccion.calle = pm.persona.direccion.calle;
+                            direccion.piso = pm.persona.direccion.piso;
+                            direccion.Torre = pm.persona.direccion.Torre;
+
+                            db.direcciones.Add(direccion);
+                            db.SaveChanges();
+
+                            persona.fechaAlta = DateTime.Now;
+                            persona.fechaNac = pm.persona.fechaNac;
+                            persona.direccionId = direccion.Id;
+                            persona.UsrId = user.Id;
+
+                            db.personas.Add(persona);
+                            db.SaveChanges();
+
+                            // var ultimoId = db.personas.Max(p => p.Id);
+                            //persona.Id = ultimoId+1;
+                            //resultado = await db.SaveChangesAsync();
+                            foreach (var item in pm.listaAcciones)
+                            {
+                                if (item.isSelected)
+                                {
+                                    RegistroAcciones RA = new RegistroAcciones();
+                                    RA.accionesId = item.Id;
+                                    RA.personaId = persona.Id;
+                                    RA.fechaAlta = DateTime.Now;
+                                    db.registroAcciones.Add(RA);
+                                    db.SaveChanges();
+                                    //resultado = await db.SaveChangesAsync();
+
+                                }
+                            }
                             
 
                             transaccion.Commit();

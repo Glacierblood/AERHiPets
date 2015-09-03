@@ -6,123 +6,112 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using AERHiPets.DAL.GestionAnimalesDAL;
-using AERHiPets.Models.GestionAnimal;
+using AERHiPets.DAL.GestionAdopcionApadrinamiento;
+using AERHiPets.Models.GestionAdopcionApadrinamiento.GestionAdopcion;
 
-namespace AERHiPets.Controllers.GestionAnimal
+namespace AERHiPets.Controllers.GestionAdopApa.GestionAdopcion
 {
-    [Authorize]
-    public class RazasController : Controller
+    public class TipoAdopcionsController : Controller
     {
-        private GestionAnimalDb db = new GestionAnimalDb();
+        private GestionAdopApaDb db = new GestionAdopApaDb();
 
-        // GET: Raza
+        // GET: TipoAdopcions
         public ActionResult Index()
         {
-            var razas = db.Razas.Include(r => r.especie).Where(a => a.fechaBaja == null);
-            return View(razas.ToList());
+            return View(db.tiposAdopciones.ToList());
         }
 
-        // GET: Raza/Details/5
+        // GET: TipoAdopcions/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Raza raza = db.Razas.Find(id);
-            raza.especie = db.Especies.SingleOrDefault(i => i.Id == raza.especieID);
-            if (raza == null)
+            TipoAdopcion tipoAdopcion = db.tiposAdopciones.Find(id);
+            if (tipoAdopcion == null)
             {
                 return HttpNotFound();
             }
-            return View(raza);
+            return View(tipoAdopcion);
         }
 
-        // GET: Raza/Create
+        // GET: TipoAdopcions/Create
         public ActionResult Create()
         {
-            ViewBag.especieID = new SelectList(db.Especies.Where(a => a.fechaBaja == null), "Id", "nombre");
             return View();
         }
 
-        // POST: Raza/Create
+        // POST: TipoAdopcions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,nombre,descripcion,especieID")] Raza raza)
+        public ActionResult Create([Bind(Include = "Id,tipoAdopcion")] TipoAdopcion tipoAdopcion)
         {
             if (ModelState.IsValid)
             {
-                db.Razas.Add(raza);
+                db.tiposAdopciones.Add(tipoAdopcion);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.especieID = new SelectList(db.Especies.Where(a => a.fechaBaja == null), "Id", "nombre", raza.especieID);
-            return View(raza);
+            return View(tipoAdopcion);
         }
 
-        // GET: Raza/Edit/5
+        // GET: TipoAdopcions/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Raza raza = db.Razas.Find(id);
-            if (raza == null)
+            TipoAdopcion tipoAdopcion = db.tiposAdopciones.Find(id);
+            if (tipoAdopcion == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.especieID = new SelectList(db.Especies.Where(a => a.fechaBaja == null), "Id", "nombre", raza.especieID);
-            return View(raza);
+            return View(tipoAdopcion);
         }
 
-        // POST: Raza/Edit/5
+        // POST: TipoAdopcions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,nombre,descripcion,especieID")] Raza raza)
+        public ActionResult Edit([Bind(Include = "Id,tipoAdopcion")] TipoAdopcion tipoAdopcion)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(raza).State = EntityState.Modified;
+                db.Entry(tipoAdopcion).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.especieID = new SelectList(db.Especies.Where(a => a.fechaBaja == null), "Id", "nombre", raza.especieID);
-            return View(raza);
+            return View(tipoAdopcion);
         }
 
-        // GET: Raza/Delete/5
+        // GET: TipoAdopcions/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Raza raza = db.Razas.Find(id);
-            raza.especie = db.Especies.SingleOrDefault(i => i.Id == raza.especieID);
-            if (raza == null)
+            TipoAdopcion tipoAdopcion = db.tiposAdopciones.Find(id);
+            if (tipoAdopcion == null)
             {
                 return HttpNotFound();
             }
-            return View(raza);
+            return View(tipoAdopcion);
         }
 
-        // POST: Raza/Delete/5
+        // POST: TipoAdopcions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Raza raza = db.Razas.Find(id);
-            
-            raza.fechaBaja = System.DateTime.Now;
-            db.Entry(raza).State = EntityState.Modified;
-            //db.Razas.Remove(raza);
+            TipoAdopcion tipoAdopcion = db.tiposAdopciones.Find(id);
+            db.tiposAdopciones.Remove(tipoAdopcion);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
