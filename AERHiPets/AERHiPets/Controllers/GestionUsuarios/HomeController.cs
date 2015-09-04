@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace AERHiPets.Controllers.GestionUsuarios
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         public ActionResult Index()

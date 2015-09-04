@@ -8,7 +8,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <h4>Animal</h4>
             <hr />
             <dl class="dl-horizontal">
@@ -91,17 +91,17 @@
            
         </div>
         <div class="col-md-4">
-            <dl class="dl-horizontal">
+            
                 @if (Model.Files.Any(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar))
                 {
-                    <dt>
-                        Foto
-                    </dt>
-                    <dd>
-                        <img src="~/File?id=@Model.Files.First(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar).FileId" alt="avatar" />
-                    </dd>
+
+                    <h4>Foto</h4>
+
+                    <p/>
+                    <img src="~/File?id=@Model.Files.First(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar).FileId" alt="avatar" />
+                    
                 }
-            </dl>
+            
         </div>
         <div class="col-md-2"></div>
 

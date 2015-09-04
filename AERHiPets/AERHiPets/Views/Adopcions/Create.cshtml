@@ -3,10 +3,10 @@
 @model AERHiPets.Models.GestionAdopcionApadrinamiento.Models.Adoptar
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Adoptar";
 }
 
-<h2>Create</h2>
+<h2>Adoptar</h2>
 
 
 @using (Html.BeginForm()) 
@@ -26,6 +26,9 @@
                     //cada vez que el estado de un radio button cambia, asignamos a nuestro campo hiden el valor del readio seleccionado, que en este caso es el id del animal seleccionado
                     $("#adopcion_animalId").val($('input[name=selectedAnimalId]:checked').val());
                 })
+
+                
+
             });
             
         </script>
@@ -101,7 +104,7 @@
         <div class="form-group">
             @*@Html.LabelFor(model => model.atencionMedica.animalId, "animalId", htmlAttributes: new { @class = "control-label col-md-2"})*@
             <div class="col-md-10">
-                @Html.EditorFor(model => model.adopcion.animalId, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
+                @Html.EditorFor(model => model.adopcion.animalId, new { htmlAttributes = new { @class = "form-control", @type = "hidden" , @Id= "adopcion_animalId" } })
                 @Html.ValidationMessageFor(model => model.adopcion.animalId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -111,7 +114,7 @@
         <div class="form-group">
             @*@Html.LabelFor(model => model.adopcion.voluntarioId, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
-                @Html.EditorFor(model => model.adopcion.voluntarioId, new { htmlAttributes = new { @class = "form-control", @Value = User.Identity.GetUserId(), @type = "hidden" } })
+                @Html.EditorFor(model => model.adopcion.voluntario.UsrId, new { htmlAttributes = new { @class = "form-control", @Value = User.Identity.GetUserId(), @type = "hidden" } })
                 @Html.ValidationMessageFor(model => model.adopcion.voluntarioId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -125,15 +128,7 @@
         </div>
 
         @*****************************************************************************************************************@
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.adopcion.dias, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.adopcion.dias, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.adopcion.dias, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
+        
         <div class="form-group">
             @Html.LabelFor(model => model.adopcion.esTemporal, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -144,11 +139,26 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.adopcion.fechaFin, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.adopcion.fechaFin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.adopcion.fechaFin, "", new { @class = "text-danger" })
+            </div>
+        </div>
         
         
 
         @*****************************************************************************************************************@
-                @*
+                        @*
+
+                    <div class="form-group">
+            @Html.LabelFor(model => model.adopcion.dias, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.adopcion.dias, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.adopcion.dias, "", new { @class = "text-danger" })
+            </div>
+        </div>
             <div class="form-group">
             @Html.LabelFor(model => model.adopcion.tipoAdopcionId, "tipoAdopcionId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -181,13 +191,7 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.adopcion.fechaFin, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.adopcion.fechaFin, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.adopcion.fechaFin, "", new { @class = "text-danger" })
-            </div>
-        </div>
+
 
         @*****************************************************************************************************************@
 @*
@@ -248,9 +252,7 @@
         </div>
     }
 
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+    
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

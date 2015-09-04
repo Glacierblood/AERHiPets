@@ -55,15 +55,15 @@ namespace AERHiPets
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "953134378063457",
+               appSecret: "6862a3f5500556544ed3957ade1ef567");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "499665822155-ilij2bio3fkjmeouofohpi6jumua2i3s.apps.googleusercontent.com",
+                ClientSecret = "_5xM0vaACbgpqLJfZGMmXHpb"
+            });
         }
     }
 }

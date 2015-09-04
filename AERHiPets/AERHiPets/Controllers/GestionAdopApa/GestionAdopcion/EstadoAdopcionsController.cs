@@ -47,7 +47,7 @@ namespace AERHiPets.Controllers.GestionAdopApa.GestionAdopcion
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,estadoAdopcion,descripcion")] EstadoAdopcion estadoAdopcion)
+        public ActionResult Create([Bind(Include = "Id,nombre,descripcion")] EstadoAdopcion estadoAdopcion)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace AERHiPets.Controllers.GestionAdopApa.GestionAdopcion
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,estadoAdopcion,descripcion")] EstadoAdopcion estadoAdopcion)
+        public ActionResult Edit([Bind(Include = "Id,nombre,descripcion")] EstadoAdopcion estadoAdopcion)
         {
             if (ModelState.IsValid)
             {

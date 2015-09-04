@@ -56,6 +56,11 @@
             <img src="~/img/17-perros-jugando.jpg" class="img-responsive img-circle" width="450" height="334">
         </section>
     </div>
+    <div class="col-md-4">
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>
 </div>
 
 @section Scripts {
