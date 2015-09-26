@@ -73,7 +73,8 @@ namespace AERHiPets.Controllers.GestionAdopApa.GestionAdopcion
             adopcion.VoluntarioUsrId = adop.adopcion.voluntario.UsrId;
             adopcion.animalId = adop.adopcion.animalId;            
             adopcion.esTemporal = adop.adopcion.esTemporal;
-            if(adopcion.esTemporal){
+            if (adopcion.tipoAdopcionId == 1 || adopcion.tipoAdopcionId == 3)
+            {
                 adopcion.fechaFin = adop.adopcion.fechaFin;
             }
             else

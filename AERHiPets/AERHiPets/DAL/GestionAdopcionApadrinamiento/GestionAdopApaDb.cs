@@ -24,6 +24,14 @@ namespace AERHiPets.DAL.GestionAdopcionApadrinamiento
          public DbSet<Apadrinamiento> apadrinamientos { get; set; }
          public DbSet<EstadoApadrinamiento> estadosApadrinamientos { get; set; }
 
+         public System.Data.Entity.DbSet<AERHiPets.Models.GestionIncidentes.TipoIncidente> TipoIncidentes { get; set; }
+
+         public System.Data.Entity.DbSet<AERHiPets.Models.GestionIncidentes.Incidente> Incidentes { get; set; }
+
+         public System.Data.Entity.DbSet<AERHiPets.Models.GestionAnimal.Raza> Razas { get; set; }
+
+         public System.Data.Entity.DbSet<AERHiPets.Models.GestionAnimal.Tamanio> Tamanios { get; set; }
+
          
 
     }

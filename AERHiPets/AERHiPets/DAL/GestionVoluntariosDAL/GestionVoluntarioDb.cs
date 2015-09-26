@@ -23,6 +23,7 @@ namespace AERHiPets.DAL.GestionVoluntariosDAL
         public DbSet<Barrio> barrios { get; set; }
         public DbSet<Localidad> localidades { get; set; }
         public DbSet<Provincia> provincias { get; set; }
+        
 
     }
 }

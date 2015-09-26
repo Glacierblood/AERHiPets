@@ -37,6 +37,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.esTemporal)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tipoAdopcion)
+            </th>
             <th></th>
             <th></th>
         </tr>
@@ -68,6 +71,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.esTemporal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipoAdopcion.tipoAdopcion)
                 </td>
                 <td>
                     @if (item.animal.Files.Any(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar))

@@ -1,0 +1,114 @@
+﻿@model AERHiPets.Models.GestionIncidentes.Incidente
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Incidente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.raza.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.raza.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tamanio.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tamanio.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipoIncidente.tipoIncidente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipoIncidente.tipoIncidente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaFin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaAlta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaAlta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaBaja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaBaja)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoIncidente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoIncidente)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

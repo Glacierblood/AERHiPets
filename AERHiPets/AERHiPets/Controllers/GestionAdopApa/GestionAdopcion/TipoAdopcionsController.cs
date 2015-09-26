@@ -47,16 +47,16 @@ namespace AERHiPets.Controllers.GestionAdopApa.GestionAdopcion
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,tipoAdopcion")] TipoAdopcion tipoAdopcion)
+        public ActionResult Create([Bind(Include = "Id,tipoAdopcion")] TipoAdopcion model)
         {
             if (ModelState.IsValid)
             {
-                db.tiposAdopciones.Add(tipoAdopcion);
+                db.tiposAdopciones.Add(model);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(tipoAdopcion);
+            return View(model);
         }
 
         // GET: TipoAdopcions/Edit/5
