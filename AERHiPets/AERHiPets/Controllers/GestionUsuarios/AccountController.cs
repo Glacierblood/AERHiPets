@@ -13,6 +13,8 @@ using AERHiPets.DAL.GestionVoluntariosDAL;
 using AERHiPets.Models.GestionUsuarios.Modelos;
 using AERHiPets.Models.GestionDireccion;
 using System.Transactions;
+using System.Net.Mail;
+using System.Net;
 
 
 namespace AERHiPets.Controllers.GestionUsuarios
@@ -81,6 +83,9 @@ namespace AERHiPets.Controllers.GestionUsuarios
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            //var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            //if (user == null) { result = SignInStatus.Failure; }            
+            //if (user.ConfirmedEmail == false) { result = SignInStatus.Failure; }
             switch (result)
             {
                 case SignInStatus.Success:
@@ -166,11 +171,11 @@ namespace AERHiPets.Controllers.GestionUsuarios
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register([Bind(Include = "Id,Nombre,Apellido,fechaNac,fechaAlta,fechaBaja,telefono,telefonoCel,puntaje,direccionId")] Persona persona, PersonaModelo pm)
+        public async Task<ActionResult> Register([Bind(Include = "Id,Nombre,Apellido,fechaNac,fechaAlta,fechaBaja,telefono,telefonoCel,puntaje,direccionId,calleGmaps,lat,lng")] Persona persona, PersonaModelo pm)
         {
             if (ModelState.IsValid)
             {             
-                        var user = new ApplicationUser { UserName = pm.registerViewModel.Email  , Email = pm.registerViewModel.Email };
+                        var user = new ApplicationUser { UserName = pm.registerViewModel.Email  , Email = pm.registerViewModel.Email, nombreUsuario= pm.persona.Nombre+""+pm.persona.Apellido };
                        // user.personaId = persona.Id;
                        // user.persona = persona;
                         var result = await UserManager.CreateAsync(user, pm.registerViewModel.Password);
@@ -193,6 +198,7 @@ namespace AERHiPets.Controllers.GestionUsuarios
                             persona.fechaNac = pm.persona.fechaNac;
                             persona.direccionId = direccion.Id;
                             persona.UsrId = user.Id;
+                            
 
                             db.personas.Add(persona);
                             db.SaveChanges();
@@ -214,11 +220,29 @@ namespace AERHiPets.Controllers.GestionUsuarios
 
                                 }
                             }
-                            
+
+                            System.Net.Mail.MailMessage m = new System.Net.Mail.MailMessage(
+                           new System.Net.Mail.MailAddress("AERHiPets@outlook.com", "Web Registration"),
+                           new System.Net.Mail.MailAddress(user.Email));
+                            m.Subject = "Email confirmation";
+                            m.Body = string.Format("Estimado {0}<BR/>Gracias por registrarse, haga click en el siguente link para compketar el registro <a href=\"{1}\" title=\"User Email Confirm\">{1}</a>", user.UserName, Url.Action("ConfirmEmail", "Account", new { Token = user.Id, Email = user.Email }, Request.Url.Scheme));
+                            m.IsBodyHtml = true;
+                            m.From = new System.Net.Mail.MailAddress("AERHiPets@outlook.com");
+                            SmtpClient smtp = new SmtpClient();
+                            smtp.Port = 587;
+                            smtp.EnableSsl = true;
+                            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = new NetworkCredential("AERHiPets@outlook.com", "1Mucho+Facil");
+                            smtp.Host = "smtp.live.com";
+
+                            smtp.Send(m);
 
                             transaccion.Commit();
-                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                            
+                            //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                           
+                            return RedirectToAction("Confirm", "Account", new { Email = user.Email });
 
                             // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                             // Send an email with this link
@@ -226,7 +250,7 @@ namespace AERHiPets.Controllers.GestionUsuarios
                             // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                             // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                            return RedirectToAction("Index", "Home");
+                           // return RedirectToAction("Index", "Home");
                         }
                         AddErrors(result);
             }
@@ -241,9 +265,42 @@ namespace AERHiPets.Controllers.GestionUsuarios
             return View(pm);
         }
 
-        //
+        [AllowAnonymous]
+        public ActionResult Confirm(string Email)
+        {
+            ViewBag.Email = Email;
+            return View();
+        }
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
+        public async Task<ActionResult> ConfirmEmail(string Token, string Email)
+        {
+            ApplicationUser user = this.UserManager.FindById(Token);
+            if (user != null)
+            {
+                if (user.Email == Email)
+                {
+                    user.ConfirmedEmail = true;
+                    user.EmailConfirmed = true;
+                    await UserManager.UpdateAsync(user);
+                    await SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Home", new { ConfirmedEmail = user.Email });
+                }
+                else
+                {
+                    return RedirectToAction("Confirm", "Account", new { Email = user.Email });
+                }
+            }
+            else
+            {
+                return RedirectToAction("Confirm", "Account", new { Email = "" });
+            }
+
+        }
+
+        //
+        // GET: /Account/ConfirmEmail
+        /*[AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)
@@ -252,7 +309,7 @@ namespace AERHiPets.Controllers.GestionUsuarios
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
-        }
+        }*/
 
         //
         // GET: /Account/ForgotPassword
@@ -272,7 +329,8 @@ namespace AERHiPets.Controllers.GestionUsuarios
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var isConfirmed = await UserManager.IsEmailConfirmedAsync(user.Id);
+                if (user == null || !(isConfirmed))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
@@ -387,6 +445,121 @@ namespace AERHiPets.Controllers.GestionUsuarios
         }
 
         //
+        // POST: /Account/Disassociate
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Disassociate(string loginProvider, string providerKey)
+        {
+            ManageMessageId? message = null;
+            IdentityResult result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
+            if (result.Succeeded)
+            {
+                message = ManageMessageId.RemoveLoginSuccess;
+            }
+            else
+            {
+                message = ManageMessageId.Error;
+            }
+            return RedirectToAction("Manage", new { Message = message });
+        }
+
+        //
+        // GET: /Account/Manage
+        public ActionResult Manage(ManageMessageId? message)
+        {
+            ViewBag.StatusMessage =
+                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
+                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
+                : message == ManageMessageId.Error ? "An error has occurred."
+                : "";
+            ViewBag.HasLocalPassword = HasPassword();
+            ViewBag.ReturnUrl = Url.Action("Manage");
+            return View();
+        }
+
+        //
+        // POST: /Account/Manage
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Manage(ManageUserViewModel model)
+        {
+            bool hasPassword = HasPassword();
+            ViewBag.HasLocalPassword = hasPassword;
+            ViewBag.ReturnUrl = Url.Action("Manage");
+            if (hasPassword)
+            {
+                if (ModelState.IsValid)
+                {
+                    IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                    }
+                    else
+                    {
+                        AddErrors(result);
+                    }
+                }
+            }
+            else
+            {
+                // User does not have a password so remove any validation errors caused by a missing OldPassword field
+                ModelState state = ModelState["OldPassword"];
+                if (state != null)
+                {
+                    state.Errors.Clear();
+                }
+
+                if (ModelState.IsValid)
+                {
+                    IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
+                    }
+                    else
+                    {
+                        AddErrors(result);
+                    }
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+
+        //
+        // POST: /Account/LinkLogin
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LinkLogin(string provider)
+        {
+            // Request a redirect to the external login provider to link a login for the current user
+            return new ChallengeResult(provider, Url.Action("LinkLoginCallback", "Account"), User.Identity.GetUserId());
+        }
+
+        //
+        // GET: /Account/LinkLoginCallback
+        public async Task<ActionResult> LinkLoginCallback()
+        {
+            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
+            if (loginInfo == null)
+            {
+                return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
+            }
+            var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Manage");
+            }
+            return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
+        }
+
+
+
+        //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
@@ -415,6 +588,8 @@ namespace AERHiPets.Controllers.GestionUsuarios
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
+
+        
 
         //
         // POST: /Account/ExternalLoginConfirmation
@@ -472,6 +647,14 @@ namespace AERHiPets.Controllers.GestionUsuarios
             return View();
         }
 
+        [ChildActionOnly]
+        public ActionResult RemoveAccountList()
+        {
+            var linkedAccounts = UserManager.GetLogins(User.Identity.GetUserId());
+            ViewBag.ShowRemoveButton = HasPassword() || linkedAccounts.Count > 1;
+            return (ActionResult)PartialView("_RemoveAccountPartial", linkedAccounts);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -495,6 +678,16 @@ namespace AERHiPets.Controllers.GestionUsuarios
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
+
+        private bool HasPassword()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user != null)
+            {
+                return user.PasswordHash != null;
+            }
+            return false;
+        }
 
         private IAuthenticationManager AuthenticationManager
         {
@@ -548,6 +741,21 @@ namespace AERHiPets.Controllers.GestionUsuarios
                 }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
+        }
+
+        public enum ManageMessageId
+        {
+            ChangePasswordSuccess,
+            SetPasswordSuccess,
+            RemoveLoginSuccess,
+            Error
+        }
+
+        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
         }
         #endregion
     }

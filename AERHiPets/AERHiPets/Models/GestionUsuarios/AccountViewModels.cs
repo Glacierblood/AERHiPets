@@ -17,6 +17,25 @@ namespace AERHiPets.Models.GestionUsuarios
         public string ReturnUrl { get; set; }
     }
 
+    public class ManageUserViewModel
+    {
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Contraseña actual")]
+        public string OldPassword { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Nueva contraseña")]
+        public string NewPassword { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Repita la contraseña")]
+        [Compare("NewPassword", ErrorMessage = "las contraseñas no coinciden.")]
+        public string ConfirmPassword { get; set; }
+    }
+
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
@@ -35,7 +54,7 @@ namespace AERHiPets.Models.GestionUsuarios
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
 
-        [Display(Name = "Remember this browser?")]
+        [Display(Name = "Recuerdame")]
         public bool RememberBrowser { get; set; }
 
         public bool RememberMe { get; set; }
@@ -60,7 +79,7 @@ namespace AERHiPets.Models.GestionUsuarios
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Recuerdame?")]
         public bool RememberMe { get; set; }
     }
 
@@ -79,7 +98,7 @@ namespace AERHiPets.Models.GestionUsuarios
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Las contraseñas no coinciden.")]
         public string ConfirmPassword { get; set; }
                
     }
@@ -99,7 +118,7 @@ namespace AERHiPets.Models.GestionUsuarios
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Las contraseñas no coinciden.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -118,7 +137,7 @@ namespace AERHiPets.Models.GestionUsuarios
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Las contraseñas no coinciden.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

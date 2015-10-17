@@ -11,6 +11,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Especie.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Especie.nombre)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.raza.nombre)
         </dt>
 
@@ -74,37 +82,42 @@
             @Html.DisplayFor(model => model.telefono)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaFin)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.fechaFin)
-        </dd>
-
+      
         <dt>
             @Html.DisplayNameFor(model => model.fechaAlta)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.fechaAlta)
-        </dd>
+        </dd>      
 
         <dt>
-            @Html.DisplayNameFor(model => model.fechaBaja)
+            @Html.DisplayNameFor(model => model.estadoIncidente)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.fechaBaja)
+            @Html.DisplayFor(model => model.estadoIncidente.estadoInc)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EstadoIncidente)
+            Foto
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EstadoIncidente)
+            @if (Model.Files.Any(f => f.FileType == AERHiPets.Models.GestionIncidentes.FileTypeIncidente.Avatar))
+            {
+                <div class="form-group">
+
+                    <div class="col-md-10">
+                        <img src="~/File?id=@Model.Files.First(f => f.FileType == AERHiPets.Models.GestionIncidentes.FileTypeIncidente.Avatar).FileIncidenteId" alt="avatar" />
+                    </div>
+                </div>
+            }
+          
         </dd>
+        
+        
+
 
     </dl>
 </div>

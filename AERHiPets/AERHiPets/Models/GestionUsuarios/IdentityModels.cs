@@ -17,6 +17,8 @@ namespace AERHiPets.Models.GestionUsuarios
             // Add custom user claims here
             return userIdentity;
         }
+        public bool ConfirmedEmail { get; set; }
+        public String nombreUsuario { get; set; }
 
     }
 /*

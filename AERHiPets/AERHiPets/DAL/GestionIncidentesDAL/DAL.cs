@@ -15,7 +15,11 @@ namespace AERHiPets.DAL.GestionIncidentesDAL
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;*/
         }
-        public DbSet<Incidente> incidentes { get; set; }
+       public DbSet<Incidente> incidentes { get; set; }
         public DbSet<TipoIncidente> tipoIncidentes { get; set; }
+
+        public System.Data.Entity.DbSet<AERHiPets.Models.GestionAnimal.Raza> Razas { get; set; }
+
+        public System.Data.Entity.DbSet<AERHiPets.Models.GestionAnimal.Tamanio> Tamanios { get; set; }
     }
 }

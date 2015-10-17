@@ -1,5 +1,5 @@
 ﻿using AERHiPets.Models.GestionAnimal;
-using AERHiPets.Models.GestionAnimal.GestionAnimalImagenes;
+using AERHiPets.Models.GestionUsuarios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -29,8 +29,14 @@ namespace AERHiPets.Models.GestionIncidentes
         public int? razaId { get; set; }
         [Display(Name = "Raza")]
         public Raza raza { get; set; }
-               
-        public virtual ICollection<File> Files { get; set; }
+
+        [Display(Name = "Especie")]
+        public int? especieId { get; set; }
+        [Display(Name = "Especie")]
+        public Especie Especie { get; set; }
+
+       
+        public virtual ICollection<FileIncidente> Files { get; set; }
 
         [Required]
         [StringLength(50, ErrorMessage = "No se permiten mas de 50 caracteres.")]
@@ -63,12 +69,24 @@ namespace AERHiPets.Models.GestionIncidentes
         [Display(Name = "Fecha de Baja")]
         public DateTime? fechaBaja { get; set; }
 
-        public String EstadoIncidente { get; set; }
+        public int? estadoIncidenteId { get; set; }
+        public EstadoIncidente estadoIncidente { get; set; }
 
-        [Display(Name = "Tamaño")]
+        [Display(Name = "Tipo Incidente")]
         public int? tipoIncidenteId { get; set; }
         public TipoIncidente tipoIncidente { get; set; }
 
+        [StringLength(255)]
+        public String VoluntarioUsrId { get; set; }
+        [Display(Name = "Nombre Voluntario")]
+        public String voluntarioName { get; set; }
 
+        public int? voluntarioId { get; set; }
+        public virtual Persona voluntario { get; set; }
+
+        public String calle { get; set; }
+        public String lat { get; set; }
+        public String lng { get; set; }
+       
     }
 }

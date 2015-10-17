@@ -72,5 +72,7 @@ namespace AERHiPets.Models.GestionAdopcionApadrinamiento.GestionAdopcion
         public String VoluntarioUsrId { get; set; }
         [Display(Name = "Nombre Voluntario")]
         public String voluntarioName { get; set; }
+
+       
     }
 }

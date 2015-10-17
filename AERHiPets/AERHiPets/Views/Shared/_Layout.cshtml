@@ -5,13 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Hi Pets!</title>
     <link href="~/content/datatables/css/jquery.datatables.min.css" rel="stylesheet" />
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/themes/base/css")
     <link href="~/Content/Site.css" rel="stylesheet" />
-
+        
 </head>
-<body style="background: #ffebdc">
+
+
+
+<body style="background: #ffebdc">  
+   
+    
+     <div id="fb-root"></div>
+    
     <div class="navbar-default navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -31,6 +39,7 @@
         </div>
     </div>
     <div class="container body-content">
+        
         @RenderBody()
         <hr />
         <footer style='background: #FAA505'></footer>
@@ -41,14 +50,32 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/Scripts/DatePickerSet.js")
-
-
+   
     <script src="~/scripts/datatables/jquery.datatables.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#myTable').DataTable(
-                {
-                    "oLanguage": {
+        $(document).ready(function () {    
+            $('#myTable').DataTable({
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                },
+                        "oLanguage": {
                         "oAria": {
                             "sSortDescending": " - click/return to sort descending",                     
                             
@@ -65,10 +92,12 @@
                         'sInfoEmpty': '0 to 0 of 0', 'sInfoFiltered': '(filtered of _MAX_)', 'sInfoPostFix': '',
                         'sSearch': 'Buscar',
                         'sUrl': ''
-                        }
-                    });
+                    },                    
+
+                });            
         });
     </script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

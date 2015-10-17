@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
-  
+    
+    
     $('#razaId option').remove();
     $('#razaId').append('<option value=""></option');
     // Populate categories when the page is loaded.

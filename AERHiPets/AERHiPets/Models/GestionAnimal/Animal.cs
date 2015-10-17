@@ -12,7 +12,7 @@ namespace AERHiPets.Models.GestionAnimal
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "este campo es requerido")]
         [StringLength(50, ErrorMessage = "No se permiten mas de 50 caracteres.")]
         [Display(Name = "Nombre Mascota")]
         public String nombre { get; set; }

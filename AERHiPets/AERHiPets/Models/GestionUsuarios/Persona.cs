@@ -43,9 +43,12 @@ namespace AERHiPets.Models.GestionUsuarios
         public String telefono { get; set; }
 
         [Required]
-        [DataType(DataType.PhoneNumber)]
+        [DataTypeAttribute("BoldRed")]
+        [RegularExpression(@"^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$",
+            ErrorMessage = "Characters are not allowed.")]
         [StringLength(15, ErrorMessage = "No se permiten mas de 15 caracteres.")]
         [Display(Name = "Telefono Celular")]
+        
         public String telefonoCel { get; set; }
         
         public int puntaje { get; set; }
@@ -57,6 +60,10 @@ namespace AERHiPets.Models.GestionUsuarios
 
         [StringLength(255)]
         public String UsrId { get; set; }
+
+        public String calleGmaps { get; set; }
+        public String lat { get; set; }
+        public String lng { get; set; }
 
     }
 }

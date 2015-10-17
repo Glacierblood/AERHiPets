@@ -139,7 +139,7 @@ namespace AERHiPets.Controllers.GestionAdopApa.GestionAdopcion
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,fechaAlta,fechaFin,fechaEntrega,esTemporal,estadoAdopcionId,voluntarioName,animalId,empleadoUsrId,VoluntarioUsrId,empleadoName")] Adopcion adopcion)
+        public ActionResult Edit([Bind(Include = "Id,fechaAlta,fechaFin,fechaEntrega,esTemporal,estadoAdopcionId,voluntarioName,animalId,empleadoUsrId,VoluntarioUsrId,empleadoName,tipoAdopcion")] Adopcion adopcion) 
         {
             switch(adopcion.estadoAdopcionId){
                 case 1://solicitado
@@ -207,5 +207,8 @@ namespace AERHiPets.Controllers.GestionAdopApa.GestionAdopcion
             }
             base.Dispose(disposing);
         }
+
+
+        
     }
 }

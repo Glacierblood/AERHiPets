@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using AERHiPets.DAL.GestionAdopcionApadrinamiento;
 using AERHiPets.Models.GestionIncidentes;
 
+using System.Data.Entity.Infrastructure;
+
 namespace AERHiPets.Controllers.GestionIncidente
 {
     public class IncidentesController : Controller
@@ -18,7 +20,12 @@ namespace AERHiPets.Controllers.GestionIncidente
         // GET: Incidentes
         public ActionResult Index()
         {
-            var incidentes = db.Incidentes.Include(i => i.raza).Include(i => i.tamanio).Include(i => i.tipoIncidente);
+            var incidentes = db.Incidentes.Include(i => i.Especie).Include(i => i.estadoIncidente).Include(i => i.raza).Include(i => i.tamanio).Include(i => i.tipoIncidente);
+            ViewBag.especieId = new SelectList(db.Especies, "Id", "nombre");
+            ViewBag.estadoIncidenteId = new SelectList(db.estadoIncidentes, "Id", "estadoInc");
+            ViewBag.razaId = new SelectList(db.Razas, "Id", "nombre");
+            ViewBag.tamanioId = new SelectList(db.Tamanios, "Id", "nombre");
+            ViewBag.tipoIncidenteId = new SelectList(db.TipoIncidentes, "Id", "tipoIncidente");
             return View(incidentes.ToList());
         }
 
@@ -30,6 +37,11 @@ namespace AERHiPets.Controllers.GestionIncidente
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Incidente incidente = db.Incidentes.Find(id);
+            incidente.raza = db.Razas.Include(r => r.especie).SingleOrDefault(i => i.Id == incidente.razaId);
+            incidente.Especie = db.Especies.SingleOrDefault(i => i.Id == incidente.especieId);
+            incidente.tamanio = db.Tamanios.SingleOrDefault(i => i.Id == incidente.tamanioId);
+            incidente.estadoIncidente = db.estadoIncidentes.SingleOrDefault(i => i.Id == incidente.estadoIncidenteId);
+            incidente.tipoIncidente = db.TipoIncidentes.SingleOrDefault(i => i.Id == incidente.tipoIncidenteId);
             if (incidente == null)
             {
                 return HttpNotFound();
@@ -40,6 +52,8 @@ namespace AERHiPets.Controllers.GestionIncidente
         // GET: Incidentes/Create
         public ActionResult Create()
         {
+            ViewBag.especieId = new SelectList(db.Especies, "Id", "nombre");
+            ViewBag.estadoIncidenteId = new SelectList(db.estadoIncidentes, "Id", "estadoInc");
             ViewBag.razaId = new SelectList(db.Razas, "Id", "nombre");
             ViewBag.tamanioId = new SelectList(db.Tamanios, "Id", "nombre");
             ViewBag.tipoIncidenteId = new SelectList(db.TipoIncidentes, "Id", "tipoIncidente");
@@ -51,15 +65,39 @@ namespace AERHiPets.Controllers.GestionIncidente
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,descripcion,tamanioId,razaId,Nombre,Apellido,telefono,fechaFin,fechaAlta,fechaBaja,EstadoIncidente,tipoIncidenteId")] Incidente incidente)
+        public ActionResult Create([Bind(Include = "Id,Email,descripcion,tamanioId,razaId,especieId,Nombre,Apellido,telefono,fechaFin,fechaAlta,fechaBaja,estadoIncidenteId,tipoIncidenteId,calleGmaps,lat,lng,VoluntarioUsrId")] Incidente incidente, HttpPostedFileBase upload)
         {
+            incidente.fechaAlta = DateTime.Now;
+
+            try{
             if (ModelState.IsValid)
             {
+                if (upload != null && upload.ContentLength > 0)//verifica se cargo una foto para en animal
+                {
+                    var avatar = new AERHiPets.Models.GestionIncidentes.FileIncidente//instancia la clase encargada de mapear la foto en la BD
+                    {
+                        FileName = System.IO.Path.GetFileName(upload.FileName),
+                        FileType = FileTypeIncidente.Avatar,
+                        ContentType = upload.ContentType
+                    };
+                    using (var reader = new System.IO.BinaryReader(upload.InputStream))//transforma la foto en una cadena de bytes para guardar en la BD
+                    {
+                        avatar.Content = reader.ReadBytes(upload.ContentLength);
+                    }
+                    incidente.Files = new List<AERHiPets.Models.GestionIncidentes.FileIncidente> { avatar };//aniade la referencia de la foto guardada al atributo correspondiente en animal
+                }
                 db.Incidentes.Add(incidente);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+            ViewBag.especieId = new SelectList(db.Especies, "Id", "nombre", incidente.especieId);
+            ViewBag.estadoIncidenteId = new SelectList(db.estadoIncidentes, "Id", "estadoInc", incidente.estadoIncidenteId);
             ViewBag.razaId = new SelectList(db.Razas, "Id", "nombre", incidente.razaId);
             ViewBag.tamanioId = new SelectList(db.Tamanios, "Id", "nombre", incidente.tamanioId);
             ViewBag.tipoIncidenteId = new SelectList(db.TipoIncidentes, "Id", "tipoIncidente", incidente.tipoIncidenteId);
@@ -78,6 +116,8 @@ namespace AERHiPets.Controllers.GestionIncidente
             {
                 return HttpNotFound();
             }
+            ViewBag.especieId = new SelectList(db.Especies, "Id", "nombre", incidente.especieId);
+            ViewBag.estadoIncidenteId = new SelectList(db.estadoIncidentes, "Id", "estadoInc", incidente.estadoIncidenteId);
             ViewBag.razaId = new SelectList(db.Razas, "Id", "nombre", incidente.razaId);
             ViewBag.tamanioId = new SelectList(db.Tamanios, "Id", "nombre", incidente.tamanioId);
             ViewBag.tipoIncidenteId = new SelectList(db.TipoIncidentes, "Id", "tipoIncidente", incidente.tipoIncidenteId);
@@ -89,14 +129,55 @@ namespace AERHiPets.Controllers.GestionIncidente
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,descripcion,tamanioId,razaId,Nombre,Apellido,telefono,fechaFin,fechaAlta,fechaBaja,EstadoIncidente,tipoIncidenteId")] Incidente incidente)
+        public ActionResult Edit([Bind(Include = "Id,Email,descripcion,tamanioId,razaId,especieId,Nombre,Apellido,telefono,fechaFin,fechaBaja,estadoIncidenteId,tipoIncidenteId,calleGmaps,lat,lng")] Incidente incidente, HttpPostedFileBase upload)
         {
+            incidente.fechaAlta = DateTime.Now;
+            
+
+            var animalToUpdate = db.Incidentes.Find(incidente.Id);
+            animalToUpdate.Email = incidente.Email;
+            animalToUpdate.descripcion = incidente.descripcion;
+            animalToUpdate.tamanioId = incidente.tamanioId;
+            animalToUpdate.especieId = incidente.especieId;
+            animalToUpdate.razaId = incidente.razaId;
+            animalToUpdate.Nombre = incidente.Nombre;
+            animalToUpdate.Apellido = incidente.Apellido;
+            animalToUpdate.telefono = incidente.telefono;
+            animalToUpdate.estadoIncidenteId = incidente.estadoIncidenteId;
+            animalToUpdate.tipoIncidenteId = incidente.tipoIncidenteId;
+
+            if (incidente.estadoIncidenteId == 3) {
+                incidente.fechaBaja = DateTime.Now;
+            } else if (incidente.estadoIncidenteId == 4) {
+                incidente.fechaFin = DateTime.Now;
+            }
+
             if (ModelState.IsValid)
             {
-                db.Entry(incidente).State = EntityState.Modified;
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    if (animalToUpdate.Files.Any(f => f.FileType == FileTypeIncidente.Avatar))
+                    {
+                        db.FileIncidentes.Remove(animalToUpdate.Files.First(f => f.FileType == FileTypeIncidente.Avatar));
+                    }
+                    var avatar = new AERHiPets.Models.GestionIncidentes.FileIncidente
+                    {
+                        FileName = System.IO.Path.GetFileName(upload.FileName),
+                        FileType = FileTypeIncidente.Avatar,
+                        ContentType = upload.ContentType
+                    };
+                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                    {
+                        avatar.Content = reader.ReadBytes(upload.ContentLength);
+                    }
+                    animalToUpdate.Files = new List<AERHiPets.Models.GestionIncidentes.FileIncidente> { avatar };
+                }
+                db.Entry(animalToUpdate).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.especieId = new SelectList(db.Especies, "Id", "nombre", incidente.especieId);
+            ViewBag.estadoIncidenteId = new SelectList(db.estadoIncidentes, "Id", "estadoInc", incidente.estadoIncidenteId);
             ViewBag.razaId = new SelectList(db.Razas, "Id", "nombre", incidente.razaId);
             ViewBag.tamanioId = new SelectList(db.Tamanios, "Id", "nombre", incidente.tamanioId);
             ViewBag.tipoIncidenteId = new SelectList(db.TipoIncidentes, "Id", "tipoIncidente", incidente.tipoIncidenteId);
@@ -136,6 +217,38 @@ namespace AERHiPets.Controllers.GestionIncidente
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult getEspecies()
+        {
+            //AerDb db = new AerDb();
+            var especies = db.Especies
+                .Where(e => e.fechaBaja == null)
+                .Select(e => new { e.Id, e.nombre })
+                .OrderBy(e => e.nombre);
+            return Json(especies, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getRazas(int intEspID)
+        {
+
+            //AerDb db = new AerDb();
+            var razas = db.Razas
+                .Where(p => p.especieID == intEspID)
+                .Where(p => p.fechaBaja == null)
+                .Select(p => new { p.Id, p.nombre })
+                .OrderBy(p => p.nombre);
+            return Json(razas, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getLatLng()
+        {
+
+            //AerDb db = new AerDb();
+            var razas = db.Incidentes
+                .Where(p => p.fechaBaja == null)
+                .Select(p => new { p.Id, p.lat, p.lng, p.calle, p.descripcion});
+            return Json(razas, JsonRequestBehavior.AllowGet);
         }
     }
 }

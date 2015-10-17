@@ -70,8 +70,7 @@
                 </td>
                 <td>
                     @if (item.Files.Any(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar))
-                    {
-                        
+                    {                       
                        
                             <img src="~/File?id=@item.Files.First(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar).FileId" alt="avatar" height="50" width="50" />
                         
