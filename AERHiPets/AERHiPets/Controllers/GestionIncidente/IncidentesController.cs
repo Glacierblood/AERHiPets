@@ -8,8 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using AERHiPets.DAL.GestionAdopcionApadrinamiento;
 using AERHiPets.Models.GestionIncidentes;
-
+using Microsoft.AspNet.Identity;
 using System.Data.Entity.Infrastructure;
+using AERHiPets.DAL.GestionVoluntariosDAL;
+using AERHiPets.Models.GestionUsuarios;
+using System.Net.Mail;
 
 namespace AERHiPets.Controllers.GestionIncidente
 {
@@ -52,12 +55,26 @@ namespace AERHiPets.Controllers.GestionIncidente
         // GET: Incidentes/Create
         public ActionResult Create()
         {
+            Incidente incidente = new Incidente();
+            if (HttpContext.User != null)
+            {
+
+                var UsrName = User.Identity.GetUserId();
+                GestionVoluntarioDb dbGV = new GestionVoluntarioDb();
+                Persona per = dbGV.personas.FirstOrDefault(p => p.UsrId == UsrName);
+                incidente.Apellido = per.Apellido;
+                incidente.Nombre = per.Nombre;
+                incidente.telefono = per.telefonoCel;
+                incidente.calle = per.calleGmaps;
+                incidente.Email = User.Identity.Name;
+            }
+
             ViewBag.especieId = new SelectList(db.Especies, "Id", "nombre");
             ViewBag.estadoIncidenteId = new SelectList(db.estadoIncidentes, "Id", "estadoInc");
             ViewBag.razaId = new SelectList(db.Razas, "Id", "nombre");
             ViewBag.tamanioId = new SelectList(db.Tamanios, "Id", "nombre");
             ViewBag.tipoIncidenteId = new SelectList(db.TipoIncidentes, "Id", "tipoIncidente");
-            return View();
+            return View(incidente);
         }
 
         // POST: Incidentes/Create
@@ -65,9 +82,13 @@ namespace AERHiPets.Controllers.GestionIncidente
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,descripcion,tamanioId,razaId,especieId,Nombre,Apellido,telefono,fechaFin,fechaAlta,fechaBaja,estadoIncidenteId,tipoIncidenteId,calleGmaps,lat,lng,VoluntarioUsrId")] Incidente incidente, HttpPostedFileBase upload)
+        public ActionResult Create([Bind(Include = "Id,Email,descripcion,tamanioId,razaId,especieId,Nombre,Apellido,telefono,fechaFin,fechaAlta,fechaBaja,estadoIncidenteId,tipoIncidenteId,calle,lat,lng,VoluntarioUsrId")] Incidente incidente, HttpPostedFileBase upload)
         {
             incidente.fechaAlta = DateTime.Now;
+
+
+
+
 
             try{
             if (ModelState.IsValid)
@@ -88,6 +109,29 @@ namespace AERHiPets.Controllers.GestionIncidente
                 }
                 db.Incidentes.Add(incidente);
                 db.SaveChanges();
+
+                //---------------------------------------------------------------------------------------
+
+                System.Net.Mail.MailMessage m = new System.Net.Mail.MailMessage(
+                          new System.Net.Mail.MailAddress("AERHiPets@outlook.com", "Web Registration"),
+                          new System.Net.Mail.MailAddress(User.Identity.Name));
+                m.Subject = "Nuevo incidente";
+                String url = "Https://localhost:44300/Incidentes/Details/" + incidente.Id;
+                m.Body = string.Format("Estimado<BR/> Ha ocurrido un nuevo incidente al que usted podria atender, haga click en el siguente link  "+url+"");
+                m.IsBodyHtml = true;
+                m.From = new System.Net.Mail.MailAddress("AERHiPets@outlook.com");
+                SmtpClient smtp = new SmtpClient();
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new NetworkCredential("AERHiPets@outlook.com", "1Mucho+Facil");
+                smtp.Host = "smtp.live.com";
+
+                smtp.Send(m);
+                //---------------------------------------------------------------------------------------
+
+                
                 return RedirectToAction("Index");
             }
             }
@@ -107,11 +151,13 @@ namespace AERHiPets.Controllers.GestionIncidente
         // GET: Incidentes/Edit/5
         public ActionResult Edit(int? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Incidente incidente = db.Incidentes.Find(id);
+            
             if (incidente == null)
             {
                 return HttpNotFound();

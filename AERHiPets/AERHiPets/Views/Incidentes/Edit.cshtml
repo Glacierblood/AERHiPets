@@ -87,6 +87,7 @@
                 @Html.ValidationMessageFor(model => model.estadoIncidente, "", new { @class = "text-danger" })
             </div>
         </div>
+            
 
        
 
@@ -105,7 +106,7 @@
                 <div class="form-group">
                     <span class="control-label col-md-2"><strong>Foto</strong></span>
                     <div class="col-md-10">
-                        <img src="~/File?id=@Model.Files.First(f => f.FileType == AERHiPets.Models.GestionIncidentes.FileTypeIncidente.Avatar).FileIncidenteId" alt="avatar" />
+                        <img src="~/FileIncidentes?id=@Model.Files.First(f => f.FileType == AERHiPets.Models.GestionIncidentes.FileTypeIncidente.Avatar).FileIncidenteId" alt="avatar" />
                     </div>
                 </div>
             }

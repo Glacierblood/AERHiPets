@@ -92,11 +92,11 @@
         </dd>      
 
         <dt>
-            @Html.DisplayNameFor(model => model.estadoIncidente)
+            @Html.DisplayNameFor(model => model.calle)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.estadoIncidente.estadoInc)
+            @Html.DisplayFor(model => model.calle)
         </dd>
 
         <dt>
@@ -109,7 +109,7 @@
                 <div class="form-group">
 
                     <div class="col-md-10">
-                        <img src="~/File?id=@Model.Files.First(f => f.FileType == AERHiPets.Models.GestionIncidentes.FileTypeIncidente.Avatar).FileIncidenteId" alt="avatar" />
+                        <img src="~/FileIncidentes?id=@Model.Files.First(f => f.FileType == AERHiPets.Models.GestionIncidentes.FileTypeIncidente.Avatar).FileIncidenteId" alt="avatar" width="640" height="480" />
                     </div>
                 </div>
             }

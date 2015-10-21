@@ -1,9 +1,10 @@
-﻿
+﻿@using Microsoft.AspNet.Identity
+
 
 @{
     ViewBag.Title = "_DDLOpciones";
 }
-
+@{if(User.IsInRole("Administrador")){
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mascotas <span class="caret"></span></a>
     <ul class="dropdown-menu">
@@ -13,7 +14,7 @@
         <li>@Html.ActionLink("Tamanio", "Index", "Tamanios")</li>
 </ul>
 </li>
-
+  }}
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Atencion Medica <span class="caret"></span></a>
     <ul class="dropdown-menu">
@@ -30,3 +31,12 @@
         <li>@Html.ActionLink("Listado de Solicitudes", "Index", "Adopcions")</li>
     </ul>
 </li>
+
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Incidentes <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        <li>@Html.ActionLink("Registrar Incidentes", "Create", "Incidentes")</li>
+        <li>@Html.ActionLink("Incidentes vigentes", "Index", "Incidentes")</li>
+    </ul>
+</li>
+
