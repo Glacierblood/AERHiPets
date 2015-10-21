@@ -112,9 +112,13 @@ namespace AERHiPets.Controllers.GestionIncidente
 
                 //---------------------------------------------------------------------------------------
 
-                System.Net.Mail.MailMessage m = new System.Net.Mail.MailMessage(
-                          new System.Net.Mail.MailAddress("AERHiPets@outlook.com", "Web Registration"),
-                          new System.Net.Mail.MailAddress(User.Identity.Name));
+                System.Net.Mail.MailMessage m = new System.Net.Mail.MailMessage();
+                m.Sender = new System.Net.Mail.MailAddress("AERHiPets@outlook.com", "Web Registration");
+                //m.          new System.Net.Mail.MailAddress(User.Identity.Name));
+
+            
+                
+
                 m.Subject = "Nuevo incidente";
                 String url = "Https://localhost:44300/Incidentes/Details/" + incidente.Id;
                 m.Body = string.Format("Estimado<BR/> Ha ocurrido un nuevo incidente al que usted podria atender, haga click en el siguente link  "+url+"");

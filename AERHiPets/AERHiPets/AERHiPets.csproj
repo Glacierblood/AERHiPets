@@ -403,6 +403,10 @@
     <Compile Include="DAL\GestionVoluntariosDAL\Migrations\201510152044308_VOL5.Designer.cs">
       <DependentUpon>201510152044308_VOL5.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\GestionVoluntariosDAL\Migrations\201510212254466_VOL6.cs" />
+    <Compile Include="DAL\GestionVoluntariosDAL\Migrations\201510212254466_VOL6.Designer.cs">
+      <DependentUpon>201510212254466_VOL6.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\GestionVoluntariosDAL\Migrations\Configuration.cs" />
     <Compile Include="DAL\NewDAL\Acciones.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -1075,6 +1079,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DAL\GestionVoluntariosDAL\Migrations\201510152044308_VOL5.resx">
       <DependentUpon>201510152044308_VOL5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionVoluntariosDAL\Migrations\201510212254466_VOL6.resx">
+      <DependentUpon>201510212254466_VOL6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

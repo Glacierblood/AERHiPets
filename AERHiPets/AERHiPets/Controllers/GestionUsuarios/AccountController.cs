@@ -198,6 +198,7 @@ namespace AERHiPets.Controllers.GestionUsuarios
                             persona.fechaNac = pm.persona.fechaNac;
                             persona.direccionId = direccion.Id;
                             persona.UsrId = user.Id;
+                            persona.email = user.Email;
                             
 
                             db.personas.Add(persona);

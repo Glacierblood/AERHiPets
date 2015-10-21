@@ -64,6 +64,7 @@ namespace AERHiPets.Models.GestionUsuarios
         public String calleGmaps { get; set; }
         public String lat { get; set; }
         public String lng { get; set; }
+        public String email { get; set; }
 
     }
 }
