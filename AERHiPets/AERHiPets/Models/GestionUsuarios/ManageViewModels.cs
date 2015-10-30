@@ -35,7 +35,7 @@ namespace AERHiPets.Models.GestionUsuarios
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirmar nueva contraseña")]
-        [Compare("nueva contraseña", ErrorMessage = "las contraseñas no coinciden.")]
+        [Compare("newPassword", ErrorMessage = "las contraseñas no coinciden.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -54,7 +54,7 @@ namespace AERHiPets.Models.GestionUsuarios
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirmar nueva contraseña")]
-        [Compare("nueva contraseña", ErrorMessage = "Las contraseñas no coinciden.")]
+        [Compare("NewPassword", ErrorMessage = "Las contraseñas no coinciden.")]
         public string ConfirmPassword { get; set; }
     }
 

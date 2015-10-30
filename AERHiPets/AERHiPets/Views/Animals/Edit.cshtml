@@ -1,124 +1,141 @@
 ﻿@model AERHiPets.Models.GestionAnimal.Animal
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 fondo textoParrafo centrarContenido">
+        @{
+            ViewBag.Title = "Modificar Mascota";
+        }
 
-@{
-    ViewBag.Title = "Modificar Mascota";
-}
-
-<h2>Modificar Mascota</h2>
-
-
-@using (Html.BeginForm("Edit", "Animals", null, FormMethod.Post, new {enctype = "multipart/form-data"}))
-{
+        <h2 class="textoTitulo"><strong>Modificar Mascota</strong></h2>
+@using (Html.BeginForm("Edit", "Animals", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
     @Html.AntiForgeryToken()
+        <div class="container">
+            <div class="row textoParrafo">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 
-    <div class="form-horizontal">
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Animal</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.Id)
+                   
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                    <div class="form-horizontal">
+                        <div class="alert alert-info">
+                            <strong>Completar los datos con asterisco!</strong>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        </div>
+
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+
+                            <div class="form-group form-inline">
+                                @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-lg-4 col-md-4 col-sm-4 hidden-xs" })
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
+                                    @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", placeholder = "Ingresar nombre del animal" } })
+                                    @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                                </div>
+                                *
+                            </div>
+
+                            <div class="form-group form-inline">
+                                @Html.LabelFor(model => model.fechaNac, htmlAttributes: new { @class = "control-label col-lg-4 col-md-4 col-sm-4 hidden-xs" })
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
+                                    @Html.EditorFor(model => model.fechaNac, new { htmlAttributes = new { @class = "form-control", placeholder = "Ingresar fecha nacimiento" } })
+                                    @Html.ValidationMessageFor(model => model.fechaNac, "", new { @class = "text-danger" })
+                                </div>
+                                *
+                            </div>
+
+                            <div class="form-group">
+                                <div class="control-label col-lg-4 col-md-4 col-sm-4 hidden-xs">
+                                    <label for="especieId">Especie</label>
+                                </div>
+                                <div class="control-label col-lg-4 col-md-4 col-sm-4 hidden-xs">
+                                    <select class="form-control" id="especieId" name="especieId" placeholder="Seleccionar especie">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                <a href="~/Especies/Create">Agregar Especie</a>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.razaId, "Raza", htmlAttributes: new { @class = "control-label col-lg-4 col-md-4 col-sm-4 hidden-xs" })
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
+                                    @Html.DropDownList("razaId", null, htmlAttributes: new { @class = "form-control", placeholder = "Seleccionar raza" })
+                                    @Html.ValidationMessageFor(model => model.razaId, "", new { @class = "text-danger" })
+                                </div>
+                                <a href="~/Razas/Create">Agregar Raza</a>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.tamanioId, "Tamaño", htmlAttributes: new { @class = "control-label col-lg-4 col-md-4 col-sm-4 hidden-xs" })
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
+                                    @Html.DropDownList("tamanioId", null, htmlAttributes: new { @class = "form-control", placeholder = "Seleccionar tamaño" })
+                                    @Html.ValidationMessageFor(model => model.tamanioId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group form-inline">
+                                @Html.LabelFor(model => model.caracteristicas, htmlAttributes: new { @class = "control-label col-lg-4 col-md-4 col-sm-4 hidden-xs" })
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                                    @Html.TextAreaFor(model => model.caracteristicas, new { htmlAttributes = new { @class = "form-control", @row = "3", placeholder = "Ingresar breve descripción del animal" } })
+                                    @Html.ValidationMessageFor(model => model.caracteristicas, "", new { @class = "text-danger" })
+                                    *
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.enAdopcion, htmlAttributes: new { @class = "control-label col-lg-4 col-md-4 col-sm-4 col-xs-4" })
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.enAdopcion)
+                                        @Html.ValidationMessageFor(model => model.enAdopcion, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--IMAGEN-->
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 ">
+                           
+                                @if (Model.Files.Any(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar))
+                                {
+                                    <span class="row control-label col-md-2"><strong>Foto</strong></span>
+                                    <br />
+                                    <img src="~/File?id=@Model.Files.First(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar).FileId" alt="avatar" class="img-responsive img-thumbnail" height="250" width="250" />
+
+                                }
+
+                                <div class="form-group">
+                                    @Html.Label("Subir Foto", new { @class = "control-label col-lg-4 col-md-4 col-sm-4 col-xs-4" })
+                                    <br />
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <input type="file" id="Avatar" name="upload" accept="image/*" />
+                                    </div>
+                                </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.fechaNac, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.fechaNac, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.fechaNac, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.caracteristicas, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.caracteristicas, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.caracteristicas, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.tamanioId, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("tamanioId", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.tamanioId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="control-label col-md-2">
-                        <label for="especieId">Especie</label>
-                    </div>
-                    <div class="col-md-10">
-                        <select class="form-control" id="especieId" name="especieId">
-                            <option value=""></option>
-                        </select>
-                        <a href="~/Especies/Create">Agregar Especie</a>
-                    </div>
-
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.razaId, "Raza", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("razaId", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.razaId, "", new { @class = "text-danger" })
-                        <a href="~/Razas/Create">Agregar Raza</a>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.enAdopcion, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.enAdopcion)
-                            @Html.ValidationMessageFor(model => model.enAdopcion, "", new { @class = "text-danger" })
+                <!--BOTON GUARDAR ANIMAL-->
+                <div class="container">
+                    <div class="row" align="center">
+                        <div class="form-group">
+                            <div class="col-md-10 centrarContenido">
+                                <input type="submit" value="Guardar" class="btn btn-danger btn-lg btn-block set-bk-clr colorBase textoMenu" />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Guardar" class="btn btn-default" />
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                @if (Model.Files.Any(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar))
-                {
-                    <div class="form-group">
-                        <span class="control-label col-md-2"><strong>Foto</strong></span>
-                        <div class="col-md-10">
-                            <img src="~/File?id=@Model.Files.First(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar).FileId" alt="avatar" />
+                    <div class="row" align="right">
+                        <div class="col-lg-10 col-md-10">
+                            @Html.ActionLink("Ir a la lista", "Index")
                         </div>
-                    </div>
-                }
 
-                <div class="form-group">
-                    @Html.Label("Subir Foto", new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <input type="file" id="Avatar" name="upload" accept="image/*" />
                     </div>
                 </div>
-            </div>
 
-            
+            </div>
         </div>
+        }
     </div>
-}
+</div>  
 
-<div>
-    @Html.ActionLink("Ir a la lista", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/Scripts/DDLRazaEspecie.js")
-}
+                    @section Scripts {
+                        @Scripts.Render("~/bundles/jqueryval")
+                        @Scripts.Render("~/Scripts/DDLRazaEspecie.js")
+                    }

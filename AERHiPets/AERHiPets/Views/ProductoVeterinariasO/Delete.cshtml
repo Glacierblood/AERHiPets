@@ -1,0 +1,40 @@
+﻿@model AERHiPets.Models.GestionAnimal.ProductoVeterinaria
+
+@{
+    ViewBag.Title = "Dar de Baja Producto Veterinario";
+}
+
+<h2>Dar de baja Producto Veterinario</h2>
+
+
+<div>
+    <h4>Producto Veterinario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>          
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Dar Baja" class="btn btn-default" /> |
+            @Html.ActionLink("Ir a la lista", "Index")
+        </div>
+    }
+</div>

@@ -23,7 +23,7 @@ namespace AERHiPets.Controllers.GestionIncidente
         // GET: Incidentes
         public ActionResult Index()
         {
-            var incidentes = db.Incidentes.Include(i => i.Especie).Include(i => i.estadoIncidente).Include(i => i.raza).Include(i => i.tamanio).Include(i => i.tipoIncidente);
+            var incidentes = db.Incidentes.Include(i => i.Especie).Include(i => i.estadoIncidente).Include(i => i.raza).Include(i => i.tamanio).Include(i => i.tipoIncidente).Where(i => i.estadoIncidenteId == 1);
             ViewBag.especieId = new SelectList(db.Especies, "Id", "nombre");
             ViewBag.estadoIncidenteId = new SelectList(db.estadoIncidentes, "Id", "estadoInc");
             ViewBag.razaId = new SelectList(db.Razas, "Id", "nombre");
@@ -52,14 +52,38 @@ namespace AERHiPets.Controllers.GestionIncidente
             return View(incidente);
         }
 
+        [HttpPost, ActionName("Detalle")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Detalle(int? id, String usrId)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Incidente incidente = db.Incidentes.Find(id);
+            if (incidente == null)
+            {
+                return HttpNotFound();
+            }
+            incidente.estadoIncidenteId = 2;
+            incidente.VoluntarioSolucionUsrId = usrId;
+            db.Entry(incidente).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+            //return View(incidente);
+        }
+
+
+
         // GET: Incidentes/Create
         public ActionResult Create()
         {
             Incidente incidente = new Incidente();
             if (HttpContext.User != null)
-            {
-
+            {   
                 var UsrName = User.Identity.GetUserId();
+                if (UsrName != null) { 
+                
                 GestionVoluntarioDb dbGV = new GestionVoluntarioDb();
                 Persona per = dbGV.personas.FirstOrDefault(p => p.UsrId == UsrName);
                 incidente.Apellido = per.Apellido;
@@ -67,6 +91,7 @@ namespace AERHiPets.Controllers.GestionIncidente
                 incidente.telefono = per.telefonoCel;
                 incidente.calle = per.calleGmaps;
                 incidente.Email = User.Identity.Name;
+                }
             }
 
             ViewBag.especieId = new SelectList(db.Especies, "Id", "nombre");
@@ -85,11 +110,7 @@ namespace AERHiPets.Controllers.GestionIncidente
         public ActionResult Create([Bind(Include = "Id,Email,descripcion,tamanioId,razaId,especieId,Nombre,Apellido,telefono,fechaFin,fechaAlta,fechaBaja,estadoIncidenteId,tipoIncidenteId,calle,lat,lng,VoluntarioUsrId")] Incidente incidente, HttpPostedFileBase upload)
         {
             incidente.fechaAlta = DateTime.Now;
-
-
-
-
-
+            incidente.estadoIncidenteId = 1;
             try{
             if (ModelState.IsValid)
             {
@@ -115,10 +136,13 @@ namespace AERHiPets.Controllers.GestionIncidente
                 System.Net.Mail.MailMessage m = new System.Net.Mail.MailMessage();
                 m.Sender = new System.Net.Mail.MailAddress("AERHiPets@outlook.com", "Web Registration");
                 //m.          new System.Net.Mail.MailAddress(User.Identity.Name));
-
-            
+                GestionVoluntarioDb dbV = new GestionVoluntarioDb();
+                var mailList = dbV.personas.Select(p => p.email);
+                foreach (String mail in mailList)
+                {
+                    m.Bcc.Add(mail);
+                }
                 
-
                 m.Subject = "Nuevo incidente";
                 String url = "Https://localhost:44300/Incidentes/Details/" + incidente.Id;
                 m.Body = string.Format("Estimado<BR/> Ha ocurrido un nuevo incidente al que usted podria atender, haga click en el siguente link  "+url+"");
@@ -166,6 +190,8 @@ namespace AERHiPets.Controllers.GestionIncidente
             {
                 return HttpNotFound();
             }
+            ViewBag.especieActual = incidente.especieId;
+            ViewBag.razaActual = incidente.razaId;
             ViewBag.especieId = new SelectList(db.Especies, "Id", "nombre", incidente.especieId);
             ViewBag.estadoIncidenteId = new SelectList(db.estadoIncidentes, "Id", "estadoInc", incidente.estadoIncidenteId);
             ViewBag.razaId = new SelectList(db.Razas, "Id", "nombre", incidente.razaId);
@@ -297,6 +323,7 @@ namespace AERHiPets.Controllers.GestionIncidente
             //AerDb db = new AerDb();
             var razas = db.Incidentes
                 .Where(p => p.fechaBaja == null)
+                .Where(p => p.estadoIncidenteId == 1)
                 .Select(p => new { p.Id, p.lat, p.lng, p.calle, p.descripcion});
             return Json(razas, JsonRequestBehavior.AllowGet);
         }

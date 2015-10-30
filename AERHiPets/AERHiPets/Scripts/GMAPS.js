@@ -85,6 +85,7 @@ function marcarTextDir(latLng) {
                 //alert(results[0].formatted_address);
                 var direccion = results[0].formatted_address.split(",");
                 document.getElementById("dir").value = direccion[0];
+                document.getElementById("dir1").value = direccion[0];
             }
         }
     });

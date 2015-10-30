@@ -1,91 +1,105 @@
 ﻿@model IEnumerable<AERHiPets.Models.GestionAdopcionApadrinamiento.GestionAdopcion.Adopcion>
 
-@{
-    ViewBag.Title = "Listado de Solicitudes";
-}
-
-<h2>Listado de solicitudes</h2>
-
-<p>
-    @Html.ActionLink("Nueva Solicitud", "Create")
-</p>
-<table class="table" id="myTable">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.animal.nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.estadoAdopcion.nombre)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.voluntarioName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.empleadoName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.fechaAlta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.fechaFin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.fechaEntrega)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.esTemporal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tipoAdopcion)
-            </th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.animal.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.estadoAdopcion.nombre)
-                </td>
-                <th>
-                    @Html.DisplayFor(modelItem => item.voluntarioName)
-                </th>
-                <th>
-                    @Html.DisplayFor(modelItem => item.empleadoName)
-                </th>
-                <th>
-                    @Html.DisplayFor(modelItem => item.fechaAlta)
-                </th>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fechaFin)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fechaEntrega)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.esTemporal)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tipoAdopcion.tipoAdopcion)
-                </td>
-                <td>
-                    @if (item.animal.Files.Any(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar))
-                    {
-                        <img src="~/File?id=@item.animal.Files.First(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar).FileId" alt="avatar" height="50" width="50" />
-                    }
-                </td>
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.Id })
-                  @*  @Html.ActionLink("Borrar", "Delete", new { id = item.Id })*@                    
-                </td>
-            </tr>
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 fondo textoParrafo centrarContenido">
+        @{
+            ViewBag.Title = "Listado de Solicitudes";
         }
-    </tbody>
-</table>
+
+        <h2 class="textoTitulo"><strong>Listado de solicitudes</strong></h2>
+
+        <p>
+            @Html.ActionLink("Nueva Solicitud", "Create")
+        </p>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+
+                    <table class="table textoTabla" id="myTable">
+                        <thead>
+                            <tr>
+                                <th class="col-sm-2 col-xs-2">
+                                    @Html.DisplayNameFor(model => model.animal.nombre)
+                                </th>
+                                <th class="col-sm-2 col-xs-2">
+                                    @Html.DisplayNameFor(model => model.estadoAdopcion.nombre)
+                                </th>
+
+                                <th class="hidden-sm hidden-xs">
+                                    @Html.DisplayNameFor(model => model.voluntarioName)
+                                </th>
+                                <th class="hidden-lg hidden-md hidden-sm hidden-xs">
+                                    @Html.DisplayNameFor(model => model.empleadoName)
+                                </th>
+                                <th class="hidden-sm hidden-xs">
+                                    @Html.DisplayNameFor(model => model.fechaAlta)
+                                </th>
+                                <th class="hidden-sm hidden-xs">
+                                    @Html.DisplayNameFor(model => model.fechaFin)
+                                </th>
+                                <th class="hidden-sm hidden-xs">
+                                    @Html.DisplayNameFor(model => model.fechaEntrega)
+                                </th>
+                                <th class="col-sm-2 col-xs-2">
+                                    @Html.DisplayNameFor(model => model.esTemporal)
+                                </th>
+                                <th class="hidden-lg hidden-md hidden-sm hidden-xs">
+                                    @Html.DisplayNameFor(model => model.tipoAdopcion)
+                                </th>
+                                <th class="col-sm-2 col-xs-2">Foto</th>
+                                <th class="col-sm-2 col-xs-2">Editar</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="col-sm-2 col-xs-2">
+                                        @Html.DisplayFor(modelItem => item.animal.nombre)
+                                    </td>
+                                    <td class="col-sm-2 col-xs-2">
+                                        @Html.DisplayFor(modelItem => item.estadoAdopcion.nombre)
+                                    </td>
+                                    <td class="hidden-sm hidden-xs">
+                                        @Html.DisplayFor(modelItem => item.voluntarioName)
+                                    </td>
+                                    <td class="hidden-lg hidden-md hidden-sm hidden-xs">
+                                        @Html.DisplayFor(modelItem => item.empleadoName)
+                                    </td>
+                                    <td class="hidden-sm hidden-xs">
+                                        @Html.DisplayFor(modelItem => item.fechaAlta)
+                                    </td>
+                                    <td class="hidden-sm hidden-xs">
+                                        @Html.DisplayFor(modelItem => item.fechaFin)
+                                    </td>
+                                    <td class="hidden-sm hidden-xs">
+                                        @Html.DisplayFor(modelItem => item.fechaEntrega)
+                                    </td>
+                                    <td class="col-sm-2 col-xs-2">
+                                        @Html.DisplayFor(modelItem => item.esTemporal)
+                                    </td>
+                                    <td class="hidden-lg hidden-md hidden-sm hidden-xs">
+                                        @Html.DisplayFor(modelItem => item.tipoAdopcion.tipoAdopcion)
+                                    </td>
+                                    <td class="col-sm-2 col-xs-2">
+                                        @if (item.animal.Files.Any(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar))
+                                        {
+                                            <img src="~/File?id=@item.animal.Files.First(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar).FileId" alt="avatar" height="50" width="50" />
+                                        }
+                                    </td>
+                                    <td class="col-sm-2 col-xs-2">
+                                        @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+                                        @*  @Html.ActionLink("Borrar", "Delete", new { id = item.Id })*@
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,48 +1,65 @@
 ﻿@model AERHiPets.Models.GestionAnimal.Raza
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 fondo textoParrafo centrarContenido">
+        @{
+            ViewBag.Title = "Eliminar";
+        }
 
-@{
-    ViewBag.Title = "Eliminar";
-}
+        <h2 class="textoTitulo"><strong>Eliminar raza</strong></h2>
 
-<h2>Eliminar</h2>
 
-<div>
-    <h4>Raza</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.especie.nombre)
-        </dt>
+        <div class="container">
+            <div class="row textoParrafo">
+                <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col.sm-offset-1 col-xs-10 col-xs-offset-1">
+                    <div class="form-horizontal">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.especie.nombre)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.especie.nombre)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.especie.nombre)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.nombre)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.nombre)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.descripcion)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.descripcion)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.descripcion)
+                            </dd>
 
-    </dl>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-default" /> |
-            @Html.ActionLink("Ir a la Lista", "Index")
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row" align="center">
+                        <div class="form-group">
+                            <div class="col-md-10 centrarContenido">
+                                <input type="submit" value="Eliminar" class="btn btn-danger btn-lg btn-block set-bk-clr colorBase textoMenu" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" align="right">
+                        <div class="col-lg-10 col-md-10">
+                            @Html.ActionLink("Ir a la lista", "Index")
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
-    }
+    </div>
 </div>

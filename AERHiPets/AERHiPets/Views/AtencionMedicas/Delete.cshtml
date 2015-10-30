@@ -1,63 +1,87 @@
 ﻿@model AERHiPets.Models.GestionAnimal.AtencionMedica
 
-@{
-    ViewBag.Title = "Dar de Baja";
-}
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 fondo textoParrafo centrarContenido">
+        @{
+            ViewBag.Title = "Registrar baja de atención médica";
+        }
 
-<h2>Dar de Baja</h2>
+        <h2 class="textoTitulo"><strong>Registrar baja de atención médica</strong></h2>
 
-<div>
-    <h4>Atencion Medica</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.animal.nombre)
-        </dt>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col.sm-offset-1 col-xs-10 col-xs-offset-1">
+                    <div class="form-horizontal">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <hr />
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.animal.nombre)
+                                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.animal.nombre)
-        </dd>
+                                <dd>
+                                    @Html.DisplayFor(model => model.animal.nombre)
+                                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.productoVeterinaria.nombre)
-        </dt>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.productoVeterinaria.nombre)
+                                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.productoVeterinaria.nombre)
-        </dd>
+                                <dd>
+                                    @Html.DisplayFor(model => model.productoVeterinaria.nombre)
+                                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.veterinaria.nombre)
-        </dt>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.veterinaria.nombre)
+                                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.veterinaria.nombre)
-        </dd>
+                                <dd>
+                                    @Html.DisplayFor(model => model.veterinaria.nombre)
+                                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tratamiento)
-        </dt>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.tratamiento)
+                                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tratamiento)
-        </dd>
+                                <dd>
+                                    @Html.DisplayFor(model => model.tratamiento)
+                                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.nombreVeterinario)
-        </dt>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.nombreVeterinario)
+                                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombreVeterinario)
-        </dd>
+                                <dd>
+                                    @Html.DisplayFor(model => model.nombreVeterinario)
+                                </dd>
 
-    </dl>
+                            </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+                        </div>
+                    </div>
+                    
+                </div>
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Dar Baja" class="btn btn-default" /> |
-            @Html.ActionLink("Ir a la lista", "Index")
+            </div>
+
+            <div class="container">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row" align="center">
+                        <div class="form-group">
+                            <div class="col-md-10 centrarContenido">
+                                <input type="submit" value="Eliminar" class="btn btn-danger btn-lg btn-block set-bk-clr colorBase textoMenu" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" align="right">
+                        <div class="col-lg-10 col-md-10">
+                            @Html.ActionLink("Ir a la lista", "Index")
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
-    }
+    </div>
 </div>

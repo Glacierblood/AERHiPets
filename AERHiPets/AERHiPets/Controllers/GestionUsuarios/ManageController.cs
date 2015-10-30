@@ -55,10 +55,10 @@ namespace AERHiPets.Controllers.GestionUsuarios
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                message == ManageMessageId.ChangePasswordSuccess ? "La contraseña fue cambiada exitosamente."
+                : message == ManageMessageId.SetPasswordSuccess ? "La contraseña fue guardada exitosamente ."
                 : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
+                : message == ManageMessageId.Error ? "Se produjo un error."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";

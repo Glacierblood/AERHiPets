@@ -1,5 +1,6 @@
 ﻿@model AERHiPets.Models.GestionIncidentes.Incidente
-
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin
 @{
     ViewBag.Title = "Details";
 }
@@ -9,6 +10,25 @@
 <div>
     <h4>Incidente</h4>
     <hr />
+@if (User.IsInRole("Voluntario")) { 
+    using (Html.BeginForm("Detalle", "Incidentes", null, FormMethod.Post))
+    {    
+        @Html.AntiForgeryToken()
+    
+        @Html.Hidden("Id", Model.Id);
+        @Html.Hidden("usrId", User.Identity.GetUserId());
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Atender el caso" class="btn btn-default" />
+            </div>
+        </div>
+        
+    }
+ }
+ 
+
+    
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Especie.nombre)

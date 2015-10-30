@@ -108,7 +108,7 @@
                     
                     <td>
                         @if (User.Identity.GetUserId() != null) {
-                            if (User.Identity.GetUserId() == item.VoluntarioUsrId) {
+                            if (User.Identity.GetUserId() == item.VoluntarioUsrId || User.IsInRole("Administrador") ) {
                                 @Html.ActionLink("Edit", "Edit", new { id = item.Id })
                             }
                         } |                        
@@ -123,7 +123,7 @@
         @Scripts.Render("~/bundles/jqueryval")
 
         @(Html.GoogleMap().ScriptRegistrar())
-        @Scripts.Render("~/Scripts/DDLRazaEspIncidente.js")
+        @*Scripts.Render("~/Scripts/DDLRazaEspIncidente.js")*@
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
 
 <script>

@@ -1,37 +1,50 @@
-﻿@using Microsoft.AspNet.Identity
-
+﻿
 
 @{
     ViewBag.Title = "_DDLOpciones";
 }
-@{if(User.IsInRole("Administrador")){
+
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mascotas <span class="caret"></span></a>
     <ul class="dropdown-menu">
-        <li>@Html.ActionLink("Animal", "Index", "Animals")</li>
-        <li>@Html.ActionLink("Raza", "Index", "Razas")</li>
-        <li>@Html.ActionLink("Especie", "Index", "Especies")</li>
-        <li>@Html.ActionLink("Tamanio", "Index", "Tamanios")</li>
-</ul>
+        <li>@Html.ActionLink("Consultar Animales", "Index", "Animals")</li>
+@if (User.IsInRole("Administrador"))
+        {
+        <li>@Html.ActionLink("Consultar Razas", "Index", "Razas")</li>
+        <li>@Html.ActionLink("Consultar Especies", "Index", "Especies")</li>
+        <li>@Html.ActionLink("Consultar Tamaños", "Index", "Tamanios")</li>
+        <li>@Html.ActionLink("Agregar Animal", "Create", "Animals")</li>
+        <li>@Html.ActionLink("Agregar Raza", "Create", "Razas")</li>
+        <li>@Html.ActionLink("Agregar Especie", "Create", "Especies")</li>
+        <li>@Html.ActionLink("Agregar Tamanio", "Create", "Tamanios")</li>
+}
+    </ul>
 </li>
-  }}
+@if (User.IsInRole("Administrador"))
+        {
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Atencion Medica <span class="caret"></span></a>
     <ul class="dropdown-menu">
-        <li>@Html.ActionLink("Veterinarias", "Index", "Veterinarias")</li>
-        <li>@Html.ActionLink("ProductosVeterinarios", "Index", "ProductoVeterinarias")</li>
-        <li>@Html.ActionLink("Atencion Medica", "Index", "AtencionMedicas")</li>
+        <li>@Html.ActionLink("Listado de veterinarias", "Index", "Veterinarias")</li>
+        <li>@Html.ActionLink("Productos Veterinarios", "Index", "ProductoVeterinarias")</li>
+        <li>@Html.ActionLink("Listado de atenciones Médicas", "Index", "AtencionMedicas")</li>
+        <li>@Html.ActionLink("Registrar veterinaria", "Create", "Veterinarias")</li>
+        <li>@Html.ActionLink("Regisrar atencion medica", "Create", "AtencionMedicas")</li>
+        <li>@Html.ActionLink("Regustrar productos veterinarios", "Create", "ProductoVeterinarias")</li>
+
     </ul>
 </li>
-
+}
 <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Adoptar <span class="caret"></span></a>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Adopción <span class="caret"></span></a>
     <ul class="dropdown-menu">
         <li>@Html.ActionLink("Solicitud Adopcion", "Create", "Adopcions")</li>
-        <li>@Html.ActionLink("Listado de Solicitudes", "Index", "Adopcions")</li>
+@if (User.IsInRole("Administrador"))
+        {
+        <li>@Html.ActionLink("Consultar Solicitudes", "Index", "Adopcions")</li>
+}
     </ul>
 </li>
-
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Incidentes <span class="caret"></span></a>
     <ul class="dropdown-menu">
@@ -39,4 +52,14 @@
         <li>@Html.ActionLink("Incidentes vigentes", "Index", "Incidentes")</li>
     </ul>
 </li>
-
+@*
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Herramientas<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        <li>@Html.ActionLink("Barrio", "Index", "Barrios")</li>
+        <li>@Html.ActionLink("Localidad", "Index", "Localidads")</li>
+        @*<li>@Html.ActionLink("Provincia", "Index", "Provincias")</li>
+        <li>@Html.ActionLink("Acciones", "Index", "Acciones")</li>
+        @*<li>@Html.ActionLink("Tipos incidentes", "Index", "TipoIncidentes")</li>
+    </ul>
+</li>*@

@@ -1,153 +1,178 @@
 ﻿@model AERHiPets.Models.GestionAnimal.GestionAnimalModelos.AtencionMedicaModelo
 
-@{
-    ViewBag.Title = "Nueva Atencion";
-}
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 fondo textoParrafo centrarContenido">
+        @{
+            ViewBag.Title = "Nueva Atencion";
+        }
 
-<h2>Nueva Atencion</h2>
-
-
-@using (Html.BeginForm()) 
-{
+        <h2 class="textoTitulo"><strong>Nueva Atencion médica</strong></h2>
+@using (Html.BeginForm())
+                    {
     @Html.AntiForgeryToken()
-    
-    
-    <div class="form-horizontal">
-        <h4>Atencion Medica</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <script src="~/scripts/jquery-1.10.2.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $.validator.setDefaults({ ignore: null });
-                $("input[name=selectedAnimalId").change(function () {
-                    //cada vez que el estado de un radio button cambia, asignamos a nuestro campo hiden el valor del readio seleccionado, que en este caso es el id del animal seleccionado
-                    $("#atencionMedica_animalId").val($('input[name=selectedAnimalId]:checked').val());
-                })
-            });
-            
-        </script>
-        <table class="table" id="myTable">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.animal.nombre)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.animal.raza.nombre)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.animal.raza.especie.nombre)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.animal.tamanio.nombre)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.animal.edad)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.animal.caracteristicas)
-                    </th>
-                    <th>
-                        Seleccionar
-                    </th>
-                    <th>
-                        Foto
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.animales)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.raza.nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.raza.especie.nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.tamanio.nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.edad)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.caracteristicas)
-                        </td>
-                        <td>
-                            @Html.RadioButton("selectedAnimalId", item.Id)
-                        </td>
-                        <td>
-                            @if (item.Files.Any(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar))
-                            {
-                                <img src="~/File?id=@item.Files.First(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar).FileId" alt="avatar" height="50" width="50" />
-                            }
-                        </td>
-                    </tr>
-                }
-            </tbody>
+        <div class="container">
+            <div class="row textoParrafo">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 
-        </table>     
-             
 
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.atencionMedica.animalId, "animalId", htmlAttributes: new { @class = "control-label col-md-2"})*@
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.atencionMedica.animalId, new { htmlAttributes = new { @class = "form-control", @type = "hidden"} })
-                @Html.ValidationMessageFor(model => model.atencionMedica.animalId, "", new { @class = "text-danger" })
+                        <div class="form-horizontal">
+                            <div class="alert alert-info">
+                                <strong>Completar los datos con asterisco!</strong>
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            </div>
+
+                            <script src="~/scripts/jquery-1.10.2.min.js"></script>
+                            <script type="text/javascript">
+                                $(document).ready(function () {
+                                    $.validator.setDefaults({ ignore: null });
+                                    $("input[name=selectedAnimalId").change(function () {
+                                        //cada vez que el estado de un radio button cambia, asignamos a nuestro campo hiden el valor del readio seleccionado, que en este caso es el id del animal seleccionado
+                                        $("#atencionMedica_animalId").val($('input[name=selectedAnimalId]:checked').val());
+                                    })
+                                });
+
+                            </script>
+
+                            <table class="table" id="myTable">
+                                <thead>
+                                    <tr>
+                                        <th class="col-sm-2 col-xs-3">
+                                            @Html.DisplayNameFor(model => model.animal.nombre)
+                                        </th>
+                                        <th class="hidden-sm hidden-xs">
+                                            @Html.DisplayNameFor(model => model.animal.raza.nombre)
+                                        </th>
+                                        <th class="hidden-sm hidden-xs">
+                                            @Html.DisplayNameFor(model => model.animal.raza.especie.nombre)
+                                        </th>
+                                        <th class="hidden-sm hidden-xs">
+                                            @Html.DisplayNameFor(model => model.animal.tamanio.nombre)
+                                        </th>
+                                        <th class="col-sm-1 hidden-xs">
+                                            @Html.DisplayNameFor(model => model.animal.edad)
+                                        </th>
+                                        <th class="hidden-sm hidden-xs">
+                                            @Html.DisplayNameFor(model => model.animal.caracteristicas)
+                                        </th>
+                                        <th class="col-lg-1 col-xs-2">
+                                            Seleccionar
+                                        </th>
+                                        <th>
+                                            Foto
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.animales)
+                                    {
+                                        <tr>
+                                            <td class="col-sm-2 col-xs-3">
+                                                @Html.DisplayFor(modelItem => item.nombre)
+                                            </td>
+                                            <td class="hidden-sm hidden-xs">
+                                                @Html.DisplayFor(modelItem => item.raza.nombre)
+                                            </td>
+                                            <td class="hidden-sm hidden-xs">
+                                                @Html.DisplayFor(modelItem => item.raza.especie.nombre)
+                                            </td>
+                                            <td class="hidden-sm hidden-xs">
+                                                @Html.DisplayFor(modelItem => item.tamanio.nombre)
+                                            </td>
+                                            <td class="col-sm-1 hidden-xs">
+                                                @Html.DisplayFor(modelItem => item.edad)
+                                            </td>
+                                            <td class="hidden-sm hidden-xs">
+                                                @Html.DisplayFor(modelItem => item.caracteristicas)
+                                            </td>
+                                            <td class="col-lg-1 col-xs-2">
+                                                @Html.RadioButton("selectedAnimalId", item.Id)
+                                            </td>
+                                            <td>
+                                                @if (item.Files.Any(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar))
+                                                {
+                                                    <img src="~/File?id=@item.Files.First(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar).FileId" alt="avatar" height="50" width="50" />
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="form-group">
+                                    @*@Html.LabelFor(model => model.atencionMedica.animalId, "animalId", htmlAttributes: new { @class = "control-label col-md-2"})*@
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10 form-inline">
+                                        @Html.EditorFor(model => model.atencionMedica.animalId, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
+                                        @Html.ValidationMessageFor(model => model.atencionMedica.animalId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-inline">
+                                    @Html.LabelFor(model => model.atencionMedica.veterinariaId, htmlAttributes: new { @class = "control-label col-lg-4 col-md-4 col-sm-4 col-xs-4" })
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                        @Html.DropDownListFor(model => model.atencionMedica.veterinariaId, ViewBag.veterinariaId as SelectList, htmlAttributes: new { @class = "form-control", placeholder = "Nombre veterinaria" })
+                                        @Html.ValidationMessageFor(model => model.atencionMedica.veterinariaId, "", new { @class = "text-danger" })
+                                        <a href="~/Veterinarias/Create">Agregar Veterinaria</a>
+                                    </div>
+                                    *
+                                </div>
+
+                                <div class="form-group form-inline">
+                                    @Html.LabelFor(model => model.atencionMedica.productoVeterinariaId, htmlAttributes: new { @class = "control-label col-lg-4 col-md-4 col-sm-4 col-xs-4" })
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                        @Html.DropDownListFor(model => model.atencionMedica.productoVeterinariaId, ViewBag.productoVeterinariaId as SelectList, htmlAttributes: new { @class = "form-control", placeholder = "Producto veterinario" })
+                                        @Html.ValidationMessageFor(model => model.atencionMedica.productoVeterinariaId, "", new { @class = "text-danger" })
+                                        <a href="~/ProductoVeterinarias/Create">Agregar Producto</a>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group form-inline">
+                                    @Html.LabelFor(model => model.atencionMedica.tratamiento, htmlAttributes: new { @class = "control-label col-lg-4 col-md-4 col-sm-4 hidden-xs" })
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
+                                        @Html.EditorFor(model => model.atencionMedica.tratamiento, new { htmlAttributes = new { @class = "form-control", placeholder = "Tratamiento" } })
+                                        @Html.ValidationMessageFor(model => model.atencionMedica.tratamiento, "", new { @class = "text-danger" })
+                                    </div>
+                                    *
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.atencionMedica.nombreVeterinario, htmlAttributes: new { @class = "control-label col-lg-4 col-md-4 col-sm-4 hidden-xs" })
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10 form-inline">
+                                        @Html.EditorFor(model => model.atencionMedica.nombreVeterinario, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre veterinario" } })
+                                        @Html.ValidationMessageFor(model => model.atencionMedica.nombreVeterinario, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                </div>
+                <!--BOTON GUARDAR ANIMAL-->
+                <div class="container">
+                    <div class="row" align="center">
+                        <div class="form-group">
+                            <div class="col-md-10 centrarContenido">
+                                <input type="submit" value="Guardar" class="btn btn-danger btn-lg btn-block set-bk-clr colorBase textoMenu" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" align="right">
+                        <div class="col-lg-10 col-md-10">
+                            @Html.ActionLink("Ir a la lista", "Index")
+                        </div>
+
+                    </div>
+                </div>
+
+
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.atencionMedica.veterinariaId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.atencionMedica.veterinariaId, ViewBag.veterinariaId as SelectList, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.atencionMedica.veterinariaId, "", new { @class = "text-danger" })
-                    <a href="~/Veterinarias/Create">Agregar Veterinaria</a>                
-            </div>
-        </div>
-               
-        <div class="form-group">
-            @Html.LabelFor(model => model.atencionMedica.productoVeterinariaId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.atencionMedica.productoVeterinariaId, ViewBag.productoVeterinariaId as SelectList, htmlAttributes: new { @class = "form-control" }) 
-                @Html.ValidationMessageFor(model => model.atencionMedica.productoVeterinariaId, "", new { @class = "text-danger" })
-                <a href="~/ProductoVeterinarias/Create">Agregar Producto</a>
-            </div>
-            
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.atencionMedica.tratamiento, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.atencionMedica.tratamiento, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.atencionMedica.tratamiento, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.atencionMedica.nombreVeterinario, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.atencionMedica.nombreVeterinario, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.atencionMedica.nombreVeterinario, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+        }
     </div>
-}
-
-<div>
-    @Html.ActionLink("Ir a la lista", "Index")
 </div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

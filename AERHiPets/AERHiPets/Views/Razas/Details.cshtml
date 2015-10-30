@@ -1,42 +1,63 @@
 ﻿@model AERHiPets.Models.GestionAnimal.Raza
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 fondo textoParrafo centrarContenido">
+        @{
+            ViewBag.Title = "Informacion";
+        }
 
-@{
-    ViewBag.Title = "Informacion";
-}
+        <h2>Informacion de raza</h2>
 
-<h2>Informacion</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col.sm-offset-1 col-xs-10 col-xs-offset-1">
+                    <div class="form-horizontal">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <hr />
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.especie.nombre)
+                                </dt>
 
-<div>
-    <h4>Raza</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.especie.nombre)
-        </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.especie.nombre)
+                                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.especie.nombre)
-        </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.nombre)
+                                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.nombre)
+                                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.descripcion)
+                                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.descripcion)
+                                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.descripcion)
-        </dd>
+                            </dl>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
 
-    </dl>
+                            @if (Model.Files.Any(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar))
+                            {
+                                <img src="~/File?id=@Model.Files.First(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar).FileId" alt="avatar" class="img-responsive img-thumbnail" height="300" width="300" />
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                <div class="container" align="center">
+                    <div class="col-md-10 centrarContenido">
+                        @Html.ActionLink("Modificar Mascota", "Edit", new { id = Model.Id }) |
+                        @Html.ActionLink("Ir a la lista", "Index")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Ir a la lista", "Index")
-</p>

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace AERHiPets.Models.GestionDireccion
 {
+    [Table("Localidades")]
     public class Localidad
     {
         public int Id { get; set; }

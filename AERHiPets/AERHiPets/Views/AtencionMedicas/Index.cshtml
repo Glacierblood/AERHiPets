@@ -1,60 +1,71 @@
 ﻿@model IEnumerable<AERHiPets.Models.GestionAnimal.AtencionMedica>
 
-@{
-    ViewBag.Title = "Atenciones Medicas";
-}
-
-<h2>Atenciones Medicas</h2>
-
-<p>
-    @Html.ActionLink("Nueva Atencion", "Create")
-</p>
-<table class="table" id="myTable">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.animal.nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.productoVeterinaria.nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.veterinaria.nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tratamiento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nombreVeterinario)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.animal.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.productoVeterinaria.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.veterinaria.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tratamiento)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombreVeterinario)
-                </td>
-                <td>
-                    @Html.ActionLink("Modificar", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Dar de Baja", "Delete", new { id = item.Id })
-                </td>
-            </tr>
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 fondo textoParrafo centrarContenido">
+        @{
+            ViewBag.Title = "Atenciones Medicas";
         }
-    </tbody>
-</table>
+
+        <h2 class="textoTitulo"><strong>Listado de Atenciones Medicas</strong></h2>
+
+        <p>
+            @Html.ActionLink("Nueva Atencion", "Create")
+        </p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr>
+                                <th class="col-sm-2 col-xs-3">
+                                    @Html.DisplayNameFor(model => model.animal.nombre)
+                                </th>
+                                <th class="col-sm-2 hidden-xs">
+                                    @Html.DisplayNameFor(model => model.productoVeterinaria.nombre)
+                                </th>
+                                <th class="col-sm-2 col-xs-3">
+                                    @Html.DisplayNameFor(model => model.veterinaria.nombre)
+                                </th>
+                                <th class="col-sm-2 col-xs-3">
+                                    @Html.DisplayNameFor(model => model.tratamiento)
+                                </th>
+                                <th class="hidden-sm hidden-xs">
+                                    @Html.DisplayNameFor(model => model.nombreVeterinario)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="col-sm-2 col-xs-3">
+                                        @Html.DisplayFor(modelItem => item.animal.nombre)
+                                    </td>
+                                    <td class="col-sm-2 hidden-xs">
+                                        @Html.DisplayFor(modelItem => item.productoVeterinaria.nombre)
+                                    </td>
+                                    <td class="col-sm-2 col-xs-3">
+                                        @Html.DisplayFor(modelItem => item.veterinaria.nombre)
+                                    </td>
+                                    <td class="col-sm-2 col-xs-3">
+                                        @Html.DisplayFor(modelItem => item.tratamiento)
+                                    </td>
+                                    <td class="hidden-sm hidden-xs">
+                                        @Html.DisplayFor(modelItem => item.nombreVeterinario)
+                                    </td>
+                                    <td class="col-sm-2 col-xs-3">
+                                        @Html.ActionLink("Modificar", "Edit", new { id = item.Id }) |
+                                        @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                                        @Html.ActionLink("Dar de Baja", "Delete", new { id = item.Id })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

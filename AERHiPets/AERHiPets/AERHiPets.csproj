@@ -305,6 +305,18 @@
     <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\201510151743432_ADOP24.Designer.cs">
       <DependentUpon>201510151743432_ADOP24.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\201510220006148_ADOP25.cs" />
+    <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\201510220006148_ADOP25.Designer.cs">
+      <DependentUpon>201510220006148_ADOP25.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\201510222058594_ADOP26.cs" />
+    <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\201510222058594_ADOP26.Designer.cs">
+      <DependentUpon>201510222058594_ADOP26.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\201510291512423_ADOP27.cs" />
+    <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\201510291512423_ADOP27.Designer.cs">
+      <DependentUpon>201510291512423_ADOP27.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\Configuration.cs" />
     <Compile Include="DAL\GestionAnimalesDAL\GestionAnimalDb.cs" />
     <Compile Include="DAL\GestionAnimalesDAL\Migrations\201508172126069_InitialCreate.cs" />
@@ -407,6 +419,10 @@
     <Compile Include="DAL\GestionVoluntariosDAL\Migrations\201510212254466_VOL6.Designer.cs">
       <DependentUpon>201510212254466_VOL6.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\GestionVoluntariosDAL\Migrations\201510291510371_VOL7.cs" />
+    <Compile Include="DAL\GestionVoluntariosDAL\Migrations\201510291510371_VOL7.Designer.cs">
+      <DependentUpon>201510291510371_VOL7.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\GestionVoluntariosDAL\Migrations\Configuration.cs" />
     <Compile Include="DAL\NewDAL\Acciones.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -507,6 +523,117 @@
     <Compile Include="DAL\NewDAL\Veterinarias.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\newnewdal\Acciones.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Adopcions.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Animals.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Apadrinamientoes.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\AspNetRoles.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\AspNetUserClaims.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\AspNetUserLogins.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\AspNetUsers.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\AtencionMedicas.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Barrios.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\C__MigrationHistory.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Direccions.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Especies.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\EstadoAdopcions.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\EstadoApadrinamientoes.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\EstadoIncidentes.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\FileIncidentes.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\FilePaths.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Files.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Incidentes.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\InformeIncidencias.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Localidades.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Model2.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model2.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Model2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Model2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model2.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Paises.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Personas.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\ProductoVeterinarias.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Provincias.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Razas.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\RegistroAcciones.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Tamanios.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\TipoAdopcions.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\TipoIncidentes.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\newnewdal\Veterinarias.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -519,6 +646,7 @@
     <Compile Include="Models\GestionDireccion\Barrio.cs" />
     <Compile Include="Models\GestionDireccion\Direccion.cs" />
     <Compile Include="Models\GestionDireccion\Localidad.cs" />
+    <Compile Include="Models\GestionDireccion\Pais.cs" />
     <Compile Include="Models\GestionDireccion\Provincia.cs" />
     <Compile Include="Models\GestionIncidentes\EstadoIncidente.cs" />
     <Compile Include="Models\GestionIncidentes\FileIncidente.cs" />
@@ -683,15 +811,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="img\10411727_10152873195719352_7002027803418843586_n.jpg" />
-    <Content Include="img\11910656_1143375862344368_1900907934_n%281%29.jpg" />
-    <Content Include="img\17-perros-jugando.jpg" />
-    <Content Include="img\412_79226_6081087_546761.jpg" />
-    <Content Include="img\8CF.jpg" />
-    <Content Include="img\hipets.png" />
-    <Content Include="img\hqdefault.jpg" />
-    <Content Include="img\perro-jugando-con-pompas-de-jabon.jpg" />
-    <Content Include="img\perro-jugando.jpg" />
     <Content Include="Content\DataTables\css\dataTables.responsive.scss" />
     <Content Include="Content\DataTables\css\dataTables.jqueryui.scss" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -704,6 +823,30 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="img\10411727_10152873195719352_7002027803418843586_n.jpg" />
+    <Content Include="img\11896192_10207378651570487_3978602744638062968_n.jpg" />
+    <Content Include="img\11910656_1143375862344368_1900907934_n%281%29.jpg" />
+    <Content Include="img\17-perros-jugando.jpg" />
+    <Content Include="img\412_79226_6081087_546761.jpg" />
+    <Content Include="img\8CF.jpg" />
+    <Content Include="img\boton_fb.gif" />
+    <Content Include="img\fondo_inicio.jpg" />
+    <Content Include="img\hipets.png" />
+    <Content Include="img\hqdefault.jpg" />
+    <Content Include="img\imagen1.jpg" />
+    <Content Include="img\imagenAdoptar.png" />
+    <Content Include="img\imagenApadrinar.png" />
+    <Content Include="img\imagenIncidente.png" />
+    <Content Include="img\imagenVoluntario.gif" />
+    <Content Include="img\logo menu.jpg" />
+    <Content Include="img\logo menu1.png" />
+    <Content Include="img\logo.jpg" />
+    <Content Include="img\logo_facebook.png" />
+    <Content Include="img\logo_twitter.png" />
+    <Content Include="img\perro-jugando-con-pompas-de-jabon.jpg" />
+    <Content Include="img\perro-jugando.jpg" />
+    <Content Include="img\perroYgato.png" />
+    <Content Include="img\veterinaria.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Casualbootstrap.min.js" />
@@ -751,6 +894,24 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <EntityDeploy Include="DAL\newnewdal\Model2.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model2.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DAL\newnewdal\Model2.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model2.edmx</DependentUpon>
+      <LastGenOutput>Model2.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DAL\newnewdal\Model2.edmx.diagram">
+      <DependentUpon>Model2.edmx</DependentUpon>
+    </Content>
+    <Content Include="DAL\newnewdal\Model2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model2.edmx</DependentUpon>
+      <LastGenOutput>Model2.cs</LastGenOutput>
+    </Content>
+    <None Include="Properties\PublishProfiles\AERHiPetsOnline.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\DDLRazaEspIncidente.js" />
     <Content Include="Scripts\Dinamic Table search.js" />
@@ -780,11 +941,11 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\SharedO\Error.cshtml" />
+    <Content Include="Views\SharedO\_Layout.cshtml" />
+    <Content Include="Views\HomeO\About.cshtml" />
+    <Content Include="Views\HomeO\Contact.cshtml" />
+    <Content Include="Views\HomeO\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -803,29 +964,29 @@
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\SharedO\Lockout.cshtml" />
+    <Content Include="Views\SharedO\_LoginPartial.cshtml" />
     <Content Include="Views\Animals\Create.cshtml" />
     <Content Include="Views\Animals\Delete.cshtml" />
     <Content Include="Views\Animals\Details.cshtml" />
     <Content Include="Views\Animals\Edit.cshtml" />
     <Content Include="Views\Animals\Index.cshtml" />
-    <Content Include="Views\Razas\Create.cshtml" />
-    <Content Include="Views\Razas\Delete.cshtml" />
-    <Content Include="Views\Razas\Details.cshtml" />
-    <Content Include="Views\Razas\Edit.cshtml" />
-    <Content Include="Views\Razas\Index.cshtml" />
-    <Content Include="Views\Especies\Create.cshtml" />
-    <Content Include="Views\Especies\Delete.cshtml" />
-    <Content Include="Views\Especies\Details.cshtml" />
-    <Content Include="Views\Especies\Edit.cshtml" />
-    <Content Include="Views\Especies\Index.cshtml" />
-    <Content Include="Views\Tamanios\Create.cshtml" />
-    <Content Include="Views\Tamanios\Delete.cshtml" />
-    <Content Include="Views\Tamanios\Details.cshtml" />
-    <Content Include="Views\Tamanios\Edit.cshtml" />
-    <Content Include="Views\Tamanios\Index.cshtml" />
-    <Content Include="Views\Shared\Partial\_DDLOpciones.cshtml" />
+    <Content Include="Views\RazasO\Create.cshtml" />
+    <Content Include="Views\RazasO\Delete.cshtml" />
+    <Content Include="Views\RazasO\Details.cshtml" />
+    <Content Include="Views\RazasO\Edit.cshtml" />
+    <Content Include="Views\RazasO\Index.cshtml" />
+    <Content Include="Views\EspeciesO\Create.cshtml" />
+    <Content Include="Views\EspeciesO\Delete.cshtml" />
+    <Content Include="Views\EspeciesO\Details.cshtml" />
+    <Content Include="Views\EspeciesO\Edit.cshtml" />
+    <Content Include="Views\EspeciesO\Index.cshtml" />
+    <Content Include="Views\TamaniosO\Create.cshtml" />
+    <Content Include="Views\TamaniosO\Delete.cshtml" />
+    <Content Include="Views\TamaniosO\Details.cshtml" />
+    <Content Include="Views\TamaniosO\Edit.cshtml" />
+    <Content Include="Views\TamaniosO\Index.cshtml" />
+    <Content Include="Views\SharedO\Partial\_DDLOpciones.cshtml" />
     <Content Include="Views\Veterinarias\Create.cshtml" />
     <Content Include="Views\Veterinarias\Delete.cshtml" />
     <Content Include="Views\Veterinarias\Details.cshtml" />
@@ -896,8 +1057,8 @@
     <Content Include="Views\TipoAdopcions\Details.cshtml" />
     <Content Include="Views\TipoAdopcions\Edit.cshtml" />
     <Content Include="Views\TipoAdopcions\Index.cshtml" />
-    <Content Include="Views\Home\ViewPage1.cshtml" />
-    <Content Include="Views\Home\GMaps.cshtml" />
+    <Content Include="Views\HomeO\ViewPage1.cshtml" />
+    <Content Include="Views\HomeO\GMaps.cshtml" />
     <Content Include="Views\TipoIncidentes\Create.cshtml" />
     <Content Include="Views\TipoIncidentes\Delete.cshtml" />
     <Content Include="Views\TipoIncidentes\Details.cshtml" />
@@ -932,10 +1093,37 @@
     <Content Include="Views\PostStatus\Success.cshtml" />
     <Content Include="Views\PostStatusFace\Success.cshtml" />
     <Content Include="Views\PostStatusFace\Index.cshtml" />
+    <Content Include="Views\Animals\Create2.cshtml" />
+    <Content Include="Views\Especies\Create.cshtml" />
+    <Content Include="Views\Especies\Delete.cshtml" />
+    <Content Include="Views\Especies\Details.cshtml" />
+    <Content Include="Views\Especies\Edit.cshtml" />
+    <Content Include="Views\Especies\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\Partial\_DDLOpciones.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\GMaps.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\ViewPage1.cshtml" />
+    <Content Include="Views\Tamanios\Create.cshtml" />
+    <Content Include="Views\Tamanios\Delete.cshtml" />
+    <Content Include="Views\Tamanios\Details.cshtml" />
+    <Content Include="Views\Tamanios\Edit.cshtml" />
+    <Content Include="Views\Tamanios\Index.cshtml" />
+    <Content Include="Views\Razas\Create.cshtml" />
+    <Content Include="Views\Razas\Delete.cshtml" />
+    <Content Include="Views\Razas\Details.cshtml" />
+    <Content Include="Views\Razas\Edit.cshtml" />
+    <Content Include="Views\Razas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="DAL\GestionAnimalesDAL\AnimalImages\" />
+    <Folder Include="DAL\newnewnewDAL\" />
     <Folder Include="images\" />
     <Folder Include="Views\FileIncidentes\" />
     <Folder Include="Views\File\" />
@@ -1014,6 +1202,15 @@
     <EmbeddedResource Include="DAL\GestionAdopcionApadrinamiento\Migrations\201510151743432_ADOP24.resx">
       <DependentUpon>201510151743432_ADOP24.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionAdopcionApadrinamiento\Migrations\201510220006148_ADOP25.resx">
+      <DependentUpon>201510220006148_ADOP25.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionAdopcionApadrinamiento\Migrations\201510222058594_ADOP26.resx">
+      <DependentUpon>201510222058594_ADOP26.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionAdopcionApadrinamiento\Migrations\201510291512423_ADOP27.resx">
+      <DependentUpon>201510291512423_ADOP27.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DAL\GestionAnimalesDAL\Migrations\201508172126069_InitialCreate.resx">
       <DependentUpon>201508172126069_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
@@ -1082,6 +1279,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DAL\GestionVoluntariosDAL\Migrations\201510212254466_VOL6.resx">
       <DependentUpon>201510212254466_VOL6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionVoluntariosDAL\Migrations\201510291510371_VOL7.resx">
+      <DependentUpon>201510291510371_VOL7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

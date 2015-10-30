@@ -1,57 +1,83 @@
 ﻿@model AERHiPets.Models.GestionAnimal.Veterinaria
 
-@{
-    ViewBag.Title = "Modificar Veterinaria";
-}
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 fondo textoParrafo centrarContenido">
+        @{
+            ViewBag.Title = "Modificar Veterinaria";
+        }
 
-<h2>Modificar Veterinaria</h2>
+        <h2 class="textoTitulo"><strong>Modificar Veterinaria</strong></h2>
+        @using (Html.BeginForm())
+                    {
+            @Html.AntiForgeryToken()
+        <div class="container">
+            <div class="row textoParrafo">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 
+                    
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Veterinaria</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+                        <!--DATOS DE REGISTRO DE VETERINARIA-->
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" align="left">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                            <div class="form-horizontal">
+                                <div class="alert alert-info">
+                                    <strong>Completar los datos con asterisco!</strong>
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.HiddenFor(model => model.Id)
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-lg-4 col-md-4 col-sm-4 hidden-xs" })
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-10 form-inline">
+                                        @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", placeholder = "Ingresar nombre de la veterinaria" } })
+                                        @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                                    </div>
+                                    *
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.direccion, htmlAttributes: new { @class = "control-label col-lg-4 col-md-4 col-sm-4 hidden-xs" })
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10 form-inline">
+                                        @Html.EditorFor(model => model.direccion, new { htmlAttributes = new { @class = "form-control", placeholder = "Dirección" } })
+                                        @Html.ValidationMessageFor(model => model.direccion, "", new { @class = "text-danger" })
+                                    </div>
+                                    *
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-lg-4 col-md-4 col-sm-4 hidden-xs" })
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10 form-inline">
+                                        @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control", placeholder = "Teléfono" } })
+                                        @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
+                                    </div>
+                                    *
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <!--BOTON GUARDAR ESPECIE-->
+                <div class="container">
+                    <div class="row" align="center">
+                        <div class="form-group">
+                            <div class="col-md-10 centrarContenido">
+                                <input type="submit" value="Guardar" class="btn btn-danger btn-lg btn-block set-bk-clr colorBase textoMenu" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" align="right">
+                        <div class="col-lg-10 col-md-10">
+                            @Html.ActionLink("Ir a la lista", "Index")
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.direccion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.direccion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.direccion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Guardar" class="btn btn-default" />
-            </div>
-        </div>
+        }
     </div>
-}
-
-<div>
-    @Html.ActionLink("Ir a la lista", "Index")
 </div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

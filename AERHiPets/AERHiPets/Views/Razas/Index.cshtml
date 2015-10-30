@@ -1,49 +1,54 @@
 ﻿@model IEnumerable<AERHiPets.Models.GestionAnimal.Raza>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Razas</h2>
-
-<p>
-    @Html.ActionLink("Nueva Raza", "Create")
-</p>
-<table class="table" id="myTable">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.especie.nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.descripcion)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.especie.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.descripcion)
-                </td>
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
-                </td>
-            </tr>
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 fondo textoParrafo centrarContenido">
+        @{
+            ViewBag.Title = "Index";
         }
-    </tbody>
 
-</table>
+        <h2 class="textoTitulo"><strong>Razas</strong></h2>
+
+        <p>
+            @Html.ActionLink("Nueva Raza", "Create")
+        </p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr>
+                                <th class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    @Html.DisplayNameFor(model => model.especie.nombre)
+                                </th>
+                                <th class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    @Html.DisplayNameFor(model => model.nombre)
+                                </th>
+                                <th class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    @Html.DisplayNameFor(model => model.descripcion)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                        @Html.DisplayFor(modelItem => item.especie.nombre)
+                                    </td>
+                                    <td class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                        @Html.DisplayFor(modelItem => item.nombre)
+                                    </td>
+                                    <td class="col-lg-3 col-md-3 col-sm-3 hidden-xs">
+                                        @Html.DisplayFor(modelItem => item.descripcion)
+                                    </td>
+                                    <td class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                        @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                                        @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                                        @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>

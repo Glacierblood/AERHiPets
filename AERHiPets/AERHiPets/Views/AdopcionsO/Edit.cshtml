@@ -1,0 +1,155 @@
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin
+
+@model AERHiPets.Models.GestionAdopcionApadrinamiento.GestionAdopcion.Adopcion
+
+@{
+    ViewBag.Title = "Modificar Solicitud";
+}
+
+<h2>Solicitud Adopcion</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Solicitud Adopcion</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="form-group">
+
+                    @Html.LabelFor(model => model.voluntarioName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.voluntarioName, new { htmlAttributes = new { @class = "form-control", @readOnly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.voluntarioName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @* @Html.LabelFor(model => model.VoluntarioUsrId, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.VoluntarioUsrId, new { htmlAttributes = new { @class = "form-control", @type = "Hidden", @readOnly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.VoluntarioUsrId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.animalId, "animalId", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.animalId, new { htmlAttributes = new { @class = "form-control", @type = "Hidden", @readOnly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.animalId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.animal.nombre, "Nombre Animal", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.animal.nombre, new { htmlAttributes = new { @class = "form-control", @readOnly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.animalId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @*  @Html.LabelFor(model => model.admId, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EmpleadoUsrId, new { htmlAttributes = new { @class = "form-control", @Value = User.Identity.GetUserId(), @type = "hidden" } })
+                        @Html.ValidationMessageFor(model => model.EmpleadoUsrId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.empleadoName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.empleadoName, new { htmlAttributes = new { @class = "form-control", @Value = User.Identity.GetUserName(), @readOnly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.empleadoName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fechaFin, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.fechaFin, new { htmlAttributes = new { @class = "form-control", @Type = "readonly", @disabled = "disabled" } })
+                        @Html.EditorFor(model => model.fechaFin, new { htmlAttributes = new { @class = "form-control", @Type = "readonly", @Style = "display: none" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fechaAlta, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.fechaAlta, new { htmlAttributes = new { @class = "form-control", @Type = "readonly", @disabled = "disabled" } })
+                        @Html.EditorFor(model => model.fechaAlta, new { htmlAttributes = new { @class = "form-control", @Type = "readonly", @Style = "display: none" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fechaEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.fechaEntrega, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.fechaEntrega, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.tipoAdopcionId, "tipoAdopcionId", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.tipoAdopcion.tipoAdopcion, new { htmlAttributes = new { @class = "form-control", @readOnly = "readonly" } })
+                       
+                        
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.esTemporal, htmlAttributes: new { @class = "control-label col-md-2", @readOnly = "readonly" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.esTemporal, new { @class = "form-control", @Type = "readonly", @disabled = "disabled" })
+                            @Html.ValidationMessageFor(model => model.esTemporal, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.estadoAdopcion.nombre, "Estado Adopcion", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.estadoAdopcionId, ViewBag.estadoAdopcionId as SelectList, null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.estadoAdopcionId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                @if (Model.animal.Files.Any(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar))
+                {
+                    <div class="form-group">
+                        <span class="control-label col-md-2"><strong>Foto</strong></span>
+                        <div class="col-md-10">
+                            <img src="~/File?id=@Model.animal.Files.First(f => f.FileType == AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.FileType.Avatar).FileId" alt="avatar" />
+                        </div>
+                    </div>
+                }
+            </div>
+
+
+
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

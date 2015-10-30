@@ -69,8 +69,9 @@ namespace AERHiPets.Controllers.GestionAnimal
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,animalId,veterinariaId,productoVeterinariaId,tratamiento,nombreVeterinario")] AtencionMedica atencionMedica)
+        public ActionResult Create([Bind(Include = "Id,animalId,veterinariaId,productoVeterinariaId,tratamiento,nombreVeterinario")] AtencionMedica atencionMedica, AtencionMedicaModelo atencionMedicaModelo)
         {
+           //borrar AtencionMedica atencionMedica = atencionMedicaModelo.atencionMedica;
             //var animales = db.Animales.Include(a => a.raza).Include(a => a.tamanio);
             //AtencionMedicaModelo model = new AtencionMedicaModelo();
             //model.animales = animales.ToList();

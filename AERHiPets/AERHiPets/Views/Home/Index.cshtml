@@ -1,36 +1,221 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+                <!--BIENVENIDO..-->
+                <div class="container">
+                    <div class="row scroll-me">
+                        <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center ">
+                            <h1 data-scroll-reveal="enter from the right after 5s">
+                                Bienvenido a Hi Pets!
+                            </h1>
+                            <h4 class="textoTitulo" data-scroll-reveal="enter from the left after 8s">
+                                Actualmente en nuestra ciudad la población de animales domésticos en situación de calle es elevada, ya sea abandonados o bajo una tenencia irresponsable de sus dueños. Estos constituyen un problema de seguridad y salud.
+                                Para ello Hi Pets! propone facilitar la comunicación y la coordinación de esfuerzos de personas independientes o miembros de alguna ONG para brindar protección y ayuda a animales en situación de riesgo.
+                            </h4>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 col-lg-offset-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4" align="center">
+                            <form action="#services" method="get">
+                                <input type="submit" value="Leer mas..." class="btn btn-danger btn-lg btn-block set-bk-clr colorBase textoMenu" name="submit" id="frm_submit" />
 
-<div class="jumbotron" style="background-color:white">
-    <div class="row">
-        <div class="col-md-4" style="vertical-align:middle">
-            <img src="~/img/11910656_1143375862344368_1900907934_n(1).jpg" width="675" height="450" class="img-circle img-responsive" />
-        </div>
-       
-        <div class="col-md-8">
-            <h1>HI PETS!</h1>
-            
-            <p class="lead">Actualmente en nuestra ciudad la población de animales domésticos en situación de calle es elevada, ya sea abandonados o bajo una tenencia irresponsable de sus dueños. Estos constituyen un problema de seguridad y salud.</p>
-            <p class="lead">Para ello Hi Pets! propone facilitar la comunicación y la coordinación de esfuerzos de personas independientes o miembros de alguna ONG para brindar protección y ayuda a animales en situación de riesgo.</p>
-        </div>
-    </div>
+                            </form>   <!-- data-toggle="modal" data-target="#exampleModal
 
+        <button type="button" class="btn btn-default btn-lg btn-block set-bk-clr textoMenu" href="#services">Inicio</button>
 
-</div>
+        CODIGO PARA POPUP LOGIN!!-->
+                            </div>
+                        
+                        </div>  
+                    </div>
+                </div>
+                <br>
+                <br>
+                <!--SERVICIOS DE AYUDA-->
+                <section id="services">
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col-md-8 col-md-offset-2 pad-bottom" data-scroll-reveal="enter from the bottom after 0.2s">
+                                <h1 data-scroll-reveal="enter from the right after 0.2s">
+                                    <strong>Servicios</strong>
+                                </h1>
+                                <!--<h4 class="textoTitulo" data-scroll-reveal="enter from the left after 0.6s">
+                    Estos son algunos de los servicios que brindamos..
+                                </h4>-->
+                            </div>
+                        </div>
+                        <!--OPCIONES-->
+                        <div class="row text-center pad-bottom textoTitulo centrarContenido" data-scroll-reveal="enter from the bottom after 0.4s">
+                            <div class="col-md-4 col-md-offset-2">
+                                <strong>Adopción</strong>
+                                <h4>
+                                    Adoptar siempre es la mejor opcion, por eso te invitamos que a que encuentres el compañero que te esta esperando 
+                                </h4>
+                                
+                            </div>
+                            <div class="col-md-4">
+                                <strong>Apadrinamiento</strong>
+                                <h4>
+                                    Si amas los animales pero por cuestiones de disponibilidad y tiempo no podes ayudar como voluntario, te recordamos que también podes hacerlo conviertiendote en padrino de alguno de ellos!
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row text-center pad-bottom textoTitulo" data-scroll-reveal="enter from the bottom after 0.4s">
+                            <div class="col-md-4 col-md-offset-2">
+                                <strong>Incidentes</strong>
+                                <h4>
+                                    Si queres publicar un caso de un animal en busca de adoptantes u hogar provisorio completa el formulario.
+                                    Además, esta aplicación on line que te ayudara a buscar y publicar animales perdidos / encontrados 
+                                </h4>
+                            </div>
+                            <div class="col-md-4">
+                                <strong>Voluntariado</strong>
+                                <h4>
+                                    Si amas los animales y queres ayudar, comprometete con la causa y sumate como voluntario!
+                                </h4>
+                            </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <img src="~/img/412_79226_6081087_546761.jpg" class="img-responsive img-rounded" width="450" height="334" />
-    </div>
+                        </div>
+                    </div>
+                </section>
 
-    <div class="col-md-4">
-        <p class="lead"></p>
-    </div>
+               
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+        <script src="js/ventor/bootstrap.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+                (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+                function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+                e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+                e.src='//www.google-analytics.com/analytics.js';
+                r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+                ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+        <!--SCRIPT POPUP-->
+        <script>
+            $(function() {
+            var dialog, form,
 
+            // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
+            emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+            name = $( "#name" ),
+            email = $( "#email" ),
+            password = $( "#password" ),
+            allFields = $( [] ).add( name ).add( email ).add( password ),
+            tips = $( ".validateTips" );
 
+            function updateTips( t ) {
+                tips
+                .text( t )
+                .addClass( "ui-state-highlight" );
+                setTimeout(function() {
+                    tips.removeClass( "ui-state-highlight", 1500 );
+                }, 500 );
+            }
 
-    <div class="col-md-4">
-        <img src="~/img/perro-jugando-con-pompas-de-jabon.jpg" class="img-responsive img-rounded" width="450" height="334" />
-    </div>
-</div>
+            function checkLength( o, n, min, max ) {
+                if ( o.val().length > max || o.val().length < min ) {
+                    o.addClass( "ui-state-error" );
+                    updateTips( "Length of " + n + " must be between " +
+                    min + " and " + max + "." );
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            function checkRegexp( o, regexp, n ) {
+                if ( !( regexp.test( o.val() ) ) ) {
+                    o.addClass( "ui-state-error" );
+                    updateTips( n );
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            function addUser() {
+                var valid = true;
+                allFields.removeClass( "ui-state-error" );
+
+                valid = valid && checkLength( name, "username", 3, 16 );
+                valid = valid && checkLength( email, "email", 6, 80 );
+                valid = valid && checkLength( password, "password", 5, 16 );
+
+                valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
+                valid = valid && checkRegexp( email, emailRegex, "eg. ui@jquery.com" );
+                valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+
+                if ( valid ) {
+                    $( "#users tbody" ).append( "<tr>" +
+                    "<td>" + name.val() + "</td>" +
+                    "<td>" + email.val() + "</td>" +
+                    "<td>" + password.val() + "</td>" +
+                    "</tr>" );
+                    dialog.dialog( "close" );
+                }
+                return valid;
+            }
+
+            dialog = $( "#dialog-form" ).dialog({
+                autoOpen: false,
+                height: 300,
+                width: 350,
+                modal: true,
+                buttons: {
+                    "Create an account": addUser,
+                    Cancel: function() {
+                    dialog.dialog( "close" );
+                }
+            },
+            close: function() {
+                form[ 0 ].reset();
+                allFields.removeClass( "ui-state-error" );
+            }
+        });
+
+        form = dialog.find( "form" ).on( "submit", function( event ) {
+            event.preventDefault();
+            addUser();
+        });
+
+        $( "#create-user" ).button().on( "click", function() {
+            dialog.dialog( "open" );
+        });
+    });
+</script>
+<!--SCRIPT ANIMACION-->
+<script>
+    $(function () {
+        // run the currently selected effect
+        function runEffect() {
+            // get effect type from
+            var selectedEffect = $("blind").val();
+
+            // most effect types need no options passed by default
+            var options = {};
+            // some effects have required parameters
+            if (selectedEffect === "scale") {
+                options = { percent: 100 };
+            } else if (selectedEffect === "size") {
+                options = { to: { width: 280, height: 185 } };
+            }
+
+            // run the effect
+            $("#effect").show(selectedEffect, options, 500, callback);
+        };
+
+        //callback function to bring a hidden box back
+        function callback() {
+            setTimeout(function () {
+                $("#effect:visible").removeAttr("style").fadeOut();
+            }, 1000);
+        };
+
+        // set effect from select menu value
+        $("#button").click(function () {
+            runEffect();
+        });
+
+        $("#effect").hide();
+    });
+</script>

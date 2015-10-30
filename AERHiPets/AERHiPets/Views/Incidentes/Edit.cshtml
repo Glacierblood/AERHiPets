@@ -6,6 +6,18 @@
 
 <h2>Edit</h2>
 
+@if (User.IsInRole("Administrador")) {
+using (Html.BeginForm("Create2", "Animals", null, FormMethod.Get, new { }))
+{
+    @Html.Hidden("id", Model.Id)
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Añadir a DAAS" class="btn btn-default" />
+        </div>
+    </div>
+}
+}
 @using (Html.BeginForm("Edit", "Incidentes", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -47,6 +59,15 @@
                 @Html.ValidationMessageFor(model => model.razaId, "", new { @class = "text-danger" })
             </div>
         </div>
+        
+        <script type="text/javascript">
+            var espId = @ViewBag.especieActual;
+            var element = document.getElementById('especieId');
+            element.value = espId;
+           // $('#especieId').value = espId;
+        </script>
+
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.especieId, "especieId", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -55,6 +76,14 @@
                 @Html.ValidationMessageFor(model => model.especieId, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <script type="text/javascript">
+            var razId = @ViewBag.razaActual;
+            var element = document.getElementById('razaId');
+            element.value = razId;
+            //$('#razaId').value = razId;
+        </script>
+        
 
         <div class="form-group">
             @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -79,6 +108,7 @@
                 @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
             </div>
         </div>
+@if (User.IsInRole("Administrador")) {
 
         <div class="form-group">
             @Html.LabelFor(model => model.estadoIncidente, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -87,9 +117,7 @@
                 @Html.ValidationMessageFor(model => model.estadoIncidente, "", new { @class = "text-danger" })
             </div>
         </div>
-            
-
-       
+}       
 
         
         <div class="form-group">
@@ -106,7 +134,7 @@
                 <div class="form-group">
                     <span class="control-label col-md-2"><strong>Foto</strong></span>
                     <div class="col-md-10">
-                        <img src="~/FileIncidentes?id=@Model.Files.First(f => f.FileType == AERHiPets.Models.GestionIncidentes.FileTypeIncidente.Avatar).FileIncidenteId" alt="avatar" />
+                        <img src="~/FileIncidentes?id=@Model.Files.First(f => f.FileType == AERHiPets.Models.GestionIncidentes.FileTypeIncidente.Avatar).FileIncidenteId" alt="avatar" width="640" height="480" />
                     </div>
                 </div>
             }

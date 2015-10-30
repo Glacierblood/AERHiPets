@@ -83,3 +83,149 @@ textarea {
     background-color: #c05c2b;
   }
 }
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+header
+{
+    background-color: orange;
+
+}
+.centrarContenido
+{
+    padding-top: 25px;
+}
+.textoTabla
+{
+    font-family: 'Walter Turncoat', cursive;
+    font-size: 15px;
+    color: black;
+}
+.textoMenu
+{
+    font-family: 'Walter Turncoat', cursive;
+    font-size: 20px;
+    color: white;
+}
+.textoTitulo
+{
+    font-family: 'Shadows Into Light Two', cursive;
+    font-size: 30px;
+    color: darkorange;
+}
+.textoSubtitulo
+{
+    font-family: 'Neucha', cursive;
+    font-size: 28px;
+    color: black;
+}
+.textoParrafo
+{
+    font-family: 'Neucha', cursive;
+    font-size: 18px;
+    color: black;
+}
+.centrarRedes
+{
+    padding-top: 25px;
+    padding-left: 80px;
+}
+.color1
+{
+    background-color: orange;
+}
+.color2
+{
+    background-color: gray;
+}
+.color3
+{
+    background-color: white;
+}
+.colorBlue
+{
+    background-color: blue;
+}
+.colorBase
+{
+    background-color: #ed6522;
+}
+.fondo
+{
+    background-color: rgba(237, 237, 237, 1);
+}
+
+#inicio {
+    background: url(../img/fondo_inicio.jpg) no-repeat center center;
+    padding: 0;
+    -webkit-background-size: cover;
+    background-size: cover;
+    -moz-background-size: cover;
+    background-attachment: fixed;
+    color: #fff;
+}
+
+#inicio .overlay 
+{
+    background-color: rgba(3, 3, 3, 0.8);
+    min-height: 700px;
+}
+
+#inicio h1
+{
+    line-height: 60px;
+    font-size: 45px;
+    font-weight: 900;
+    padding-top: 150px;
+    padding-bottom: 35px;
+    color: #FF6600;
+    font-family: 'Walter Turncoat', cursive;
+}
+
+#inicio h4 
+{
+    line-height: 30px;
+    font-size: 12px;
+    padding-bottom: 40px;
+    text-transform: uppercase;
+    color: white;
+}
+
+#inicio i 
+{
+    font-size: 80px;
+    padding: 30px;
+    color: #FF6600;
+}
+
+
+footer 
+{
+    padding: 20px;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 900;
+    background-color: rgba(237, 237, 237, 1);
+}
+
+footer a, footer a:hover 
+{
+    color: #000;
+    text-decoration: none;
+}
+
+#services {
+    /*background-color: rgba(237, 237, 237, 1);*/
+}
+
+    #services i {
+        font-size: 80px;
+        padding: 30px;
+        color: #FF6600;
+    }
+
+    #services h4 {
+        padding-bottom: 5px;
+        padding-top: 15px;
+    }

@@ -14,5 +14,9 @@ namespace AERHiPets.Models.GestionDireccion
         [StringLength(50, ErrorMessage = "No se permiten mas de 50 caracteres.")]
         [Display(Name = "Provincia")]
         public String  nombre { get; set; }
+
+        public int? paisId { get; set; }
+        public Pais pais { get; set; }
+
     }
 }

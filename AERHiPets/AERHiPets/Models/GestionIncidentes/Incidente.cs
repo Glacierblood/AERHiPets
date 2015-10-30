@@ -1,4 +1,5 @@
 ﻿using AERHiPets.Models.GestionAnimal;
+using AERHiPets.Models.GestionDireccion;
 using AERHiPets.Models.GestionUsuarios;
 using System;
 using System.Collections.Generic;
@@ -81,12 +82,20 @@ namespace AERHiPets.Models.GestionIncidentes
         [Display(Name = "Nombre Voluntario")]
         public String voluntarioName { get; set; }
 
+        [StringLength(255)]
+        public String VoluntarioSolucionUsrId { get; set; }
+        [Display(Name = "Nombre Voluntario")]
+        public String voluntarioSolucionName { get; set; }
+
         public int? voluntarioId { get; set; }
         public virtual Persona voluntario { get; set; }
 
         public String calle { get; set; }
         public String lat { get; set; }
         public String lng { get; set; }
+
+        public Nullable<int> barrioId { get; set; }
+        public virtual Barrio Barrios { get; set; }
        
     }
 }

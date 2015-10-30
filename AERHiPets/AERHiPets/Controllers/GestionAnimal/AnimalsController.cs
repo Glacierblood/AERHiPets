@@ -12,6 +12,7 @@ using AERHiPets.Models.GestionAnimal.GestionAnimalImagenes;
 using System.IO;
 using System.Data.Entity.Infrastructure;
 using AERHiPets.Models.GestionAnimal.GestionAnimalModelos;
+using AERHiPets.Models.GestionIncidentes;
 
 namespace AERHiPets.Controllers.GestionAnimal
 {
@@ -55,7 +56,8 @@ namespace AERHiPets.Controllers.GestionAnimal
         // GET: Animal/Create
         public ActionResult Create()
         {
-            ViewBag.razaId = new SelectList(db.Razas, "Id", "nombre");
+            ViewBag.especieId = new SelectList(db.Especies.Where(e => e.fechaBaja == null), "Id", "nombre");
+            ViewBag.razaId = new SelectList(db.Razas.Where(e => e.fechaBaja == null), "Id", "nombre");
             ViewBag.tamanioId = new SelectList(db.Tamanios.Where(a => a.fechaBaja == null), "Id", "nombre");
             return View();
         }
@@ -98,8 +100,77 @@ namespace AERHiPets.Controllers.GestionAnimal
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
+            ViewBag.especieId = new SelectList(db.Especies.Where(e => e.fechaBaja == null), "Id", "nombre");
+            ViewBag.razaId = new SelectList(db.Razas.Where(e => e.fechaBaja == null), "Id", "nombre", animal.razaId);
+            ViewBag.tamanioId = new SelectList(db.Tamanios.Where(a => a.fechaBaja == null), "Id", "nombre", animal.tamanioId);
+            return View(animal);
+        }
 
-            ViewBag.razaId = new SelectList(db.Razas, "Id", "nombre", animal.razaId);
+        [ActionName("Create2")]        
+        public ActionResult Create2(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            AERHiPets.DAL.GestionIncidentesDAL.DAL GI = new AERHiPets.DAL.GestionIncidentesDAL.DAL();
+            Incidente incidente = GI.incidentes.Find(id);
+                       
+            if (incidente == null)
+            {
+                return HttpNotFound();
+            }
+            Animal animal = new Animal();
+            animal.enAdopcion = true;
+            animal.razaId = incidente.razaId;
+            animal.tamanioId = incidente.tamanioId;
+            animal.raza = db.Razas.Find(animal.razaId);
+            animal.raza.especieID = incidente.especieId;
+            ViewBag.especieId = new SelectList(db.Especies.Where(e => e.fechaBaja == null), "Id", "nombre");
+            ViewBag.razaId = new SelectList(db.Razas.Where(e => e.fechaBaja == null), "Id", "nombre", animal.razaId);
+            ViewBag.tamanioId = new SelectList(db.Tamanios.Where(a => a.fechaBaja == null), "Id", "nombre", animal.tamanioId);
+            
+            return View(animal);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create2([Bind(Include = "Id,nombre,fechaNac,caracteristicas,tamanioId,razaId,enAdopcion")] Animal animal, HttpPostedFileBase upload)
+        {
+            animal.fechaAlta = DateTime.Now;
+            animal.edad = DateTime.Now.Year - animal.fechaNac.Year;
+            try
+            {
+
+                if (ModelState.IsValid)//Verifica que el formulario sea valido
+                {
+                    if (upload != null && upload.ContentLength > 0)//verifica se cargo una foto para en animal
+                    {
+                        var avatar = new AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.File//instancia la clase encargada de mapear la foto en la BD
+                        {
+                            FileName = System.IO.Path.GetFileName(upload.FileName),
+                            FileType = FileType.Avatar,
+                            ContentType = upload.ContentType
+                        };
+                        using (var reader = new System.IO.BinaryReader(upload.InputStream))//transforma la foto en una cadena de bytes para guardar en la BD
+                        {
+                            avatar.Content = reader.ReadBytes(upload.ContentLength);
+                        }
+                        animal.Files = new List<AERHiPets.Models.GestionAnimal.GestionAnimalImagenes.File> { avatar };//aniade la referencia de la foto guardada al atributo correspondiente en animal
+                    }
+                    db.Animales.Add(animal);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+            ViewBag.especieId = new SelectList(db.Especies.Where(e => e.fechaBaja == null), "Id", "nombre");
+            ViewBag.razaId = new SelectList(db.Razas.Where(e => e.fechaBaja == null), "Id", "nombre", animal.razaId);
             ViewBag.tamanioId = new SelectList(db.Tamanios.Where(a => a.fechaBaja == null), "Id", "nombre", animal.tamanioId);
             return View(animal);
         }
@@ -117,7 +188,8 @@ namespace AERHiPets.Controllers.GestionAnimal
             {
                 return HttpNotFound();
             }
-            ViewBag.razaId = new SelectList(db.Razas, "Id", "nombre", animal.razaId);
+            ViewBag.especieId = new SelectList(db.Especies.Where(e => e.fechaBaja == null), "Id", "nombre");
+            ViewBag.razaId = new SelectList(db.Razas.Where(e => e.fechaBaja == null), "Id", "nombre", animal.razaId);
             ViewBag.tamanioId = new SelectList(db.Tamanios.Where(a => a.fechaBaja == null), "Id", "nombre", animal.tamanioId);
             return View(animal);
         }
@@ -166,7 +238,8 @@ namespace AERHiPets.Controllers.GestionAnimal
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.razaId = new SelectList(db.Razas, "Id", "nombre", animal.razaId);
+            ViewBag.especieId = new SelectList(db.Especies.Where(e => e.fechaBaja == null), "Id", "nombre");
+            ViewBag.razaId = new SelectList(db.Razas.Where(e => e.fechaBaja == null), "Id", "nombre", animal.razaId);
             ViewBag.tamanioId = new SelectList(db.Tamanios.Where(a => a.fechaBaja == null), "Id", "nombre", animal.tamanioId);
             return View(animal);
         }
