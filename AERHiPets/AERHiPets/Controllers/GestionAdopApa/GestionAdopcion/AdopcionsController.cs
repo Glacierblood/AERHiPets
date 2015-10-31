@@ -13,6 +13,7 @@ using AERHiPets.Models.GestionAdopcionApadrinamiento.Models;
 using AERHiPets.DAL.GestionVoluntariosDAL;
 using Microsoft.AspNet.Identity.Owin;
 using AERHiPets.Models.GestionUsuarios;
+using Microsoft.AspNet.Identity;
 
 namespace AERHiPets.Controllers.GestionAdopApa.GestionAdopcion
 {
@@ -26,6 +27,7 @@ namespace AERHiPets.Controllers.GestionAdopApa.GestionAdopcion
         // GET: Adopcions
         public ActionResult Index()
         {
+            
             var adopciones = db.adopciones.Include(a => a.animal).Include(a => a.estadoAdopcion).Include(a => a.tipoAdopcion);
             return View(adopciones.ToList());
         }
