@@ -125,15 +125,23 @@
         @(Html.GoogleMap().ScriptRegistrar())
         @*Scripts.Render("~/Scripts/DDLRazaEspIncidente.js")*@
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
+</script>
+<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>
 
 <script>
 
     var geocoder;
     var map;
     var marker;
-
+    var markers = [];
+    var url = ['http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png',
+        'http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png',
+        'http://gmaps-samples.googlecode.com/svn/trunk/markers/red/blank.png',
+        'http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png'];
 
     $(document).ready(function () {
+
         crearMapa();
     });
 
@@ -147,6 +155,14 @@
         }
         map = new google.maps.Map(document.getElementById("map_canvas"), opc);
 
+        function sleep(delay) {
+            var inicio = new Date().getTime();
+            while (new Date().getTime() < inicio + delay);
+        }
+        function createCluster() {
+            markerCluster = new MarkerClusterer(map, markers);
+        }
+
         $.getJSON('/Incidentes/getLatLng', function (data) {
             for (i = 0; i <= data.length; i++) {
                 var latitude = parseFloat(data[i].lat);
@@ -156,20 +172,22 @@
                     position: myLatLng,
                     map: map,
                     title: data[i].descripcion,
+                   
                 });
 
                 var infowindow = new google.maps.InfoWindow({
                     content: data[i].descripcion
                 });
-
-                google.maps.event.addListener(map, 'click', function (event) {
+                
+                google.maps.event.addListener(marker, 'click', function (event) {
                     infowindow.open(map, marker)
                 });
-
-                marker.setMap(map);
+                markers.push(marker);
+                
                 
 
             }
+            setTimeout(createCluster, wait + 1000);
         });
 
     }

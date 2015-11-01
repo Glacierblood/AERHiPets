@@ -1,6 +1,9 @@
 ﻿@model AERHiPets.Models.GestionIncidentes.Incidente
 @using Microsoft.AspNet.Identity
 @using Microsoft.AspNet.Identity.Owin
+
+<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "817f7d80-328b-44cb-a90e-9127d8501eed", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 @{
     ViewBag.Title = "Details";
 }
@@ -141,6 +144,10 @@
 
     </dl>
 </div>
+
+<span class='st__large' displaytext=''></span>
+<span class='st_facebook_large' displaytext='Facebook'></span>
+<span class='st_twitter_large' displaytext='Tweet'></span>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

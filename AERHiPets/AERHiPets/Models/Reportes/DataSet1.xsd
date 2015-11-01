@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="aspnet_AERHiPets_20150817055016ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="aspnet_AERHiPets_20150817055016ConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.aspnet_AERHiPets_20150817055016ConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="DefaultConnection" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DefaultConnection (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.DefaultConnection.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="InformeIncidenciasTableAdapter" GeneratorDataComponentClassName="InformeIncidenciasTableAdapter" Name="InformeIncidencias" UserDataComponentName="InformeIncidenciasTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DefaultConnection (Web.config)" DbObjectName="dbo.InformeIncidencias" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT tipoIncidenteId, Zona, tipoIncidente, especieId, nombre FROM dbo.InformeIncidencias</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="tipoIncidenteId" DataSetColumn="tipoIncidenteId" />
+              <Mapping SourceColumn="Zona" DataSetColumn="Zona" />
+              <Mapping SourceColumn="tipoIncidente" DataSetColumn="tipoIncidente" />
+              <Mapping SourceColumn="especieId" DataSetColumn="especieId" />
+              <Mapping SourceColumn="nombre" DataSetColumn="nombre" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="InformeIncidencias" msprop:Generator_TableClassName="InformeIncidenciasDataTable" msprop:Generator_TableVarName="tableInformeIncidencias" msprop:Generator_TablePropName="InformeIncidencias" msprop:Generator_RowDeletingName="InformeIncidenciasRowDeleting" msprop:Generator_RowChangingName="InformeIncidenciasRowChanging" msprop:Generator_RowEvHandlerName="InformeIncidenciasRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeIncidenciasRowDeleted" msprop:Generator_UserTableName="InformeIncidencias" msprop:Generator_RowChangedName="InformeIncidenciasRowChanged" msprop:Generator_RowEvArgName="InformeIncidenciasRowChangeEvent" msprop:Generator_RowClassName="InformeIncidenciasRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="tipoIncidenteId" msprop:Generator_ColumnVarNameInTable="columntipoIncidenteId" msprop:Generator_ColumnPropNameInRow="tipoIncidenteId" msprop:Generator_ColumnPropNameInTable="tipoIncidenteIdColumn" msprop:Generator_UserColumnName="tipoIncidenteId" type="xs:int" minOccurs="0" />
+              <xs:element name="Zona" msprop:Generator_ColumnVarNameInTable="columnZona" msprop:Generator_ColumnPropNameInRow="Zona" msprop:Generator_ColumnPropNameInTable="ZonaColumn" msprop:Generator_UserColumnName="Zona" type="xs:int" />
+              <xs:element name="tipoIncidente" msprop:Generator_ColumnVarNameInTable="columntipoIncidente" msprop:Generator_ColumnPropNameInRow="tipoIncidente" msprop:Generator_ColumnPropNameInTable="tipoIncidenteColumn" msprop:Generator_UserColumnName="tipoIncidente" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="especieId" msprop:Generator_ColumnVarNameInTable="columnespecieId" msprop:Generator_ColumnPropNameInRow="especieId" msprop:Generator_ColumnPropNameInTable="especieIdColumn" msprop:Generator_UserColumnName="especieId" type="xs:int" minOccurs="0" />
+              <xs:element name="nombre" msprop:Generator_ColumnVarNameInTable="columnnombre" msprop:Generator_ColumnPropNameInRow="nombre" msprop:Generator_ColumnPropNameInTable="nombreColumn" msprop:Generator_UserColumnName="nombre">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

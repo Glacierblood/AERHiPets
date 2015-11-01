@@ -19,7 +19,8 @@ namespace AERHiPets.Models.GestionDireccion
         [StringLength(10, ErrorMessage = "No se permiten mas de 10 caracteres.")]
         [Display(Name = "Codigo Postal")]
         public String codigoPostal { get; set; }
-       
+
+        public int Zona { get; set; }
         
         [Display(Name = "Localidad")]
         public int localidadId { get; set; }

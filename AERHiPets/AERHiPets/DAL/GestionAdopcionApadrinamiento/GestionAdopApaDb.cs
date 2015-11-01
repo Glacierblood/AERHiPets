@@ -3,6 +3,7 @@ using AERHiPets.Models.GestionAdopcionApadrinamiento.GestionAdopcion;
 using AERHiPets.Models.GestionAdopcionApadrinamiento.GestionApadrinamiento;
 using AERHiPets.Models.GestionAnimal.GestionAnimalImagenes;
 using AERHiPets.Models.GestionIncidentes;
+using AERHiPets.Models.Reportes;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -16,7 +17,7 @@ namespace AERHiPets.DAL.GestionAdopcionApadrinamiento
          public GestionAdopApaDb() : base("DefaultConnection")
         {
         }
-
+        
          public DbSet<File> Files { get; set; }
          public DbSet<EstadoIncidente> estadoIncidentes { get; set; }
          public DbSet<Adopcion> adopciones { get; set; }

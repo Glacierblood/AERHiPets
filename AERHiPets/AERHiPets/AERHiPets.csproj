@@ -212,6 +212,7 @@
     <Compile Include="Controllers\GestionUsuarios\ManageController.cs" />
     <Compile Include="Controllers\GestionUsuarios\PersonasController.cs" />
     <Compile Include="Controllers\GestionUsuarios\RegistroAccionesController.cs" />
+    <Compile Include="Controllers\Reportes\ReportController.cs" />
     <Compile Include="DAL\GestionAdopcionApadrinamiento\GestionAdopApaDb.cs" />
     <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\201509030030009_ADOP1.cs" />
     <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\201509030030009_ADOP1.Designer.cs">
@@ -316,6 +317,10 @@
     <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\201510291512423_ADOP27.cs" />
     <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\201510291512423_ADOP27.Designer.cs">
       <DependentUpon>201510291512423_ADOP27.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\201511010226077_ADOP32.cs" />
+    <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\201511010226077_ADOP32.Designer.cs">
+      <DependentUpon>201511010226077_ADOP32.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\GestionAdopcionApadrinamiento\Migrations\Configuration.cs" />
     <Compile Include="DAL\GestionAnimalesDAL\GestionAnimalDb.cs" />
@@ -422,6 +427,10 @@
     <Compile Include="DAL\GestionVoluntariosDAL\Migrations\201510291510371_VOL7.cs" />
     <Compile Include="DAL\GestionVoluntariosDAL\Migrations\201510291510371_VOL7.Designer.cs">
       <DependentUpon>201510291510371_VOL7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GestionVoluntariosDAL\Migrations\201511010102330_VOL8.cs" />
+    <Compile Include="DAL\GestionVoluntariosDAL\Migrations\201511010102330_VOL8.Designer.cs">
+      <DependentUpon>201511010102330_VOL8.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\GestionVoluntariosDAL\Migrations\Configuration.cs" />
     <Compile Include="DAL\NewDAL\Acciones.cs">
@@ -673,6 +682,12 @@
     <Compile Include="Models\GestionUsuarios\Modelos\PersonaModelo.cs" />
     <Compile Include="Models\GestionUsuarios\Persona.cs" />
     <Compile Include="Models\GestionUsuarios\RegistroAcciones.cs" />
+    <Compile Include="Models\Reportes\DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Reportes\ReportePrueba.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -911,6 +926,17 @@
       <DependentUpon>Model2.edmx</DependentUpon>
       <LastGenOutput>Model2.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\Reportes\DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="Models\Reportes\DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Models\Reportes\DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\AERHiPetsOnline.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\DDLRazaEspIncidente.js" />
@@ -1127,6 +1153,7 @@
     <Folder Include="images\" />
     <Folder Include="Views\FileIncidentes\" />
     <Folder Include="Views\File\" />
+    <Folder Include="Views\Report\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1211,6 +1238,9 @@
     <EmbeddedResource Include="DAL\GestionAdopcionApadrinamiento\Migrations\201510291512423_ADOP27.resx">
       <DependentUpon>201510291512423_ADOP27.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionAdopcionApadrinamiento\Migrations\201511010226077_ADOP32.resx">
+      <DependentUpon>201511010226077_ADOP32.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DAL\GestionAnimalesDAL\Migrations\201508172126069_InitialCreate.resx">
       <DependentUpon>201508172126069_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
@@ -1282,6 +1312,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DAL\GestionVoluntariosDAL\Migrations\201510291510371_VOL7.resx">
       <DependentUpon>201510291510371_VOL7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\GestionVoluntariosDAL\Migrations\201511010102330_VOL8.resx">
+      <DependentUpon>201511010102330_VOL8.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
