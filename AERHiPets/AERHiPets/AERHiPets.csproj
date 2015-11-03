@@ -1145,6 +1145,7 @@
     <Content Include="Views\Razas\Details.cshtml" />
     <Content Include="Views\Razas\Edit.cshtml" />
     <Content Include="Views\Razas\Index.cshtml" />
+    <Content Include="Views\Animals\Create2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
